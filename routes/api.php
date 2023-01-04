@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\Brand\BrandController;
 use App\Http\Controllers\Api\Admin\Category\CategoryController;
+use App\Http\Controllers\Api\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Api\Admin\Order\OrderController;
 use App\Http\Controllers\Api\Admin\Product\ProductController;
 use App\Http\Controllers\Api\Admin\Product\StockController;
@@ -67,6 +68,12 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::resource('order',OrderController::class)->except('create','edit','update','store','destroy');
     Route::get('/order/search-order/{text}',[OrderController::class,'datatableSearch']);
     Route::post('/order/change-status/{id}',[OrderController::class,'changeStatus']);
+
+    //dashboard
+    Route::get('/sale-doughnut-data',[DashboardController::class,'saleDoughnutChartData']);
+    Route::get('/sale-graph-chart-data',[DashboardController::class,'saleGraphChartData']);
+    Route::get('/stock-price-bar-chart-data',[DashboardController::class,'orderPriceBarChartData']);
+    Route::get('/recent-order-limit',[DashboardController::class,'recentOrderData']);
 
 });
 

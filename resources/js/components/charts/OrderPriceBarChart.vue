@@ -1,5 +1,5 @@
 <template>
-    <LineChartGenerator
+    <Bar
         :chart-options="chartOptions"
         :chart-data="chartData"
         :chart-id="chartId"
@@ -13,64 +13,53 @@
 </template>
 
 <script>
-import { Line as LineChartGenerator } from "vue-chartjs/legacy";
+import { Bar } from 'vue-chartjs/legacy'
 
 import {
     Chart as ChartJS,
     Title,
     Tooltip,
     Legend,
-    LineElement,
-    LinearScale,
+    BarElement,
     CategoryScale,
-    PointElement,
-} from "chart.js";
+    LinearScale
+} from 'chart.js'
 
-ChartJS.register(
-    Title,
-    Tooltip,
-    Legend,
-    LineElement,
-    LinearScale,
-    CategoryScale,
-    PointElement
-);
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 export default {
-    name: "SaleGraphLineChart",
+    name: "OrderPriceBarChart",
     components: {
-        LineChartGenerator,
+        Bar
     },
     props: {
         chartId: {
             type: String,
-            default: "line-chart",
+            default: 'bar-chart'
         },
         datasetIdKey: {
             type: String,
-            default: "label",
+            default: 'label'
         },
         width: {
             type: Number,
-            default: 400,
+            default: 400
         },
         height: {
             type: Number,
-            default: 400,
+            default: 400
         },
         cssClasses: {
-            default: "",
-            type: String,
+            default: '',
+            type: String
         },
         styles: {
             type: Object,
-            default: () => {
-
-            },
+            default: () => {}
         },
         plugins: {
             type: Array,
-            default: () => [],
-        },
+            default: () => []
+        }
     },
     data() {
         return {
@@ -94,24 +83,24 @@ export default {
                 ],
                 datasets: [
                     {
-                        label: "Monthly Total Orders",
-                        backgroundColor: "#ff583d",
-                        // data: [40, 39, 10, 40, 39, 80, 40],
-                        data: [],
-                    },
-                ],
+                        label: 'Monthly Price Of Order',
+                        backgroundColor: '#b20021',
+                        // data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11],
+                        data: []
+                    }
+                ]
             },
             chartOptions: {
                 responsive: true,
-                maintainAspectRatio: false,
-            },
-        };
+                maintainAspectRatio: false
+            }
+        }
     },
     created() {
-        this.getGraphLineChartData();
+        this.getBarChartData();
     },
     methods:{
-        async getGraphLineChartData(){
+        async getBarChartData(){
             // Add a request interceptor
             axios.interceptors.request.use((config)=> {
                 // Do something before request is sent
@@ -136,7 +125,7 @@ export default {
                 return Promise.reject(error);
             });
             let token = JSON.parse(window.localStorage.getItem('token'))
-            await axios.get(`/api/sale-graph-chart-data`, {headers: { 'Authorization': 'Bearer ' + token }})
+            await axios.get(`/api/stock-price-bar-chart-data`, {headers: { 'Authorization': 'Bearer ' + token }})
                 .then((response)=>{
                     if (response.data.status != 200){
                         this.message = response.data.message;
@@ -155,6 +144,8 @@ export default {
                 })
         },
     },
+
+
 }
 </script>
 

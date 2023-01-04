@@ -60,8 +60,8 @@
             </v-col>
             <v-col cols="12" lg="12">
                 <v-card class="pa-15">
-                    <v-card-title class="text-capitalize">Monthly stock in and stock out</v-card-title>
-                    <StockBarChart/>
+                    <v-card-title class="text-capitalize">Monthly Total Order Price</v-card-title>
+                    <OrderPriceBarChart/>
                 </v-card>
             </v-col>
             <v-col cols="12" lg="4">
@@ -126,8 +126,8 @@
                                 {{ item.status }}
                             </v-chip>
                         </template>
-                        <template v-slot:item.action="">
-                            <v-btn color="success" outlined small shaped >View</v-btn>
+                        <template v-slot:item.action="{ item }">
+                            <v-btn color="success" outlined small shaped @click="$router.push({ name: 'show-product',params:{id:item.id} })">View</v-btn>
                         </template>
                     </v-data-table>
                 </v-card>
@@ -137,12 +137,12 @@
 </template>
 
 <script>
-    import StockBarChart from "../components/charts/StockBarChart";
+    import OrderPriceBarChart from "../components/charts/OrderPriceBarChart";
     import SaleDoughnutChart from "../components/charts/SaleDoughnutChart";
     import SaleGraphLineChart from "../components/charts/SaleGraphLineChart";
     export default {
         name: "Dashboard",
-        components: {SaleGraphLineChart, SaleDoughnutChart, StockBarChart },
+        components: {SaleGraphLineChart, SaleDoughnutChart, OrderPriceBarChart },
         data() {
             return {
                 activityLog: [
@@ -157,7 +157,6 @@
                     },
                 ],
                 loaded: false,
-                stockBarChartData: null,
                 loading:false,
                 success:false,
                 error:false,
@@ -171,7 +170,7 @@
                     },
                     {
                         text: 'Total Product',
-                        sortable: true,
+                        sortable: false,
                         value: 'total_product_quantity',
                     },
                     {text: 'Total Price', value: 'total_price',sortable: false},
@@ -184,9 +183,52 @@
                 items: [],
             }
         },
-        mounted() {
+        created() {
+            this.getRecentOrderData();
         },
         methods: {
+            async getRecentOrderData(){
+                // Add a request interceptor
+                axios.interceptors.request.use((config)=> {
+                    // Do something before request is sent
+                    this.loading = true;
+                    return config;
+                },  (error) => {
+                    // Do something with request error
+                    this.loading = false;
+                    this.message = error.data.status
+                    this.error = true;
+                    return Promise.reject(error);
+                });
+
+                // Add a response interceptor
+                axios.interceptors.response.use((response) => {
+                    this.loading = false;
+                    return response;
+                },  (error) => {
+                    this.loading = false;
+                    this.message = error.data.status
+                    this.error = true;
+                    return Promise.reject(error);
+                });
+                let token = JSON.parse(window.localStorage.getItem('token'))
+                await axios.get(`/api/recent-order-limit`, {headers: { 'Authorization': 'Bearer ' + token }})
+                    .then((response)=>{
+                        if (response.data.status != 200){
+                            this.message = response.data.message;
+                            this.error = true;
+                        }else {
+                            if (response.data.data != null){
+                                this.items = response.data.data
+                            }
+
+                        }
+                    })
+                    .catch((error)=>{
+                        this.message = 'Something went wrong !';
+                        this.error = true;
+                    })
+            },
         },
 
     }

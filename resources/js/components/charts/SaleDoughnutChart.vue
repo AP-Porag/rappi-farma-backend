@@ -62,12 +62,18 @@ export default {
     },
     data() {
         return {
+            loading:false,
+            message:'',
+            error:false,
             chartData: {
-                labels: ['Pending', 'Shipped', 'Delivered', 'Canceled','Rejected'],
+                // labels: ['Pending', 'Shipped', 'Delivered', 'Canceled','Rejected'],
+                labels: [],
                 datasets: [
                     {
-                        backgroundColor: ['#ff583d', '#1393a2', '#02522f', '#DD1B16','#b20021'],
-                        data: [40, 20, 80, 10,5]
+                        // backgroundColor: ['#ff583d', '#1393a2', '#02522f', '#DD1B16','#b20021'],
+                        backgroundColor: [],
+                        // data: [40, 20, 80, 10,5],
+                        data: [],
                     }
                 ]
             },
@@ -76,7 +82,56 @@ export default {
                 maintainAspectRatio: false
             }
         }
-    }
+    },
+    created() {
+        this.getDoughnutChartData();
+    },
+    methods:{
+        async getDoughnutChartData(){
+            // Add a request interceptor
+            axios.interceptors.request.use((config)=> {
+                // Do something before request is sent
+                this.loading = true;
+                return config;
+            },  (error) => {
+                // Do something with request error
+                this.loading = false;
+                this.message = error.data.status
+                this.error = true;
+                return Promise.reject(error);
+            });
+
+            // Add a response interceptor
+            axios.interceptors.response.use((response) => {
+                this.loading = false;
+                return response;
+            },  (error) => {
+                this.loading = false;
+                this.message = error.data.status
+                this.error = true;
+                return Promise.reject(error);
+            });
+            let token = JSON.parse(window.localStorage.getItem('token'))
+            await axios.get(`/api/sale-doughnut-data`, {headers: { 'Authorization': 'Bearer ' + token }})
+                .then((response)=>{
+                    if (response.data.status != 200){
+                        this.message = response.data.message;
+                        this.error = true;
+                    }else {
+                        if (response.data.data != null){
+                            this.chartData.labels = response.data.data.statuses
+                            this.chartData.datasets[0].data = response.data.data.counts
+                            this.chartData.datasets[0].backgroundColor = response.data.data.colors
+                        }
+
+                    }
+                })
+                .catch((error)=>{
+                    this.message = 'Something went wrong !';
+                    this.error = true;
+                })
+        },
+    },
 }
 </script>
 

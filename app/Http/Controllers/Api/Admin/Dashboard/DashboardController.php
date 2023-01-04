@@ -19,7 +19,12 @@ class DashboardController extends Controller
             ->get();
 
         //return $orders;
-        $backgrounds = ['#ff583d', '#1393a2', '#02522f', '#DD1B16','#b20021'];
+//        pending #ff583d,
+//        shipped #1393a2,
+//        delivered #02522f,
+//        rejected #dd1b16
+//        canceled #b20021
+        $backgrounds = ['#02522f', '#ff583d', '#dd1b16', '#1393a2','#b20021'];
         $counts = [];
         $statuses = [];
         $colors = [];
@@ -67,15 +72,31 @@ class DashboardController extends Controller
         return response()->json(['status'=>200,'data'=>$monthly_order_data_array]);
     }
 
-    public function stockBarChartData()
+    public function orderPriceBarChartData()
     {
-        $dataArray = Stock::selectRaw('year(created_at) year, monthname(created_at) month, sum(total_product_quantity) stock')
-            ->where('status','stock-in')
+        $dataArray = Order::selectRaw('year(created_at) year, monthname(created_at) month, sum(total_price) orders')
             ->where("created_at", ">", \Illuminate\Support\Carbon::now()->subMonths(13))
             ->groupBy('year', 'month')
             ->orderBy('created_at', 'ASC')
             ->get();
-        return $dataArray;
+        $month_name_array = array();
+        $monthly_order_count_array = array();
+        if ($dataArray->count() != 0) {
+            foreach ($dataArray as $data) {
+                $unformated_date = $data->month . '-' . $data->year;
+                $date = new \DateTime($unformated_date);
+                $month_name = $date->format('M-y');
+                array_push($month_name_array, $month_name);
+                array_push($monthly_order_count_array, $data->orders);
+            }
+        }
+
+        $monthly_order_data_array = array(
+            'months' => $month_name_array,
+            'orders' => $monthly_order_count_array,
+        );
+
+        //return $monthly_order_data_array;
         return response()->json(['status'=>200,'data'=>$monthly_order_data_array]);
     }
 
@@ -85,6 +106,7 @@ class DashboardController extends Controller
             ->orderBy('id','DESC')
             ->limit(GlobalConstant::DEFAULT_RECENT_LIMIT)
             ->get();
-        return $orders;
+        //return $orders;
+        return response()->json(['status'=>200,'data'=>$orders]);
     }
 }

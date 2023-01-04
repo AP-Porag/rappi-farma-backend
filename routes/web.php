@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/{any}', function () {
-//    return view('app');
-//})->where('any', '.*')->name('web');
-Route::get('/sale-doughnut-data',[DashboardController::class,'saleDoughnutChartData']);
-Route::get('/sale-graph-chart-data',[DashboardController::class,'saleGraphChartData']);
-Route::get('/stock-bar-chart-data',[DashboardController::class,'stockBarChartData']);
-Route::get('/recent-order-limit',[DashboardController::class,'recentOrderData']);
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '.*')->name('web');
+//Route::get('/sale-doughnut-data',[DashboardController::class,'saleDoughnutChartData']);
+//Route::get('/sale-graph-chart-data',[DashboardController::class,'saleGraphChartData']);
+//Route::get('/stock-price-bar-chart-data',[DashboardController::class,'orderPriceBarChartData']);
+//Route::get('/recent-order-limit',[DashboardController::class,'recentOrderData']);
