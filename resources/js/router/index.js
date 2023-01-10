@@ -43,6 +43,9 @@ const OrderDelivered = () => import('../views/order/Delivered.vue')
 const OrderCanceled = () => import('../views/order/Canceled.vue')
 const OrderRejected = () => import('../views/order/Rejected.vue')
 
+//settings component
+const Settings = () => import('../views/settings/index.vue')
+
 Vue.use(vueRouter);
 
 const router = new vueRouter({
@@ -229,6 +232,12 @@ const router = new vueRouter({
                     name:'rejected-order',
                     meta:{title:'rejected order'},
                     component: OrderRejected
+                },
+                {
+                    path:'settings',
+                    name:'settings',
+                    meta:{title:'settings'},
+                    component: Settings
                 },
 
             ],

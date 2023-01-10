@@ -330,7 +330,6 @@ export default {
                         this.error = true;
                     }else {
                         if (response.data.user != null){
-                            console.log(response.data.user)
                             this.form_data.first_name = response.data.user.first_name;
                             this.form_data.last_name = response.data.user.last_name;
                             this.form_data.username = response.data.user.username;
@@ -376,7 +375,7 @@ export default {
                     return Promise.reject(error);
                 });
                 let token = JSON.parse(window.localStorage.getItem('token'))
-                await axios.post('/api/user',this.form_data, {headers: { 'Authorization': 'Bearer ' + token }})
+                await axios.put(`/api/user/${this.$route.params.id}`,this.form_data, {headers: { 'Authorization': 'Bearer ' + token }})
                     .then((response)=>{
                         if (response.data.status != 200){
                             this.message = response.data.message;

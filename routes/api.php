@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Api\Admin\Order\OrderController;
 use App\Http\Controllers\Api\Admin\Product\ProductController;
 use App\Http\Controllers\Api\Admin\Product\StockController;
+use App\Http\Controllers\Api\Admin\Setting\SettingController;
 use App\Http\Controllers\Api\Admin\User\AuthController;
 use App\Http\Controllers\Api\Admin\User\UserController;
 use Illuminate\Http\Request;
@@ -36,6 +37,7 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::get('/product/search-product-for-stock-add/{text}',[ProductController::class,'searchProductForAddStock']);
     Route::get('/product/all/category-brand/{category_id}',[ProductController::class,'allBrandForCategory']);
     Route::get('/product/stock-history/{product_id}',[ProductController::class,'getProductHistory']);
+    Route::get('/product/order-history/{product_id}',[ProductController::class,'productOrderHistoryData']);
 
     //stock
     Route::post('/stock/stock-add',[StockController::class,'stockAdd'])->name('stock.add');
@@ -74,7 +76,12 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::get('/sale-graph-chart-data',[DashboardController::class,'saleGraphChartData']);
     Route::get('/stock-price-bar-chart-data',[DashboardController::class,'orderPriceBarChartData']);
     Route::get('/recent-order-limit',[DashboardController::class,'recentOrderData']);
+    Route::get('/dashboard-card-data',[DashboardController::class,'dashboardCardData']);
+    Route::get('/last-order-history-data',[DashboardController::class,'lastProductOrderHistoryData']);
 
+    ## Settings
+    Route::post('/setting/save', [SettingController::class, 'saveSettings']);
+    Route::get('/setting/get',[SettingController::class,'getAllSettings']);
 });
 
 /*
@@ -106,6 +113,9 @@ Route::group(['prefix' => 'v1'], function(){
     Route::post('/order',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'store']);
     Route::get('/order',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'index']);
     Route::get('/order/{id}',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'details']);
+
+    ## Settings
+    Route::get('/setting/front/get',[SettingController::class,'getAllSettings']);
 
 });
 

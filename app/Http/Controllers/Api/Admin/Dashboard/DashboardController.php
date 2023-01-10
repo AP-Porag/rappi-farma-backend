@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api\Admin\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\HistoryResource;
+use App\Models\History;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Stock;
+use App\Models\User;
 use App\Utils\GlobalConstant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -109,4 +113,32 @@ class DashboardController extends Controller
         //return $orders;
         return response()->json(['status'=>200,'data'=>$orders]);
     }
+
+    public function dashboardCardData()
+    {
+        $total_products = Product::count();
+        $total_customers = User::where('user_type',User::USER_TYPE_CUSTOMER)->count();
+        $total_sells = Order::count();
+        $total_pending_orders = Order::where('status',GlobalConstant::ORDER_STATUS_PENDING)->count();
+        $data = [
+            "total_products"=>$total_products,
+            "total_customers"=>$total_customers,
+            "total_sells"=>$total_sells,
+            "total_pending_orders"=>$total_pending_orders,
+        ];
+
+        return response()->json(['status'=>200,'data'=>$data]);
+    }
+
+    public function lastProductOrderHistoryData()
+    {
+        $last_order_history = HistoryResource::collection(History::where('type','order')->take(3)->get());
+        $data = [
+            "last_order_history"=>$last_order_history,
+        ];
+
+        return response()->json(['status'=>200,'data'=>$data]);
+    }
+
+
 }

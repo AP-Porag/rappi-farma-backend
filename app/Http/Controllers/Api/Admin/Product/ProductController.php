@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api\Admin\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductRequest;
+use App\Http\Resources\HistoryResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductStockResource;
 use App\Http\Resources\VSelectResource;
 use App\Models\Brand;
+use App\Models\History;
 use App\Models\Product;
 use App\Models\ProductStock;
 use Illuminate\Http\Request;
@@ -229,4 +231,15 @@ class ProductController extends Controller
 
         return response()->json(['status'=>200,'data'=>$data]);
     }
+
+    public function productOrderHistoryData($product_id)
+    {
+        $order_history = HistoryResource::collection(History::where('type','order')->where('product_id',$product_id)->take(5)->get());
+        $data = [
+            "order_history"=>$order_history,
+        ];
+
+        return response()->json(['status'=>200,'data'=>$data]);
+    }
+
 }

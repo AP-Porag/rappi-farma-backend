@@ -661,6 +661,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -674,27 +703,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      activityLog: [{
-        title: 'Total Products',
-        amount: 50,
-        icon: 'mdi-account',
-        color: 'cyan lighten-3'
-      }, {
-        title: 'Total Customer',
-        amount: 3433,
-        icon: 'mdi-account-group-outline',
-        color: 'green darken-2'
-      }, {
-        title: 'Total Sale',
-        amount: 3433,
-        icon: 'mdi-account-group-outline',
-        color: 'blue-grey darken-1'
-      }, {
-        title: 'Pending Orders',
-        amount: 3433,
-        icon: 'mdi-account-group-outline',
-        color: 'deep-orange darken-1'
-      }],
+      total_products: '',
+      total_customers: '',
+      total_sells: '',
+      total_pending_orders: '',
+      histories: [],
       loaded: false,
       loading: false,
       success: false,
@@ -739,6 +752,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     this.getRecentOrderData();
+    this.getDashBoardCardData();
+    this.getLastHistoryData();
   },
   methods: {
     getRecentOrderData: function getRecentOrderData() {
@@ -797,6 +812,77 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee);
+      }))();
+    },
+    getLastHistoryData: function getLastHistoryData() {
+      var _this2 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var token;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                token = JSON.parse(window.localStorage.getItem('token'));
+                _context2.next = 3;
+                return axios.get("/api/last-order-history-data", {
+                  headers: {
+                    'Authorization': 'Bearer ' + token
+                  }
+                }).then(function (response) {
+                  if (response.data.status != 200) {
+                    console.log(response.data.status);
+                  } else {
+                    if (response.data.data != null) {
+                      _this2.histories = response.data.data;
+                    }
+                  }
+                })["catch"](function (error) {
+                  _this2.message = 'Something went wrong !';
+                  _this2.error = true;
+                });
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    getDashBoardCardData: function getDashBoardCardData() {
+      var _this3 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var token;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                token = JSON.parse(window.localStorage.getItem('token'));
+                _context3.next = 3;
+                return axios.get("/api/dashboard-card-data", {
+                  headers: {
+                    'Authorization': 'Bearer ' + token
+                  }
+                }).then(function (response) {
+                  if (response.data.status != 200) {
+                    console.log(response.data.status);
+                  } else {
+                    if (response.data.data != null) {
+                      _this3.total_products = response.data.data.total_products;
+                      _this3.total_customers = response.data.data.total_customers;
+                      _this3.total_sells = response.data.data.total_sells;
+                      _this3.total_pending_orders = response.data.data.total_pending_orders;
+                    }
+                  }
+                })["catch"](function (error) {
+                  _this3.message = 'Something went wrong !';
+                  _this3.error = true;
+                });
+              case 3:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     }
   }
@@ -1511,7 +1597,8 @@ var render = function () {
           _c(
             "v-btn",
             {
-              attrs: { color: "success" },
+              staticClass: "white--text",
+              attrs: { color: "indigo" },
               on: {
                 click: function ($event) {
                   return _vm.$router.push({ name: "order" })
@@ -1535,7 +1622,14 @@ var render = function () {
             [
               _c(
                 "v-alert",
-                { attrs: { dense: "", text: "", type: "success" } },
+                {
+                  attrs: {
+                    dense: "",
+                    text: "",
+                    type: "success",
+                    color: "indigo",
+                  },
+                },
                 [
                   _vm._v(
                     "\n                    Login Successfully! Welcome to "
@@ -1548,10 +1642,10 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "v-row",
-                _vm._l(_vm.activityLog, function (item, index) {
-                  return _c(
+                [
+                  _c(
                     "v-col",
-                    { key: index, attrs: { lg: "6", cols: "12" } },
+                    { attrs: { lg: "6", cols: "12" } },
                     [
                       _c(
                         "v-card",
@@ -1568,24 +1662,25 @@ var render = function () {
                             },
                             [
                               _c("div", [
-                                _c("strong", [_vm._v(_vm._s(item.title))]),
+                                _c("strong", [_vm._v("Total Products")]),
                                 _vm._v(" "),
                                 _c("br"),
-                                _vm._v(" "),
-                                _c("span", [_vm._v("Last 3 weeks")]),
                               ]),
                               _vm._v(" "),
                               _c(
                                 "v-avatar",
                                 {
                                   staticStyle: { border: "3px solid #444" },
-                                  attrs: { size: "60", color: item.color },
+                                  attrs: {
+                                    size: "60",
+                                    color: "cyan lighten-3",
+                                  },
                                 },
                                 [
                                   _c(
                                     "span",
                                     { staticStyle: { color: "white" } },
-                                    [_vm._v(_vm._s(item.amount) + " +")]
+                                    [_vm._v(_vm._s(_vm.total_products) + " +")]
                                   ),
                                 ]
                               ),
@@ -1601,8 +1696,177 @@ var render = function () {
                       ),
                     ],
                     1
-                  )
-                }),
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { lg: "6", cols: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: { elevation: "2" },
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            {
+                              staticClass:
+                                "d-flex justify-space-between align-center",
+                            },
+                            [
+                              _c("div", [
+                                _c("strong", [_vm._v("Total Customer")]),
+                                _vm._v(" "),
+                                _c("br"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-avatar",
+                                {
+                                  staticStyle: { border: "3px solid #444" },
+                                  attrs: {
+                                    size: "60",
+                                    color: "green darken-2",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "white" } },
+                                    [_vm._v(_vm._s(_vm.total_customers) + " +")]
+                                  ),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-card-actions", {
+                            staticClass: "d-flex justify-space-between",
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { lg: "6", cols: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: { elevation: "2" },
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            {
+                              staticClass:
+                                "d-flex justify-space-between align-center",
+                            },
+                            [
+                              _c("div", [
+                                _c("strong", [_vm._v("Total Sale")]),
+                                _vm._v(" "),
+                                _c("br"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-avatar",
+                                {
+                                  staticStyle: { border: "3px solid #444" },
+                                  attrs: {
+                                    size: "60",
+                                    color: "blue-grey darken-1",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "white" } },
+                                    [_vm._v(_vm._s(_vm.total_sells) + " +")]
+                                  ),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-card-actions", {
+                            staticClass: "d-flex justify-space-between",
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { lg: "6", cols: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: { elevation: "2" },
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            {
+                              staticClass:
+                                "d-flex justify-space-between align-center",
+                            },
+                            [
+                              _c("div", [
+                                _c("strong", [_vm._v("Pending Orders")]),
+                                _vm._v(" "),
+                                _c("br"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-avatar",
+                                {
+                                  staticStyle: { border: "3px solid #444" },
+                                  attrs: {
+                                    size: "60",
+                                    color: "deep-orange darken-1",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "white" } },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.total_pending_orders) + " +"
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-card-actions", {
+                            staticClass: "d-flex justify-space-between",
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
                 1
               ),
             ],
@@ -1622,54 +1886,41 @@ var render = function () {
                     "v-card-text",
                     { staticClass: "py-0" },
                     [
-                      _c(
-                        "v-timeline",
-                        { attrs: { "align-top": "", dense: "" } },
-                        [
-                          _c(
-                            "v-timeline-item",
-                            { attrs: { color: "indigo", small: "" } },
-                            [
-                              _c("strong", [_vm._v("5 Minuts ago")]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "text-caption" }, [
-                                _vm._v(
-                                  "\n                                   You have new order please check this out\n                                "
-                                ),
-                              ]),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-timeline-item",
-                            { attrs: { color: "green", small: "" } },
-                            [
-                              _c("strong", [_vm._v("35 Minuts ago")]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "text-caption mb-2" }, [
-                                _vm._v(
-                                  "\n                                    A Product has delivered!\n                                "
-                                ),
-                              ]),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-timeline-item",
-                            { attrs: { color: "indigo", small: "" } },
-                            [
-                              _c("strong", [_vm._v("44 Minuts ago")]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "text-caption" }, [
-                                _vm._v(
-                                  "\n                                    You have new order please check this out\n                                "
-                                ),
-                              ]),
-                            ]
-                          ),
-                        ],
-                        1
-                      ),
+                      _vm.histories.length
+                        ? _c(
+                            "v-timeline",
+                            { attrs: { "align-top": "", dense: "" } },
+                            _vm._l(_vm.histories, function (history, index) {
+                              return _c(
+                                "v-timeline-item",
+                                {
+                                  key: index,
+                                  attrs: {
+                                    color:
+                                      history.type === "order"
+                                        ? "indigo"
+                                        : "green",
+                                    small: "",
+                                  },
+                                },
+                                [
+                                  _c("strong", [
+                                    _vm._v(_vm._s(history.created_at)),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "text-caption" }, [
+                                    _vm._v(
+                                      "\n                                   " +
+                                        _vm._s(history.message) +
+                                        "\n                                "
+                                    ),
+                                  ]),
+                                ]
+                              )
+                            }),
+                            1
+                          )
+                        : _c("p", [_vm._v("No activities found")]),
                     ],
                     1
                   ),

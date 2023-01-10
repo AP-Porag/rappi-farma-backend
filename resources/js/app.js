@@ -23,6 +23,7 @@ import store from './store'
 
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
 const app = new Vue({
     el: '#app',
     router,
@@ -30,6 +31,10 @@ const app = new Vue({
     vuetify,
     render: h => h(App)
 });
+
+function getAllSetting() {
+    store.dispatch('getData');
+}
 
 export default app;
 

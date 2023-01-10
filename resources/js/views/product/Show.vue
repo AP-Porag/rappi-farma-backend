@@ -119,29 +119,17 @@
                     <v-tabs-items v-model="tab">
                         <v-tab-item>
                             <v-card flat>
-                                <v-card-title class="ml-11 indigo--text">Order history</v-card-title>
+                                <v-card-title class="ml-7 indigo--text">Order history</v-card-title>
                                 <v-card-text class="py-5">
-                                    <v-timeline align-top dense>
-                                        <v-timeline-item color="indigo" small>
-                                            <strong>5 Minuts ago</strong>
+                                    <v-timeline align-top dense v-if="histories.length">
+                                        <v-timeline-item :color="history.type === 'order' ? 'indigo' : 'green'" small v-for="(history,index) in histories" :key="index">
+                                            <strong>{{history.created_at}}</strong>
                                             <div class="text-caption">
-                                                You have new order please check this out
-                                            </div>
-                                        </v-timeline-item>
-                                        <v-timeline-item color="green" small>
-                                            <strong>35 Minuts ago</strong>
-                                            <div class="text-caption mb-2">
-                                                A Product has delivered!
-                                            </div>
-                                        </v-timeline-item>
-
-                                        <v-timeline-item color="indigo" small>
-                                            <strong>44 Minuts ago</strong>
-                                            <div class="text-caption">
-                                                You have new order please check this out
+                                                {{history.message}}
                                             </div>
                                         </v-timeline-item>
                                     </v-timeline>
+                                    <p v-else class="ml-7">No activities found</p>
                                 </v-card-text>
                             </v-card>
                         </v-tab-item>
@@ -188,11 +176,13 @@ export default {
         message:'',
         item:'',
         stocks:[],
+        histories:[],
         tab: null,
     }),
     created() {
         this.getItemData();
         this.getProductStockHistory();
+        this.getProductOrderHistoryData();
     },
     methods:{
         async getItemData(){
@@ -271,6 +261,50 @@ export default {
                     }else {
                         if (response.data.data.items != null){
                             this.stocks = response.data.data.items;
+                        }
+
+                    }
+                })
+                .catch((error)=>{
+                    this.message = 'Something went wrong !';
+                    this.error = true;
+                })
+        },
+
+        async getProductOrderHistoryData(){
+            // Add a request interceptor
+            axios.interceptors.request.use((config)=> {
+                // Do something before request is sent
+                this.loading = true;
+                return config;
+            },  (error) => {
+                // Do something with request error
+                this.loading = false;
+                this.message = error.data.status
+                this.error = true;
+                return Promise.reject(error);
+            });
+
+            // Add a response interceptor
+            axios.interceptors.response.use((response) => {
+                this.loading = false;
+                return response;
+            },  (error) => {
+                this.loading = false;
+                this.message = error.data.status
+                this.error = true;
+                return Promise.reject(error);
+            });
+            let token = JSON.parse(window.localStorage.getItem('token'))
+            await axios.get(`/api/product/order-history/${this.$route.params.id}`, {headers: { 'Authorization': 'Bearer ' + token }})
+                .then((response)=>{
+                    if (response.data.status != 200){
+                        this.message = response.data.message;
+                        this.error = true;
+                    }else {
+                        console.log(response.data.data.order_history)
+                        if (response.data.data.order_history != null){
+                            this.histories = response.data.data.order_history;
                         }
 
                     }

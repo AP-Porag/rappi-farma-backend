@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -79,7 +80,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-
+        $user = new UserResource($user);
         return response()->json(['status'=>200,'user'=>$user]);
     }
 
@@ -92,7 +93,44 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = User::find($id);
+        $item->first_name = $request->first_name;
+        $item->last_name = $request->last_name;
+        $item->username = $request->username;
+        $item->email = $request->email;
+        $item->phone = $request->phone;
+        $item->gender = $request->gender;
+        $item->date_of_birth = $request->date_of_birth;
+        $item->user_type = $request->user_type;
+        $item->password = Hash::make($request->password);
+        $item->save();
+
+        if ($item){
+            //image upload
+            if (str_contains($request->image, 'data:image/')){
+
+                $path = User::FILE_STORE_PATH.'/' . $item->avatar;
+                delete_image($path);
+
+                $image_64 = $request->image; //your base64 encoded data
+                $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
+                $replace = substr($image_64, 0, strpos($image_64, ',')+1);
+                // find substring for replace here eg: data:image/png;base64,
+                $image = str_replace($replace, '', $image_64);
+                $image = str_replace(' ', '+', $image);
+                $imageName = time().'.'.$extension;
+                Storage::disk('public')->put(User::FILE_STORE_PATH.'/' . $imageName, base64_decode($image));
+                $image_link = $imageName;
+
+
+                $item->avatar = $image_link;
+                $item->save();
+            }
+
+
+        }
+
+        return response()->json(['status'=>200,'message'=>'Record updated successfully']);
     }
 
     /**

@@ -164,6 +164,7 @@ export default {
           //         },
           //     ],
           // },
+          {id:6,icon:'mdi-cog',title:'Settings',path:'settings'},
       ],
     };
   },

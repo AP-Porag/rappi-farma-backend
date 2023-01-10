@@ -179,18 +179,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -207,12 +195,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       message: '',
       item: '',
       stocks: [],
+      histories: [],
       tab: null
     };
   },
   created: function created() {
     this.getItemData();
     this.getProductStockHistory();
+    this.getProductOrderHistoryData();
   },
   methods: {
     getItemData: function getItemData() {
@@ -329,6 +319,65 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
+      }))();
+    },
+    getProductOrderHistoryData: function getProductOrderHistoryData() {
+      var _this3 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var token;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                // Add a request interceptor
+                axios.interceptors.request.use(function (config) {
+                  // Do something before request is sent
+                  _this3.loading = true;
+                  return config;
+                }, function (error) {
+                  // Do something with request error
+                  _this3.loading = false;
+                  _this3.message = error.data.status;
+                  _this3.error = true;
+                  return Promise.reject(error);
+                });
+
+                // Add a response interceptor
+                axios.interceptors.response.use(function (response) {
+                  _this3.loading = false;
+                  return response;
+                }, function (error) {
+                  _this3.loading = false;
+                  _this3.message = error.data.status;
+                  _this3.error = true;
+                  return Promise.reject(error);
+                });
+                token = JSON.parse(window.localStorage.getItem('token'));
+                _context3.next = 5;
+                return axios.get("/api/product/order-history/".concat(_this3.$route.params.id), {
+                  headers: {
+                    'Authorization': 'Bearer ' + token
+                  }
+                }).then(function (response) {
+                  if (response.data.status != 200) {
+                    _this3.message = response.data.message;
+                    _this3.error = true;
+                  } else {
+                    console.log(response.data.data.order_history);
+                    if (response.data.data.order_history != null) {
+                      _this3.histories = response.data.data.order_history;
+                    }
+                  }
+                })["catch"](function (error) {
+                  _this3.message = 'Something went wrong !';
+                  _this3.error = true;
+                });
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     }
   }
@@ -2840,7 +2889,7 @@ var render = function () {
                             [
                               _c(
                                 "v-card-title",
-                                { staticClass: "ml-11 indigo--text" },
+                                { staticClass: "ml-7 indigo--text" },
                                 [_vm._v("Order history")]
                               ),
                               _vm._v(" "),
@@ -2848,80 +2897,58 @@ var render = function () {
                                 "v-card-text",
                                 { staticClass: "py-5" },
                                 [
-                                  _c(
-                                    "v-timeline",
-                                    { attrs: { "align-top": "", dense: "" } },
-                                    [
-                                      _c(
-                                        "v-timeline-item",
+                                  _vm.histories.length
+                                    ? _c(
+                                        "v-timeline",
                                         {
-                                          attrs: { color: "indigo", small: "" },
+                                          attrs: { "align-top": "", dense: "" },
                                         },
-                                        [
-                                          _c("strong", [
-                                            _vm._v("5 Minuts ago"),
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "div",
-                                            { staticClass: "text-caption" },
-                                            [
-                                              _vm._v(
-                                                "\n                                            You have new order please check this out\n                                        "
-                                              ),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-timeline-item",
-                                        {
-                                          attrs: { color: "green", small: "" },
-                                        },
-                                        [
-                                          _c("strong", [
-                                            _vm._v("35 Minuts ago"),
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "div",
-                                            {
-                                              staticClass: "text-caption mb-2",
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                            A Product has delivered!\n                                        "
-                                              ),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-timeline-item",
-                                        {
-                                          attrs: { color: "indigo", small: "" },
-                                        },
-                                        [
-                                          _c("strong", [
-                                            _vm._v("44 Minuts ago"),
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "div",
-                                            { staticClass: "text-caption" },
-                                            [
-                                              _vm._v(
-                                                "\n                                            You have new order please check this out\n                                        "
-                                              ),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ],
-                                    1
-                                  ),
+                                        _vm._l(
+                                          _vm.histories,
+                                          function (history, index) {
+                                            return _c(
+                                              "v-timeline-item",
+                                              {
+                                                key: index,
+                                                attrs: {
+                                                  color:
+                                                    history.type === "order"
+                                                      ? "indigo"
+                                                      : "green",
+                                                  small: "",
+                                                },
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v(
+                                                    _vm._s(history.created_at)
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass: "text-caption",
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                            " +
+                                                        _vm._s(
+                                                          history.message
+                                                        ) +
+                                                        "\n                                        "
+                                                    ),
+                                                  ]
+                                                ),
+                                              ]
+                                            )
+                                          }
+                                        ),
+                                        1
+                                      )
+                                    : _c("p", { staticClass: "ml-7" }, [
+                                        _vm._v("No activities found"),
+                                      ]),
                                 ],
                                 1
                               ),

@@ -363,7 +363,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this.error = true;
                   } else {
                     if (response.data.user != null) {
-                      console.log(response.data.user);
                       _this.form_data.first_name = response.data.user.first_name;
                       _this.form_data.last_name = response.data.user.last_name;
                       _this.form_data.username = response.data.user.username;
@@ -424,7 +423,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
                 token = JSON.parse(window.localStorage.getItem('token'));
                 _context2.next = 6;
-                return axios.post('/api/user', _this2.form_data, {
+                return axios.put("/api/user/".concat(_this2.$route.params.id), _this2.form_data, {
                   headers: {
                     'Authorization': 'Bearer ' + token
                   }

@@ -19,6 +19,7 @@ class AuthController extends Controller
             if (Auth::attempt($credentials)){
 
                 $user = Auth::user();
+                $data['id'] = $user->id;
                 $data['fullName'] = $user->full_name;
                 $data['username'] = $user->username;
                 $data['email'] = $user->email;
