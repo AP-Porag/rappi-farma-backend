@@ -16,4 +16,9 @@ class History extends Model
         'message',
         'status',
     ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class,'order_id');
+    }
 }

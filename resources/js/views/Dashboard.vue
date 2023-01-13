@@ -198,7 +198,7 @@
             this.getRecentOrderData();
             this.getDashBoardCardData();
             this.getLastHistoryData();
-            console.log('hello from dash')
+            //console.log('hello from dashboard')
         },
         methods: {
             async getRecentOrderData(){

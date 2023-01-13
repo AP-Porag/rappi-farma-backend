@@ -13,6 +13,7 @@ use App\Models\History;
 use App\Models\Product;
 use App\Models\ProductStock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -245,7 +246,8 @@ class ProductController extends Controller
     public function productCardData()
     {
         $total_products = Product::count();
-        $total_stock = Product::count();
+        //$total_stock = Product::sum('current_stock');
+        $total_stock = DB::table('products')->sum('current_stock');
         $data = [
             "total_products"=>$total_products,
             "total_stock"=>$total_stock,

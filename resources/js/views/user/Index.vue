@@ -352,6 +352,7 @@ export default {
     created() {
         this.getAllUsersData();
         this.getAdministrationCardData();
+        //console.log('hello from user index')
     }
 }
 </script>

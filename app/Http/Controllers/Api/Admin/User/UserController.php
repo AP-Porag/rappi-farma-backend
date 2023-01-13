@@ -20,8 +20,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = UserResource::collection(User::where('user_type','!=',User::USER_TYPE_CUSTOMER)->paginate($request->per_page));
-        $total = User::where('user_type','!=',User::USER_TYPE_CUSTOMER)->count();
+        $users = UserResource::collection(User::where('user_type','=',User::USER_TYPE_ADMIN)->paginate($request->per_page));
+        $total = User::where('user_type','=',User::USER_TYPE_ADMIN)->count();
         $data = [
             "users"=>$users,
             "total"=>$total
@@ -156,7 +156,7 @@ class UserController extends Controller
 
     public function datatableSearch(Request $request,$text)
     {
-        $users = User::where('user_type','!=',User::USER_TYPE_CUSTOMER)
+        $users = User::where('user_type','=',User::USER_TYPE_ADMIN)
             ->where("first_name","LIKE","%$text%")
             ->orWhere("last_name","LIKE","%$text%")
             ->orWhere("phone","LIKE","%$text%")
@@ -164,7 +164,7 @@ class UserController extends Controller
             ->orWhere("user_type","LIKE","%$text%")
             ->paginate($request->per_page);
         $users = UserResource::collection($users);
-        $total = User::where('user_type','!=',User::USER_TYPE_CUSTOMER)->count();
+        $total = User::where('user_type','=',User::USER_TYPE_ADMIN)->count();
         $data = [
             "users"=>$users,
             "total"=>$total

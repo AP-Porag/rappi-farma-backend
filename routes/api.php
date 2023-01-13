@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Admin\Brand\BrandController;
 use App\Http\Controllers\Api\Admin\Category\CategoryController;
 use App\Http\Controllers\Api\Admin\Dashboard\DashboardController;
+use App\Http\Controllers\Api\Admin\History\HistoryController;
 use App\Http\Controllers\Api\Admin\Order\OrderController;
 use App\Http\Controllers\Api\Admin\Product\ProductController;
 use App\Http\Controllers\Api\Admin\Product\StockController;
@@ -92,6 +93,9 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::get('/recent-order-limit',[DashboardController::class,'recentOrderData']);
     Route::get('/dashboard-card-data',[DashboardController::class,'dashboardCardData']);
     Route::get('/last-order-history-data',[DashboardController::class,'lastProductOrderHistoryData']);
+
+    ## History
+    Route::get('/history/get/last-five', [HistoryController::class, 'getLastFive']);
 
     ## Settings
     Route::post('/setting/save', [SettingController::class, 'saveSettings']);

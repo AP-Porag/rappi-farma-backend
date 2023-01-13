@@ -476,6 +476,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   created: function created() {
     this.getAllUsersData();
     this.getAdministrationCardData();
+    //console.log('hello from user index')
   }
 });
 
