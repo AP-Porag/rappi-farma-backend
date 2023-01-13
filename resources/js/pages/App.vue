@@ -6,14 +6,9 @@
 
 <script>
 import {mapActions} from 'vuex'
+import store from "../store";
 export default {
     name: "App",
-    created() {
-
-    },
-    method:{
-
-    }
 }
 </script>
 

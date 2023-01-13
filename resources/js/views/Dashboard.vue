@@ -10,7 +10,7 @@
         <v-row>
             <v-col lg="7" cols="12">
                 <v-alert dense text type="success" color="indigo">
-                    Login Successfully! Welcome to <strong class="text-capitalize">Rappi farma admin</strong>
+                    Login Successfully! Welcome to <strong class="text-capitalize">{{settings.name}} admin</strong>
                 </v-alert>
                 <v-row>
                     <v-col lg="6" cols="12">
@@ -106,19 +106,6 @@
                 </v-card>
             </v-col>
             <v-col cols="12" lg="12">
-<!--                <v-card>-->
-<!--                    <v-data-table-->
-<!--                            caption="Recent Order list"-->
-<!--                            :headers="headers"-->
-<!--                            :items="desserts"-->
-<!--                            :items-per-page="5"-->
-<!--                            class="elevation-1"-->
-<!--                    >-->
-<!--                        <template v-slot:item.action="">-->
-<!--                            <v-btn color="success" outlined small shaped >View</v-btn>-->
-<!--                        </template>-->
-<!--                    </v-data-table>-->
-<!--                </v-card>-->
                 <v-card>
                     <v-snackbar top color="green" v-model="success">
                         {{message}}
@@ -169,6 +156,7 @@
     import OrderPriceBarChart from "../components/charts/OrderPriceBarChart";
     import SaleDoughnutChart from "../components/charts/SaleDoughnutChart";
     import SaleGraphLineChart from "../components/charts/SaleGraphLineChart";
+    import {mapGetters} from "vuex";
     export default {
         name: "Dashboard",
         components: {SaleGraphLineChart, SaleDoughnutChart, OrderPriceBarChart },
@@ -295,6 +283,11 @@
                         this.error = true;
                     })
             }
+        },
+        computed: {
+            ...mapGetters({
+                settings:'settings'
+            })
         },
 
     }

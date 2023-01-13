@@ -24,17 +24,47 @@ import store from './store'
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-const app = new Vue({
-    el: '#app',
-    router,
-    store:store,
-    vuetify,
-    render: h => h(App)
-});
+// const app = new Vue({
+//     mounted(){
+//        this.getSettingsData()
+//     },
+//     methods:{
+//         async getSettingsData(){
+//             await axios.get('/api/v1/setting/front/get')
+//                 .then((response)=>{
+//                     console.log('hello appjs')
+//                     let setting = response.data.data.settings;
+//                     this.$store.commit('setSetting', setting)
+//                 })
+//                 .catch((error)=>{
+//                     console.log(error)
+//                 })
+//         },
+//     },
+//     el: '#app',
+//     router,
+//     store:store,
+//     vuetify,
+//     render: h => h(App),
+// });
 
-function getAllSetting() {
-    store.dispatch('getData');
-}
+fetch('/api/v1/setting/front/get')
+    .then(r => r.json())
+    .then((data) => {
+        let settings = data.data.settings;
+        store.commit('setSetting', settings)
+        new Vue({
+            el: '#app',
+            router,
+            store:store,
+            vuetify,
+            render: h => h(App),
+        })
+    })
+    .catch((error) => {
+        // Don't forget to handle this
+        console.log(error)
+    })
 
-export default app;
+//export default app;
 

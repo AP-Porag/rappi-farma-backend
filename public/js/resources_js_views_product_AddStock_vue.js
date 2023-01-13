@@ -311,7 +311,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.scroll[data-v-61e7d298] {\n    height: 400px;\n    margin-top: 5px;\n    overflow-y: scroll\n}\n.datatable-search[data-v-61e7d298]{\n    margin-left: 15px;\n    margin-right: 15px;\n}\n.product_quantity[data-v-61e7d298]{\n    width: 150px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.scroll[data-v-61e7d298] {\r\n    height: 400px;\r\n    margin-top: 5px;\r\n    overflow-y: scroll\n}\n.datatable-search[data-v-61e7d298]{\r\n    margin-left: 15px;\r\n    margin-right: 15px;\n}\n.product_quantity[data-v-61e7d298]{\r\n    width: 150px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

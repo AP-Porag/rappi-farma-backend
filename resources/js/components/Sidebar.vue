@@ -11,7 +11,7 @@
             :src="require('../assets/logo.svg')"
           />
         </v-avatar>
-        <h2 class="indigo--text">Rappi Farma</h2>
+        <h2 class="indigo--text">{{settings.name}}</h2>
       </div>
     </div>
     <v-divider></v-divider>
@@ -64,6 +64,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "Sidebar",
   props: ["drawer"],
@@ -168,6 +170,13 @@ export default {
       ],
     };
   },
+    computed: {
+        ...mapGetters({
+            settings:'settings'
+        })
+    },
+
+
 };
 </script>
 
