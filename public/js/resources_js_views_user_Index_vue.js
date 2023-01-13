@@ -415,10 +415,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee4);
       }))();
+    },
+    getAdministrationCardData: function getAdministrationCardData() {
+      var _this5 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+        var token;
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                token = JSON.parse(window.localStorage.getItem('token'));
+                _context5.next = 3;
+                return axios.get("/api/user/card-data", {
+                  headers: {
+                    'Authorization': 'Bearer ' + token
+                  }
+                }).then(function (response) {
+                  if (response.data.status != 200) {
+                    console.log(response.data.status);
+                  } else {
+                    if (response.data.data != null) {
+                      console.log(response.data.data);
+                    }
+                  }
+                })["catch"](function (error) {
+                  _this5.message = 'Something went wrong !';
+                  _this5.error = true;
+                });
+              case 3:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
     }
   },
   created: function created() {
     this.getAllUsersData();
+    this.getAdministrationCardData();
+    console.log('heloohkscshk');
   }
 });
 
@@ -440,7 +476,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-38b630ad]{\r\n    width: 0px !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-38b630ad]{\n    width: 0px !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

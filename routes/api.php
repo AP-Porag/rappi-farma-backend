@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->group(function (){
     //user
     Route::resource('user',UserController::class)->except('create','edit');
     Route::get('/user/search-user/{text}',[UserController::class,'datatableSearch']);
+    Route::get('/user/card-data',[UserController::class,'administrationCardData']);
 
     //category
     Route::resource('category',CategoryController::class)->except('create','edit');

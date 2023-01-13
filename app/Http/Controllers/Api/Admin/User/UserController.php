@@ -172,4 +172,21 @@ class UserController extends Controller
 
         return response()->json(['status'=>200,'data'=>$data]);
     }
+
+    public function administrationCardData()
+    {
+        $total_users = User::count();
+        $total_admins = User::where('user_type',User::USER_TYPE_ADMIN)->count();
+        $total_customers = User::where('user_type',User::USER_TYPE_CUSTOMER)->count();
+        $total_drivers = User::where('user_type',User::USER_TYPE_DRIVER)->count();
+        $data = [
+            "total_users"=>$total_users,
+            "total_admins"=>$total_admins,
+            "total_customers"=>$total_customers,
+            "total_drivers"=>$total_drivers,
+        ];
+
+        return response()->json(['status'=>200,'data'=>$data]);
+    }
+
 }

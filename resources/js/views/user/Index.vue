@@ -296,10 +296,31 @@ export default {
                     this.message = 'Something went wrong !';
                     this.error = true;
                 })
+        },
+
+        async getAdministrationCardData(){
+            let token = JSON.parse(window.localStorage.getItem('token'))
+            await axios.get(`/api/user/card-data`, {headers: { 'Authorization': 'Bearer ' + token }})
+                .then((response)=>{
+                    if (response.data.status != 200){
+                        console.log(response.data.status)
+                    }else {
+                        if (response.data.data != null){
+                            console.log(response.data.data)
+                        }
+
+                    }
+                })
+                .catch((error)=>{
+                    this.message = 'Something went wrong !';
+                    this.error = true;
+                })
         }
     },
     created() {
-        this.getAllUsersData()
+        this.getAllUsersData();
+        this.getAdministrationCardData();
+        console.log('heloohkscshk')
     }
 }
 </script>
