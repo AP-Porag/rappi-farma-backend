@@ -277,6 +277,63 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -295,6 +352,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       success: false,
       error: false,
       message: '',
+      total_orders: '',
+      total_pending_orders: '',
+      total_shipped_orders: '',
+      total_delivered_orders: '',
+      total_rejected_orders: '',
+      total_canceled_orders: '',
       status: ['pending', 'shipped', 'delivered', 'canceled', 'rejected'],
       headers: [{
         text: 'SKU',
@@ -357,6 +420,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   created: function created() {
     this.getAllItemsData();
     this.categoryCount();
+    this.getOrderCardData();
   },
   methods: {
     datatableSearch: function datatableSearch($e) {
@@ -544,6 +608,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee4);
       }))();
+    },
+    getOrderCardData: function getOrderCardData() {
+      var _this5 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+        var token;
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                token = JSON.parse(window.localStorage.getItem('token'));
+                _context5.next = 3;
+                return axios.get("/api/order/card/card-data", {
+                  headers: {
+                    'Authorization': 'Bearer ' + token
+                  }
+                }).then(function (response) {
+                  if (response.data.status != 200) {
+                    console.log(response.data.status);
+                  } else {
+                    if (response.data.data != null) {
+                      _this5.total_orders = response.data.data.total_orders;
+                      _this5.total_pending_orders = response.data.data.total_pending_orders;
+                      _this5.total_shipped_orders = response.data.data.total_shipped_orders;
+                      _this5.total_delivered_orders = response.data.data.total_delivered_orders;
+                      _this5.total_rejected_orders = response.data.data.total_rejected_orders;
+                      _this5.total_canceled_orders = response.data.data.total_canceled_orders;
+                    }
+                  }
+                })["catch"](function (error) {
+                  _this5.message = 'Something went wrong !';
+                  _this5.error = true;
+                });
+              case 3:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
     }
   }
 });
@@ -566,7 +669,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-250f0698]{\r\n    width: 0px !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-250f0698]{\n    width: 0px !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -887,10 +990,10 @@ var render = function () {
             [
               _c(
                 "v-row",
-                _vm._l(_vm.activityLog, function (item, index) {
-                  return _c(
+                [
+                  _c(
                     "v-col",
-                    { key: index, attrs: { lg: "3", cols: "12" } },
+                    { attrs: { lg: "3", cols: "12" } },
                     [
                       _c(
                         "v-card",
@@ -899,61 +1002,318 @@ var render = function () {
                           attrs: { elevation: "2" },
                         },
                         [
-                          _c("v-card-text", {}, [
-                            item.amount > 0
-                              ? _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "d-flex justify-space-between align-center",
+                          _c(
+                            "v-card-text",
+                            {
+                              staticClass:
+                                "d-flex justify-space-between align-center",
+                            },
+                            [
+                              _c("div", [
+                                _c("strong", [_vm._v("Total Orders")]),
+                                _vm._v(" "),
+                                _c("br"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-avatar",
+                                {
+                                  staticStyle: { border: "3px solid #444" },
+                                  attrs: {
+                                    size: "60",
+                                    color: "cyan lighten-3",
                                   },
-                                  [
-                                    _c("div", [
-                                      _c("strong", [
-                                        _vm._v(_vm._s(item.title)),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("br"),
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-avatar",
-                                      {
-                                        staticStyle: {
-                                          border: "3px solid #444",
-                                        },
-                                        attrs: {
-                                          size: "60",
-                                          color: item.color,
-                                        },
-                                      },
-                                      [
-                                        _c(
-                                          "span",
-                                          { staticStyle: { color: "white" } },
-                                          [
-                                            _vm._v(_vm._s(item.amount) + " "),
-                                            item.amount > 0
-                                              ? _c("span", [_vm._v("+")])
-                                              : _vm._e(),
-                                          ]
-                                        ),
-                                      ]
-                                    ),
-                                  ],
-                                  1
-                                )
-                              : _c("div", [
-                                  _c("strong", [_vm._v("No Item found")]),
-                                ]),
-                          ]),
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "white" } },
+                                    [_vm._v(_vm._s(_vm.total_orders) + " +")]
+                                  ),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
                         ],
                         1
                       ),
                     ],
                     1
-                  )
-                }),
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { lg: "3", cols: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: { elevation: "2" },
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            {
+                              staticClass:
+                                "d-flex justify-space-between align-center",
+                            },
+                            [
+                              _c("div", [
+                                _c("strong", [_vm._v("Total Pending Orders")]),
+                                _vm._v(" "),
+                                _c("br"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-avatar",
+                                {
+                                  staticStyle: { border: "3px solid #444" },
+                                  attrs: {
+                                    size: "60",
+                                    color: "deep-orange darken-1",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "white" } },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.total_pending_orders) + " +"
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { lg: "3", cols: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: { elevation: "2" },
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            {
+                              staticClass:
+                                "d-flex justify-space-between align-center",
+                            },
+                            [
+                              _c("div", [
+                                _c("strong", [_vm._v("Total Shipped Orders")]),
+                                _vm._v(" "),
+                                _c("br"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-avatar",
+                                {
+                                  staticStyle: { border: "3px solid #444" },
+                                  attrs: {
+                                    size: "60",
+                                    color: "purple darken-2",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "white" } },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.total_shipped_orders) + " +"
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { lg: "3", cols: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: { elevation: "2" },
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            {
+                              staticClass:
+                                "d-flex justify-space-between align-center",
+                            },
+                            [
+                              _c("div", [
+                                _c("strong", [
+                                  _vm._v("Total Delivered Orders"),
+                                ]),
+                                _vm._v(" "),
+                                _c("br"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-avatar",
+                                {
+                                  staticStyle: { border: "3px solid #444" },
+                                  attrs: {
+                                    size: "60",
+                                    color: "green darken-2",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "white" } },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.total_delivered_orders) +
+                                          " +"
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { lg: "3", cols: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: { elevation: "2" },
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            {
+                              staticClass:
+                                "d-flex justify-space-between align-center",
+                            },
+                            [
+                              _c("div", [
+                                _c("strong", [_vm._v("Total Rejected Orders")]),
+                                _vm._v(" "),
+                                _c("br"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-avatar",
+                                {
+                                  staticStyle: { border: "3px solid #444" },
+                                  attrs: { size: "60", color: "red darken-1" },
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "white" } },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.total_rejected_orders) + " +"
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { lg: "3", cols: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: { elevation: "2" },
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            {
+                              staticClass:
+                                "d-flex justify-space-between align-center",
+                            },
+                            [
+                              _c("div", [
+                                _c("strong", [_vm._v("Total Canceled Orders")]),
+                                _vm._v(" "),
+                                _c("br"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-avatar",
+                                {
+                                  staticStyle: { border: "3px solid #444" },
+                                  attrs: { size: "60", color: "blue darken-1" },
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "white" } },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.total_canceled_orders) + " +"
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
                 1
               ),
             ],

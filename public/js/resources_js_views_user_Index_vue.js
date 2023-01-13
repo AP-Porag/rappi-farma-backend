@@ -159,6 +159,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index",
@@ -173,27 +209,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       success: false,
       error: false,
       message: '',
-      activityLog: [{
-        title: 'Total User',
-        amount: 50,
-        icon: 'mdi-account',
-        color: 'cyan lighten-3'
-      }, {
-        title: 'Total Admin',
-        amount: 3433,
-        icon: 'mdi-account-group-outline',
-        color: 'green darken-2'
-      }, {
-        title: 'Total Customer',
-        amount: 3433,
-        icon: 'mdi-account-group-outline',
-        color: 'purple darken-2'
-      }, {
-        title: 'Total Driver',
-        amount: 3433,
-        icon: 'mdi-account-group-outline',
-        color: 'deep-orange darken-1'
-      }],
+      total_admins: '',
+      total_customers: '',
+      total_drivers: '',
+      total_users: '',
       headers: [{
         text: 'Full Name',
         align: 'start',
@@ -426,7 +445,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 token = JSON.parse(window.localStorage.getItem('token'));
                 _context5.next = 3;
-                return axios.get("/api/user/card-data", {
+                return axios.get("/api/user/card/card-data", {
                   headers: {
                     'Authorization': 'Bearer ' + token
                   }
@@ -435,7 +454,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     console.log(response.data.status);
                   } else {
                     if (response.data.data != null) {
-                      console.log(response.data.data);
+                      _this5.total_users = response.data.data.total_users;
+                      _this5.total_admins = response.data.data.total_admins;
+                      _this5.total_customers = response.data.data.total_customers;
+                      _this5.total_drivers = response.data.data.total_drivers;
                     }
                   }
                 })["catch"](function (error) {
@@ -454,7 +476,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   created: function created() {
     this.getAllUsersData();
     this.getAdministrationCardData();
-    console.log('heloohkscshk');
   }
 });
 
@@ -635,10 +656,10 @@ var render = function () {
             [
               _c(
                 "v-row",
-                _vm._l(_vm.activityLog, function (item, index) {
-                  return _c(
+                [
+                  _c(
                     "v-col",
-                    { key: index, attrs: { lg: "3", cols: "12" } },
+                    { attrs: { lg: "3", cols: "12" } },
                     [
                       _c(
                         "v-card",
@@ -655,7 +676,7 @@ var render = function () {
                             },
                             [
                               _c("div", [
-                                _c("strong", [_vm._v(_vm._s(item.title))]),
+                                _c("strong", [_vm._v("Total User")]),
                                 _vm._v(" "),
                                 _c("br"),
                               ]),
@@ -664,13 +685,16 @@ var render = function () {
                                 "v-avatar",
                                 {
                                   staticStyle: { border: "3px solid #444" },
-                                  attrs: { size: "60", color: item.color },
+                                  attrs: {
+                                    size: "60",
+                                    color: "cyan lighten-3",
+                                  },
                                 },
                                 [
                                   _c(
                                     "span",
                                     { staticStyle: { color: "white" } },
-                                    [_vm._v(_vm._s(item.amount) + " +")]
+                                    [_vm._v(_vm._s(_vm.total_users) + " +")]
                                   ),
                                 ]
                               ),
@@ -682,8 +706,161 @@ var render = function () {
                       ),
                     ],
                     1
-                  )
-                }),
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { lg: "3", cols: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: { elevation: "2" },
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            {
+                              staticClass:
+                                "d-flex justify-space-between align-center",
+                            },
+                            [
+                              _c("div", [
+                                _c("strong", [_vm._v("Total Admin")]),
+                                _vm._v(" "),
+                                _c("br"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-avatar",
+                                {
+                                  staticStyle: { border: "3px solid #444" },
+                                  attrs: {
+                                    size: "60",
+                                    color: "green darken-2",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "white" } },
+                                    [_vm._v(_vm._s(_vm.total_admins) + " +")]
+                                  ),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { lg: "3", cols: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: { elevation: "2" },
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            {
+                              staticClass:
+                                "d-flex justify-space-between align-center",
+                            },
+                            [
+                              _c("div", [
+                                _c("strong", [_vm._v("Total Customer")]),
+                                _vm._v(" "),
+                                _c("br"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-avatar",
+                                {
+                                  staticStyle: { border: "3px solid #444" },
+                                  attrs: {
+                                    size: "60",
+                                    color: "purple darken-2",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "white" } },
+                                    [_vm._v(_vm._s(_vm.total_customers) + " +")]
+                                  ),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { lg: "3", cols: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: { elevation: "2" },
+                        },
+                        [
+                          _c(
+                            "v-card-text",
+                            {
+                              staticClass:
+                                "d-flex justify-space-between align-center",
+                            },
+                            [
+                              _c("div", [
+                                _c("strong", [_vm._v("Total Driver")]),
+                                _vm._v(" "),
+                                _c("br"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "v-avatar",
+                                {
+                                  staticStyle: { border: "3px solid #444" },
+                                  attrs: {
+                                    size: "60",
+                                    color: "deep-orange darken-1",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "white" } },
+                                    [_vm._v(_vm._s(_vm.total_customers) + " +")]
+                                  ),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
                 1
               ),
             ],

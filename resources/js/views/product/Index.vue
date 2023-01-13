@@ -8,19 +8,31 @@
             <v-col lg="12" cols="12">
 <!--                <ActivityLog/>-->
                 <v-row>
-                    <v-col lg="3" cols="12" v-for="(item,index) in activityLog" :key="index">
+                    <v-col lg="3" cols="12">
                         <v-card elevation="2" class="rounded-lg">
                             <v-card-text class="">
-                                <div class="d-flex justify-space-between align-center" v-if="item.amount > 0">
+                                <div class="d-flex justify-space-between align-center">
                                     <div>
-                                        <strong>{{ item.title }}</strong> <br>
+                                        <strong>Total Products</strong> <br>
                                     </div>
-                                    <v-avatar size="60" :color="item.color" style="border: 3px solid #444">
-                                        <span style="color: white">{{item.amount}} <span v-if="item.amount > 0">+</span></span>
+                                    <v-avatar size="60" color="cyan lighten-3" style="border: 3px solid #444">
+                                        <span style="color: white">{{total_products}} <span>+</span></span>
                                     </v-avatar>
                                 </div>
-                                <div v-else>
-                                    <strong>No Item found</strong>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+
+                    <v-col lg="3" cols="12">
+                        <v-card elevation="2" class="rounded-lg">
+                            <v-card-text class="">
+                                <div class="d-flex justify-space-between align-center">
+                                    <div>
+                                        <strong>Total Stock</strong> <br>
+                                    </div>
+                                    <v-avatar size="60" color="purple darken-2" style="border: 3px solid #444">
+                                        <span style="color: white">{{total_stock}} <span>+</span></span>
+                                    </v-avatar>
                                 </div>
                             </v-card-text>
                         </v-card>
@@ -177,6 +189,8 @@ export default {
             success:false,
             error:false,
             message:'',
+            total_products:'',
+            total_stock:'',
             headers: [
                 {
                     text: 'Name',
@@ -193,10 +207,6 @@ export default {
                 {text: 'Status', value: 'status',sortable: false},
                 {text: 'Actions', value: 'action',sortable: false},
             ],
-            activityLog: [
-                {title: 'Total Categories', amount: self.category_count, icon: 'mdi-account', color: 'cyan lighten-3'},
-                {title: 'Total Brand', amount: this.category_count, icon: 'mdi-account-group-outline', color: 'purple darken-2'},
-            ],
             items: [],
             total:0,
             category_count:10,
@@ -205,6 +215,7 @@ export default {
     created() {
         this.getAllItemsData()
         this.categoryCount()
+        this.getProductCardData()
     },
     methods: {
         async datatableSearch($e){
@@ -324,6 +335,26 @@ export default {
                         this.error = true;
                     }else {
                         this.category_count = response.data.data.total
+                    }
+                })
+                .catch((error)=>{
+                    this.message = 'Something went wrong !';
+                    this.error = true;
+                })
+        },
+
+        async getProductCardData(){
+            let token = JSON.parse(window.localStorage.getItem('token'))
+            await axios.get(`/api/product/card/card-data`, {headers: { 'Authorization': 'Bearer ' + token }})
+                .then((response)=>{
+                    if (response.data.status != 200){
+                        console.log(response.data.status)
+                    }else {
+                        if (response.data.data != null){
+                            this.total_products = response.data.data.total_products;
+                            this.total_stock = response.data.data.total_stock;
+                        }
+
                     }
                 })
                 .catch((error)=>{

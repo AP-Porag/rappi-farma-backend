@@ -242,4 +242,17 @@ class ProductController extends Controller
         return response()->json(['status'=>200,'data'=>$data]);
     }
 
+    public function productCardData()
+    {
+        $total_products = Product::count();
+        $total_stock = Product::count();
+        $data = [
+            "total_products"=>$total_products,
+            "total_stock"=>$total_stock,
+        ];
+
+        return response()->json(['status'=>200,'data'=>$data]);
+    }
+
+
 }

@@ -8,20 +8,77 @@
             <v-col lg="12" cols="12">
 <!--                <ActivityLog/>-->
                 <v-row>
-                    <v-col lg="3" cols="12" v-for="(item,index) in activityLog" :key="index">
+                    <v-col lg="3" cols="12">
                         <v-card elevation="2" class="rounded-lg">
-                            <v-card-text class="">
-                                <div class="d-flex justify-space-between align-center" v-if="item.amount > 0">
-                                    <div>
-                                        <strong>{{ item.title }}</strong> <br>
-                                    </div>
-                                    <v-avatar size="60" :color="item.color" style="border: 3px solid #444">
-                                        <span style="color: white">{{item.amount}} <span v-if="item.amount > 0">+</span></span>
-                                    </v-avatar>
+                            <v-card-text class="d-flex justify-space-between align-center">
+                                <div>
+                                    <strong>Total Orders</strong> <br>
                                 </div>
-                                <div v-else>
-                                    <strong>No Item found</strong>
+                                <v-avatar size="60" color="cyan lighten-3" style="border: 3px solid #444">
+                                    <span style="color: white">{{total_orders}} +</span>
+                                </v-avatar>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+                    <v-col lg="3" cols="12">
+                        <v-card elevation="2" class="rounded-lg">
+                            <v-card-text class="d-flex justify-space-between align-center">
+                                <div>
+                                    <strong>Total Pending Orders</strong> <br>
                                 </div>
+                                <v-avatar size="60" color="deep-orange darken-1" style="border: 3px solid #444">
+                                    <span style="color: white">{{total_pending_orders}} +</span>
+                                </v-avatar>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+                    <v-col lg="3" cols="12">
+                        <v-card elevation="2" class="rounded-lg">
+                            <v-card-text class="d-flex justify-space-between align-center">
+                                <div>
+                                    <strong>Total Shipped Orders</strong> <br>
+                                </div>
+                                <v-avatar size="60" color="purple darken-2" style="border: 3px solid #444">
+                                    <span style="color: white">{{total_shipped_orders}} +</span>
+                                </v-avatar>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+                    <v-col lg="3" cols="12">
+                        <v-card elevation="2" class="rounded-lg">
+                            <v-card-text class="d-flex justify-space-between align-center">
+                                <div>
+                                    <strong>Total Delivered Orders</strong> <br>
+                                </div>
+                                <v-avatar size="60" color="green darken-2" style="border: 3px solid #444">
+                                    <span style="color: white">{{total_delivered_orders}} +</span>
+                                </v-avatar>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+
+                    <v-col lg="3" cols="12">
+                        <v-card elevation="2" class="rounded-lg">
+                            <v-card-text class="d-flex justify-space-between align-center">
+                                <div>
+                                    <strong>Total Rejected Orders</strong> <br>
+                                </div>
+                                <v-avatar size="60" color="red darken-1" style="border: 3px solid #444">
+                                    <span style="color: white">{{total_rejected_orders}} +</span>
+                                </v-avatar>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+
+                    <v-col lg="3" cols="12">
+                        <v-card elevation="2" class="rounded-lg">
+                            <v-card-text class="d-flex justify-space-between align-center">
+                                <div>
+                                    <strong>Total Canceled Orders</strong> <br>
+                                </div>
+                                <v-avatar size="60" color="blue darken-1" style="border: 3px solid #444">
+                                    <span style="color: white">{{total_canceled_orders}} +</span>
+                                </v-avatar>
                             </v-card-text>
                         </v-card>
                     </v-col>
@@ -173,6 +230,12 @@ export default {
             success:false,
             error:false,
             message:'',
+            total_orders:'',
+            total_pending_orders:'',
+            total_shipped_orders:'',
+            total_delivered_orders:'',
+            total_rejected_orders:'',
+            total_canceled_orders:'',
             status: ['pending', 'shipped','delivered','canceled','rejected'],
             headers: [
                 {
@@ -193,10 +256,6 @@ export default {
                 {text: 'Status', value: 'status',sortable: false},
                 {text: 'Actions', value: 'action',sortable: false},
             ],
-            activityLog: [
-                {title: 'Total Categories', amount: self.category_count, icon: 'mdi-account', color: 'cyan lighten-3'},
-                {title: 'Total Brand', amount: this.category_count, icon: 'mdi-account-group-outline', color: 'purple darken-2'},
-            ],
             items: [],
             total:0,
             category_count:10,
@@ -213,6 +272,7 @@ export default {
     created() {
         this.getAllItemsData()
         this.categoryCount()
+        this.getOrderCardData()
     },
     methods: {
         async datatableSearch($e){
@@ -323,6 +383,30 @@ export default {
                     this.error = true;
                 })
         },
+
+        async getOrderCardData(){
+            let token = JSON.parse(window.localStorage.getItem('token'))
+            await axios.get(`/api/order/card/card-data`, {headers: { 'Authorization': 'Bearer ' + token }})
+                .then((response)=>{
+                    if (response.data.status != 200){
+                        console.log(response.data.status)
+                    }else {
+                        if (response.data.data != null){
+                            this.total_orders = response.data.data.total_orders;
+                            this.total_pending_orders = response.data.data.total_pending_orders;
+                            this.total_shipped_orders = response.data.data.total_shipped_orders;
+                            this.total_delivered_orders = response.data.data.total_delivered_orders;
+                            this.total_rejected_orders = response.data.data.total_rejected_orders;
+                            this.total_canceled_orders = response.data.data.total_canceled_orders;
+                        }
+
+                    }
+                })
+                .catch((error)=>{
+                    this.message = 'Something went wrong !';
+                    this.error = true;
+                })
+        }
     },
 
 }

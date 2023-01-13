@@ -85,8 +85,13 @@ export default {
                   },
                   {
                       id:"2-2",
-                      path: 'review-registration',
+                      path: 'customer',
                       title: 'Customer',
+                  },
+                  {
+                      id:"2-3",
+                      path: 'driver',
+                      title: 'Driver',
                   },
               ],
           },

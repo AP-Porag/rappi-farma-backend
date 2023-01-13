@@ -281,6 +281,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -299,6 +311,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       success: false,
       error: false,
       message: '',
+      total_products: '',
+      total_stock: '',
       headers: [{
         text: 'Name',
         align: 'start',
@@ -337,17 +351,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         value: 'action',
         sortable: false
       }],
-      activityLog: [{
-        title: 'Total Categories',
-        amount: self.category_count,
-        icon: 'mdi-account',
-        color: 'cyan lighten-3'
-      }, {
-        title: 'Total Brand',
-        amount: this.category_count,
-        icon: 'mdi-account-group-outline',
-        color: 'purple darken-2'
-      }],
       items: [],
       total: 0,
       category_count: 10
@@ -356,6 +359,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   created: function created() {
     this.getAllItemsData();
     this.categoryCount();
+    this.getProductCardData();
   },
   methods: {
     datatableSearch: function datatableSearch($e) {
@@ -576,6 +580,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee5);
       }))();
+    },
+    getProductCardData: function getProductCardData() {
+      var _this6 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+        var token;
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                token = JSON.parse(window.localStorage.getItem('token'));
+                _context6.next = 3;
+                return axios.get("/api/product/card/card-data", {
+                  headers: {
+                    'Authorization': 'Bearer ' + token
+                  }
+                }).then(function (response) {
+                  if (response.data.status != 200) {
+                    console.log(response.data.status);
+                  } else {
+                    if (response.data.data != null) {
+                      _this6.total_products = response.data.data.total_products;
+                      _this6.total_stock = response.data.data.total_stock;
+                    }
+                  }
+                })["catch"](function (error) {
+                  _this6.message = 'Something went wrong !';
+                  _this6.error = true;
+                });
+              case 3:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
     }
   }
 });
@@ -598,7 +637,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-06cfffba]{\r\n    width: 0px !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-06cfffba]{\n    width: 0px !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -919,10 +958,10 @@ var render = function () {
             [
               _c(
                 "v-row",
-                _vm._l(_vm.activityLog, function (item, index) {
-                  return _c(
+                [
+                  _c(
                     "v-col",
-                    { key: index, attrs: { lg: "3", cols: "12" } },
+                    { attrs: { lg: "3", cols: "12" } },
                     [
                       _c(
                         "v-card",
@@ -932,60 +971,108 @@ var render = function () {
                         },
                         [
                           _c("v-card-text", {}, [
-                            item.amount > 0
-                              ? _c(
-                                  "div",
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "d-flex justify-space-between align-center",
+                              },
+                              [
+                                _c("div", [
+                                  _c("strong", [_vm._v("Total Products")]),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "v-avatar",
                                   {
-                                    staticClass:
-                                      "d-flex justify-space-between align-center",
+                                    staticStyle: { border: "3px solid #444" },
+                                    attrs: {
+                                      size: "60",
+                                      color: "cyan lighten-3",
+                                    },
                                   },
                                   [
-                                    _c("div", [
-                                      _c("strong", [
-                                        _vm._v(_vm._s(item.title)),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("br"),
-                                    ]),
-                                    _vm._v(" "),
                                     _c(
-                                      "v-avatar",
-                                      {
-                                        staticStyle: {
-                                          border: "3px solid #444",
-                                        },
-                                        attrs: {
-                                          size: "60",
-                                          color: item.color,
-                                        },
-                                      },
+                                      "span",
+                                      { staticStyle: { color: "white" } },
                                       [
-                                        _c(
-                                          "span",
-                                          { staticStyle: { color: "white" } },
-                                          [
-                                            _vm._v(_vm._s(item.amount) + " "),
-                                            item.amount > 0
-                                              ? _c("span", [_vm._v("+")])
-                                              : _vm._e(),
-                                          ]
+                                        _vm._v(
+                                          _vm._s(_vm.total_products) + " "
                                         ),
+                                        _c("span", [_vm._v("+")]),
                                       ]
                                     ),
-                                  ],
-                                  1
-                                )
-                              : _c("div", [
-                                  _c("strong", [_vm._v("No Item found")]),
-                                ]),
+                                  ]
+                                ),
+                              ],
+                              1
+                            ),
                           ]),
                         ],
                         1
                       ),
                     ],
                     1
-                  )
-                }),
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    { attrs: { lg: "3", cols: "12" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "rounded-lg",
+                          attrs: { elevation: "2" },
+                        },
+                        [
+                          _c("v-card-text", {}, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "d-flex justify-space-between align-center",
+                              },
+                              [
+                                _c("div", [
+                                  _c("strong", [_vm._v("Total Stock")]),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "v-avatar",
+                                  {
+                                    staticStyle: { border: "3px solid #444" },
+                                    attrs: {
+                                      size: "60",
+                                      color: "purple darken-2",
+                                    },
+                                  },
+                                  [
+                                    _c(
+                                      "span",
+                                      { staticStyle: { color: "white" } },
+                                      [
+                                        _vm._v(_vm._s(_vm.total_stock) + " "),
+                                        _c("span", [_vm._v("+")]),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ],
+                              1
+                            ),
+                          ]),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
                 1
               ),
             ],

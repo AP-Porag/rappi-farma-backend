@@ -7,14 +7,50 @@
         <v-row>
             <v-col lg="12" cols="12">
                 <v-row>
-                    <v-col lg="3" cols="12" v-for="(item,index) in activityLog" :key="index">
+                    <v-col lg="3" cols="12">
                         <v-card elevation="2" class="rounded-lg">
                             <v-card-text class="d-flex justify-space-between align-center">
                                 <div>
-                                    <strong>{{ item.title }}</strong> <br>
+                                    <strong>Total User</strong> <br>
                                 </div>
-                                <v-avatar size="60" :color="item.color" style="border: 3px solid #444">
-                                    <span style="color: white">{{item.amount}} +</span>
+                                <v-avatar size="60" color="cyan lighten-3" style="border: 3px solid #444">
+                                    <span style="color: white">{{total_users}} +</span>
+                                </v-avatar>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+                    <v-col lg="3" cols="12">
+                        <v-card elevation="2" class="rounded-lg">
+                            <v-card-text class="d-flex justify-space-between align-center">
+                                <div>
+                                    <strong>Total Admin</strong> <br>
+                                </div>
+                                <v-avatar size="60" color="green darken-2" style="border: 3px solid #444">
+                                    <span style="color: white">{{total_admins}} +</span>
+                                </v-avatar>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+                    <v-col lg="3" cols="12">
+                        <v-card elevation="2" class="rounded-lg">
+                            <v-card-text class="d-flex justify-space-between align-center">
+                                <div>
+                                    <strong>Total Customer</strong> <br>
+                                </div>
+                                <v-avatar size="60" color="purple darken-2" style="border: 3px solid #444">
+                                    <span style="color: white">{{total_customers}} +</span>
+                                </v-avatar>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+                    <v-col lg="3" cols="12">
+                        <v-card elevation="2" class="rounded-lg">
+                            <v-card-text class="d-flex justify-space-between align-center">
+                                <div>
+                                    <strong>Total Driver</strong> <br>
+                                </div>
+                                <v-avatar size="60" color="deep-orange darken-1" style="border: 3px solid #444">
+                                    <span style="color: white">{{total_customers}} +</span>
                                 </v-avatar>
                             </v-card-text>
                         </v-card>
@@ -156,17 +192,10 @@ export default {
             success:false,
             error:false,
             message:'',
-            activityLog: [
-                {title: 'Total User', amount: 50, icon: 'mdi-account', color: 'cyan lighten-3'},
-                {title: 'Total Admin', amount: 3433, icon: 'mdi-account-group-outline', color: 'green darken-2'},
-                {title: 'Total Customer', amount: 3433, icon: 'mdi-account-group-outline', color: 'purple darken-2'},
-                {
-                    title: 'Total Driver',
-                    amount: 3433,
-                    icon: 'mdi-account-group-outline',
-                    color: 'deep-orange darken-1'
-                },
-            ],
+            total_admins:'',
+            total_customers:'',
+            total_drivers:'',
+            total_users:'',
             headers: [
                 {
                     text: 'Full Name',
@@ -300,13 +329,16 @@ export default {
 
         async getAdministrationCardData(){
             let token = JSON.parse(window.localStorage.getItem('token'))
-            await axios.get(`/api/user/card-data`, {headers: { 'Authorization': 'Bearer ' + token }})
+            await axios.get(`/api/user/card/card-data`, {headers: { 'Authorization': 'Bearer ' + token }})
                 .then((response)=>{
                     if (response.data.status != 200){
                         console.log(response.data.status)
                     }else {
                         if (response.data.data != null){
-                            console.log(response.data.data)
+                            this.total_users = response.data.data.total_users;
+                            this.total_admins = response.data.data.total_admins;
+                            this.total_customers = response.data.data.total_customers;
+                            this.total_drivers = response.data.data.total_drivers;
                         }
 
                     }
@@ -320,7 +352,6 @@ export default {
     created() {
         this.getAllUsersData();
         this.getAdministrationCardData();
-        console.log('heloohkscshk')
     }
 }
 </script>

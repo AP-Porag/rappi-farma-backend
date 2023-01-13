@@ -24,33 +24,33 @@ import store from './store'
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-// const app = new Vue({
-//     el: '#app',
-//     router,
-//     store:store,
-//     vuetify,
-//     render: h => h(App),
-// });
+const app = new Vue({
+    el: '#app',
+    router,
+    store:store,
+    vuetify,
+    render: h => h(App),
+});
 
-let app = {};
-fetch('/api/v1/setting/front/get')
-    .then(r => r.json())
-    .then((data) => {
-        let settings = data.data.settings;
-        store.commit('setSetting', settings)
-        const appVueObject = new Vue({
-            el: '#app',
-            router,
-            store:store,
-            vuetify,
-            render: h => h(App),
-        })
-        app = appVueObject;
-    })
-    .catch((error) => {
-        // Don't forget to handle this
-        console.log(error)
-    })
+// let app = {};
+// fetch('/api/v1/setting/front/get')
+//     .then(r => r.json())
+//     .then((data) => {
+//         let settings = data.data.settings;
+//         store.commit('setSetting', settings)
+//         app = new Vue({
+//             el: '#app',
+//             router,
+//             store:store,
+//             vuetify,
+//             render: h => h(App),
+//         })
+//
+//     })
+//     .catch((error) => {
+//         // Don't forget to handle this
+//         console.log(error)
+//     })
 export default app;
 
 

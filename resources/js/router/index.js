@@ -7,8 +7,6 @@ import Invoice from "../pages/Invoice";
 import Home from "../pages/Home";
 import About from "../views/About";
 
-// const Login = () => import('../views/Dashboard.vue')
-// const Home = () => import('../views/Dashboard.vue')
 const Dashboard = () => import('../views/Dashboard.vue')
 
 //user components
@@ -16,6 +14,9 @@ const UserProfile = () => import('../views/user/Profile.vue')
 const UserIndex = () => import('../views/user/Index.vue')
 const UserCreate = () => import('../views/user/Create.vue')
 const UserEdit = () => import('../views/user/Edit.vue')
+
+const CustomerIndex = () => import('../views/user/customer.vue')
+const DriverIndex = () => import('../views/user/driver.vue')
 
 //category components
 const CategoryIndex = () => import('../views/category/Index.vue')
@@ -124,6 +125,18 @@ const router = new vueRouter({
                     name:'profile',
                     meta:{title:'profile'},
                     component: UserProfile
+                },
+                {
+                    path:'customer',
+                    name:'customer',
+                    meta:{title:'customer'},
+                    component: CustomerIndex
+                },
+                {
+                    path:'driver',
+                    name:'driver',
+                    meta:{title:'driver'},
+                    component: DriverIndex
                 },
                 {
                     path:'category',

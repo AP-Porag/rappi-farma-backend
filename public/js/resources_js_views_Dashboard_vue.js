@@ -746,6 +746,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getRecentOrderData();
     this.getDashBoardCardData();
     this.getLastHistoryData();
+    console.log('hello from dash');
   },
   methods: {
     getRecentOrderData: function getRecentOrderData() {

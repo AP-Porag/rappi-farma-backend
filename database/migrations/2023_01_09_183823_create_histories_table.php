@@ -15,6 +15,7 @@ class CreateHistoriesTable extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_id')->nullable()->constrained('orders')->onDelete('set null');
             $table->string('type')->default('order');
             $table->string('message')->nullable();
             $table->string('status')->default('unread');

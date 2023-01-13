@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CategoryRequest;
 use App\Http\Resources\CategoryResource;
+use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -200,4 +201,17 @@ class CategoryController extends Controller
 
         return response()->json(['status'=>200,'data'=>$data]);
     }
+
+    public function preRequisitionCardData()
+    {
+        $total_categories = Category::count();
+        $total_brands = Brand::count();
+        $data = [
+            "total_categories"=>$total_categories,
+            "total_brands"=>$total_brands,
+        ];
+
+        return response()->json(['status'=>200,'data'=>$data]);
+    }
+
 }

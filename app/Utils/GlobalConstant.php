@@ -23,5 +23,24 @@ class GlobalConstant
     public const ORDER_STATUS_CANCELED  = 'canceled';
     public const ORDER_STATUS_REJECTED  = 'rejected';
 
+    // History type
+    public const HISTORY_STRATUS_READ   = 'read';
+    public const HISTORY_STRATUS_UNREAD   = 'unread';
+
+
+    // History type
+    public const HISTORY_TYPE_ORDER   = 'order';
+    public const HISTORY_TYPE_ORDER_SHIPPED   = 'order-shipped';
+    public const HISTORY_TYPE_ORDER_DELIVERED   = 'order-delivered';
+    public const HISTORY_TYPE_ORDER_CANCELED   = 'order-canceled';
+    public const HISTORY_TYPE_ORDER_REJECTED   = 'order-rejected';
+
+    // History message
+    public const HISTORY_MESSAGE_ORDER_CREATE   = 'You have new order please check this out';
+    public const HISTORY_MESSAGE_ORDER_SHIPPED   = 'A order has shipped!';
+    public const HISTORY_MESSAGE_ORDER_DELIVERED   = 'A Product has delivered!';
+    public const HISTORY_MESSAGE_ORDER_CANCELED   = 'A order has canceled!';
+    public const HISTORY_MESSAGE_ORDER_REJECTED   = 'A order has rejected!';
+
 
 }

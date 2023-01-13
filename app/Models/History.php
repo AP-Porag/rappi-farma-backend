@@ -11,6 +11,7 @@ class History extends Model
     use HasFactory,ModelBootHandler;
 
     protected $fillable = [
+        'order_id',
         'type',
         'message',
         'status',

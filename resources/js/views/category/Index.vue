@@ -7,19 +7,31 @@
         <v-row>
             <v-col lg="12" cols="12">
                 <v-row>
-                    <v-col lg="3" cols="12" v-for="(item,index) in activityLog" :key="index">
+                    <v-col lg="3" cols="12">
                         <v-card elevation="2" class="rounded-lg">
                             <v-card-text class="">
-                                <div class="d-flex justify-space-between align-center" v-if="item.amount > 0">
+                                <div class="d-flex justify-space-between align-center">
                                     <div>
-                                        <strong>{{ item.title }}</strong> <br>
+                                        <strong>Total Categories</strong> <br>
                                     </div>
-                                    <v-avatar size="60" :color="item.color" style="border: 3px solid #444">
-                                        <span style="color: white">{{item.amount}} <span v-if="item.amount > 0">+</span></span>
+                                    <v-avatar size="60" color="cyan lighten-3" style="border: 3px solid #444">
+                                        <span style="color: white">{{total_categories}} <span>+</span></span>
                                     </v-avatar>
                                 </div>
-                                <div v-else>
-                                    <strong>No category found</strong>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+
+                    <v-col lg="3" cols="12">
+                        <v-card elevation="2" class="rounded-lg">
+                            <v-card-text class="">
+                                <div class="d-flex justify-space-between align-center">
+                                    <div>
+                                        <strong>Total Brands</strong> <br>
+                                    </div>
+                                    <v-avatar size="60" color="purple darken-2" style="border: 3px solid #444">
+                                        <span style="color: white">{{total_brands}} <span>+</span></span>
+                                    </v-avatar>
                                 </div>
                             </v-card-text>
                         </v-card>
@@ -162,10 +174,8 @@ export default {
             success:false,
             error:false,
             message:'',
-            activityLog: [
-                {title: 'Total Categories', amount: this.total, icon: 'mdi-account', color: 'cyan lighten-3'},
-                {title: 'Total Brand', amount: 3433, icon: 'mdi-account-group-outline', color: 'purple darken-2'},
-            ],
+            total_categories:'',
+            total_brands:'',
             headers: [
                 {
                     text: 'Name',
@@ -292,10 +302,31 @@ export default {
                     this.message = 'Something went wrong !';
                     this.error = true;
                 })
+        },
+
+        async getPreRequisitionCardData(){
+            let token = JSON.parse(window.localStorage.getItem('token'))
+            await axios.get(`/api/category/card/card-data`, {headers: { 'Authorization': 'Bearer ' + token }})
+                .then((response)=>{
+                    if (response.data.status != 200){
+                        console.log(response.data.status)
+                    }else {
+                        if (response.data.data != null){
+                            this.total_categories = response.data.data.total_categories;
+                            this.total_brands = response.data.data.total_brands;
+                        }
+
+                    }
+                })
+                .catch((error)=>{
+                    this.message = 'Something went wrong !';
+                    this.error = true;
+                })
         }
     },
     created() {
         this.getAllItemsData()
+        this.getPreRequisitionCardData()
     }
 }
 </script>

@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\Admin\Product\ProductController;
 use App\Http\Controllers\Api\Admin\Product\StockController;
 use App\Http\Controllers\Api\Admin\Setting\SettingController;
 use App\Http\Controllers\Api\Admin\User\AuthController;
+use App\Http\Controllers\Api\Admin\User\CustomerController;
+use App\Http\Controllers\Api\Admin\User\DriverController;
 use App\Http\Controllers\Api\Admin\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,11 +23,20 @@ Route::middleware('auth:sanctum')->group(function (){
     //user
     Route::resource('user',UserController::class)->except('create','edit');
     Route::get('/user/search-user/{text}',[UserController::class,'datatableSearch']);
-    Route::get('/user/card-data',[UserController::class,'administrationCardData']);
+    Route::get('/user/card/card-data',[UserController::class,'administrationCardData']);
+
+    //driver
+    Route::get('/driver',[DriverController::class,'index']);
+    Route::get('/driver/search-driver/{text}',[DriverController::class,'datatableSearch']);
+
+    //customer
+    Route::get('/customer',[CustomerController::class,'index']);
+    Route::get('/customer/search-customer/{text}',[CustomerController::class,'datatableSearch']);
 
     //category
     Route::resource('category',CategoryController::class)->except('create','edit');
     Route::get('/category/search-category/{text}',[CategoryController::class,'datatableSearch']);
+    Route::get('/category/card/card-data',[CategoryController::class,'preRequisitionCardData']);
 
     //brand
     Route::resource('brand',BrandController::class)->except('create','edit');
@@ -39,6 +50,7 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::get('/product/all/category-brand/{category_id}',[ProductController::class,'allBrandForCategory']);
     Route::get('/product/stock-history/{product_id}',[ProductController::class,'getProductHistory']);
     Route::get('/product/order-history/{product_id}',[ProductController::class,'productOrderHistoryData']);
+    Route::get('/product/card/card-data',[ProductController::class,'productCardData']);
 
     //stock
     Route::post('/stock/stock-add',[StockController::class,'stockAdd'])->name('stock.add');
@@ -46,6 +58,7 @@ Route::middleware('auth:sanctum')->group(function (){
     //pending order
     Route::get('/order/pending-order',[OrderController::class,'pendingIndex']);
     Route::get('/order/search-pending-order/{text}',[OrderController::class,'pendingDatatableSearch']);
+    Route::get('/order/card/card-data',[OrderController::class,'orderCardData']);
 
     //shipped order
     Route::get('/order/shipped-order',[OrderController::class,'shippedIndex']);
