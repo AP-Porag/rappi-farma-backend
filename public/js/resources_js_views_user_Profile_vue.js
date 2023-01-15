@@ -288,7 +288,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         gender: '',
         date_of_birth: '',
         user_type: '',
-        password: '',
+        //password:'',
         image: ''
       },
       rules: {
@@ -437,6 +437,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this2.message = response.data.message;
                     _this2.error = true;
                   } else {
+                    // commit('SET_USER',data.data)
+                    // commit('SET_TOKEN',data.data.token)
+                    // commit('SET_TOKEN_TO_LOCALSTORAGE')
                     window.location.reload();
                     _this2.message = response.data.message;
                     _this2.success = true;
@@ -464,9 +467,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     }
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
     user: 'user'
-  })),
+  })), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)(['SET_USER', 'SET_TOKEN', 'SET_TOKEN_TO_LOCALSTORAGE'])),
   created: function created() {
     this.getUserData();
   }
@@ -513,7 +516,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.upload-btn[data-v-45366d78]{\r\n    position: absolute !important;\r\n    z-index: 1;\r\n    top: 121px;\r\n    color: cadetblue;\r\n    background: blueviolet;\r\n    background: rgb(125,198,163);\r\n    background: linear-gradient(50deg, rgba(125,198,163,1) 0%, rgba(35,216,227,1) 72%);\n}\n.bg[data-v-45366d78]{\r\n    background: rgb(255,197,185);\r\n    background: linear-gradient(0deg, rgba(255,197,185,0.711922268907563) 0%, rgba(220,246,223,0.6671043417366946) 35%, rgba(255,255,255,0.7539390756302521) 74%), url(http://unblast.com/wp-content/uploads/2021/09/Real-Estate-Agent-Illustration.jpg);\n}\n.avatar-shadow[data-v-45366d78]{\r\n    box-shadow: 0px 0px 10px 0px rgba(50,12,112,0.75);\r\n    -webkit-box-shadow: 0px 0px 10px 0px rgba(50,12,112,0.75);\r\n    -moz-box-shadow: 0px 0px 10px 0px rgba(50,12,112,0.75);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.upload-btn[data-v-45366d78]{\n    position: absolute !important;\n    z-index: 1;\n    top: 121px;\n    color: cadetblue;\n    background: blueviolet;\n    background: rgb(125,198,163);\n    background: linear-gradient(50deg, rgba(125,198,163,1) 0%, rgba(35,216,227,1) 72%);\n}\n.bg[data-v-45366d78]{\n    background: rgb(255,197,185);\n    background: linear-gradient(0deg, rgba(255,197,185,0.711922268907563) 0%, rgba(220,246,223,0.6671043417366946) 35%, rgba(255,255,255,0.7539390756302521) 74%), url(http://unblast.com/wp-content/uploads/2021/09/Real-Estate-Agent-Illustration.jpg);\n}\n.avatar-shadow[data-v-45366d78]{\n    box-shadow: 0px 0px 10px 0px rgba(50,12,112,0.75);\n    -webkit-box-shadow: 0px 0px 10px 0px rgba(50,12,112,0.75);\n    -moz-box-shadow: 0px 0px 10px 0px rgba(50,12,112,0.75);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

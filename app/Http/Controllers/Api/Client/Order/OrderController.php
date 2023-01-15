@@ -122,7 +122,7 @@ class OrderController extends Controller
 //        ]);
         //$order->user->notify(new OrderProcessed($order));
 
-        return response()->json(['success' => 'Product added successfully','status'=>200], 200);
+        return response()->json(['success' => 'Order submitted successfully','status'=>200], 200);
     }
 
 

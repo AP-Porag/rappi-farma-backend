@@ -77,7 +77,7 @@
               Profile
           </v-list-item-title>
         </v-list-item>
-          <v-list-item link>
+          <v-list-item link @click="$router.push({ name: 'change-password' })">
               <v-list-item-icon>
                   <v-icon>mdi-key</v-icon>
               </v-list-item-icon>
@@ -118,7 +118,7 @@ export default {
         })
     },
     created() {
-      //this.getLastFiveHistory()
+      this.getLastFiveHistory()
     },
     methods:{
         ...mapActions({

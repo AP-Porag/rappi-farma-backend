@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rappi Farma</title>
+    <title>{{ config('settings.site_title') ?? config('app.name') }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ config('settings.site_favicon') }}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
     <!-- nprogress -->

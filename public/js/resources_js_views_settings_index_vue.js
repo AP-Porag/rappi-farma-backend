@@ -113,6 +113,198 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "index",
@@ -123,31 +315,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       message: '',
       loading: false,
       form_data: {
-        category_id: '',
-        name: '',
-        status: '',
-        thumbnail_image: ''
-      }
+        site_title: '',
+        site_email: '',
+        site_contact: '',
+        site_address: '',
+        site_facebook_link: '',
+        site_instagram_link: '',
+        site_twitter_link: '',
+        admin_product_sku: '',
+        admin_order_sku: '',
+        admin_shipping_charge: '',
+        admin_estimated_delivery_time: '',
+        admin_twilio_order_message: ''
+      },
+      logoImageFile: null,
+      logoImageFileName: null,
+      faviconImageFile: null,
+      faviconImageFileName: null,
+      websiteLoginFile: null,
+      websiteLoginFileName: null,
+      websiteRegistrationFile: null,
+      websiteRegistrationFileName: null,
+      websiteCustomerProfileBgFile: null,
+      websiteCustomerProfileBgFileName: null,
+      adminLoginFile: null,
+      adminLoginFileName: null
     };
   },
   created: function created() {
     this.loadSettings();
   },
   methods: {
-    // toggleThumbnailImageUpload() {
-    //     this.thumbnail_image_upload = !this.thumbnail_image_upload;
-    // },
-    // thumbnailCropSuccess(imgDataUrl, field) {
-    //     this.form_data.thumbnail_image = imgDataUrl;
-    //     if (this.thumbnail_error = true && this.form_data.thumbnail_image != ''){
-    //         this.thumbnail_error = false;
-    //     }
-    //     //console.log(this.form_data.image)
-    // },
     submit: function submit() {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var token;
+        var token, formData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -176,11 +378,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return Promise.reject(error);
                 });
                 token = JSON.parse(window.localStorage.getItem('token'));
-                _context.next = 5;
-                return axios.post('/api/setting/save', _this.form_data, {
+                formData = new FormData(); // WE APPEND THE AVATAR TO THE FORMDATA WE'RE GONNA POST
+                formData.append('logoImageFile', _this.logoImageFile);
+                formData.append('logoImageFileName', _this.logoImageFileName);
+                formData.append('faviconImageFile', _this.faviconImageFile);
+                formData.append('faviconImageFileName', _this.faviconImageFileName);
+                formData.append('websiteLoginFile', _this.websiteLoginFile);
+                formData.append('websiteLoginFileName', _this.websiteLoginFileName);
+                formData.append('websiteRegistrationFile', _this.websiteRegistrationFile);
+                formData.append('websiteRegistrationFileName', _this.websiteRegistrationFileName);
+                formData.append('websiteCustomerProfileBgFile', _this.websiteCustomerProfileBgFile);
+                formData.append('websiteCustomerProfileBgFileName', _this.websiteCustomerProfileBgFileName);
+                formData.append('adminLoginFile', _this.adminLoginFile);
+                formData.append('adminLoginFileName', _this.adminLoginFileName);
+                _.each(_this.form_data, function (value, key) {
+                  formData.append(key, value);
+                });
+                _context.next = 19;
+                return axios.post('/api/setting/save', formData, {
                   headers: {
                     'Authorization': 'Bearer ' + token
-                  }
+                  },
+                  'content-type': 'multipart/form-data;charset=utf-8; boundary=' + Math.random().toString().substr(2)
                 }).then(function (response) {
                   if (response.data.status != 200) {
                     _this.message = response.data.message;
@@ -194,7 +413,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.message = 'Something went wrong !';
                   _this.error = true;
                 });
-              case 5:
+              case 19:
               case "end":
                 return _context.stop();
             }
@@ -221,9 +440,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this2.message = response.data.message;
                     _this2.error = true;
                   } else {
-                    _this2.form_data.name = response.data.data.settings.name;
-                    _this2.form_data.status = response.data.data.settings.status;
-                    _this2.form_data.thumbnail_image = response.data.data.settings.thumbnail_image;
+                    console.log(response.data.data.settings);
+                    _this2.form_data.site_title = response.data.data.settings.site_title;
+                    _this2.form_data.site_email = response.data.data.settings.site_email;
+                    _this2.form_data.site_contact = response.data.data.settings.site_contact;
+                    _this2.form_data.site_address = response.data.data.settings.site_address;
+                    _this2.form_data.site_facebook_link = response.data.data.settings.site_facebook_link;
+                    _this2.form_data.site_instagram_link = response.data.data.settings.site_instagram_link;
+                    _this2.form_data.site_twitter_link = response.data.data.settings.site_twitter_link;
+                    _this2.form_data.admin_product_sku = response.data.data.settings.admin_product_sku;
+                    _this2.form_data.admin_order_sku = response.data.data.settings.admin_order_sku;
+                    _this2.form_data.admin_shipping_charge = response.data.data.settings.admin_shipping_charge;
+                    _this2.form_data.admin_twilio_order_message = response.data.data.settings.admin_twilio_order_message;
+                    _this2.form_data.admin_estimated_delivery_time = response.data.data.settings.admin_estimated_delivery_time;
+                    _this2.logoImageFileName = response.data.data.settings.site_logo;
+                    _this2.faviconImageFileName = response.data.data.settings.site_favicon;
+                    _this2.websiteLoginFileName = response.data.data.settings.website_login_bg;
+                    _this2.websiteRegistrationFileName = response.data.data.settings.website_registration_bg;
+                    _this2.websiteCustomerProfileBgFileName = response.data.data.settings.website_customer_profile_bg;
+                    _this2.adminLoginFileName = response.data.data.settings.admin_login_bg;
                   }
                 })["catch"](function (error) {
                   _this2.message = 'Something went wrong !';
@@ -236,6 +471,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2);
       }))();
+    },
+    handleLogoFileObject: function handleLogoFileObject() {
+      this.logoImageFile = this.$refs.file.files[0];
+      this.logoImageFileName = this.logoImageFile.name;
+    },
+    handleFaviconFileObject: function handleFaviconFileObject() {
+      this.faviconImageFile = this.$refs.faviconFile.files[0];
+      this.faviconImageFileName = this.faviconImageFile.name;
+    },
+    handleWebsiteLoginFileObject: function handleWebsiteLoginFileObject() {
+      this.websiteLoginFile = this.$refs.WebsiteLoginFile.files[0];
+      this.websiteLoginFileName = this.websiteLoginFile.name;
+    },
+    handleWebsiteRegistrationFileObject: function handleWebsiteRegistrationFileObject() {
+      this.websiteRegistrationFile = this.$refs.WebsiteRegistrationFile.files[0];
+      this.websiteRegistrationFileName = this.websiteRegistrationFile.name;
+    },
+    handleWebsiteCustomerProfileBgFileObject: function handleWebsiteCustomerProfileBgFileObject() {
+      this.websiteCustomerProfileBgFile = this.$refs.WebsiteCustomerProfileBgFile.files[0];
+      this.websiteCustomerProfileBgFileName = this.websiteCustomerProfileBgFile.name;
+    },
+    handleAdminLoginFileObject: function handleAdminLoginFileObject() {
+      this.adminLoginFile = this.$refs.adminLoginFile.files[0];
+      this.adminLoginFileName = this.adminLoginFile.name;
     }
   }
 });
@@ -258,7 +517,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.v-slide-group__wrapper{\n    border-right: 20px solid #f3f9fd !important;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.v-slide-group__wrapper{\n    border-right: 20px solid #f3f9fd !important;\n}\n.custom-file{\n    border: 1px solid #999;\n    padding: 10px;\n    border-radius: 4px;\n}\n.custom-file label{\n    margin-right: 30px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -465,15 +724,17 @@ var render = function () {
                     [
                       _c(
                         "v-tab",
+                        { staticClass: "text-left" },
                         [
                           _c("v-icon", { attrs: { left: "" } }, [
                             _vm._v(
-                              "\n                            mdi-security\n                        "
+                              "\n                            mdi-spider-web\n                        "
                             ),
                           ]),
                           _vm._v(
-                            "\n                        Admin\n                    "
+                            "\n                        Common\n                        "
                           ),
+                          _c("v-spacer"),
                         ],
                         1
                       ),
@@ -487,23 +748,26 @@ var render = function () {
                             ),
                           ]),
                           _vm._v(
-                            "\n                        Website\n                    "
+                            "\n                        Website\n                        "
                           ),
+                          _c("v-spacer"),
                         ],
                         1
                       ),
                       _vm._v(" "),
                       _c(
                         "v-tab",
+                        { staticClass: "text-left" },
                         [
                           _c("v-icon", { attrs: { left: "" } }, [
                             _vm._v(
-                              "\n                            mdi-spider-web\n                        "
+                              "\n                                mdi-security\n                            "
                             ),
                           ]),
                           _vm._v(
-                            "\n                        Global\n                    "
+                            "\n                            Admin\n                        "
                           ),
+                          _c("v-spacer"),
                         ],
                         1
                       ),
@@ -515,8 +779,11 @@ var render = function () {
                             "v-card",
                             { attrs: { flat: "" } },
                             [
+                              _c("v-card-title", [_vm._v("Common Settings")]),
+                              _vm._v(" "),
                               _c(
                                 "v-form",
+                                { attrs: { enctype: "multipart/form-data" } },
                                 [
                                   _c(
                                     "v-container",
@@ -526,79 +793,324 @@ var render = function () {
                                         [
                                           _c(
                                             "v-col",
-                                            { attrs: { cols: "12", md: "6" } },
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Site Title",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data.site_title,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "site_title",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.site_title",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Email Address",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data.site_email,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "site_email",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.site_email",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Contact Number",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data.site_contact,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "site_contact",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.site_contact",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Address",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data.site_address,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "site_address",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.site_address",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Facebook Page Link",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data
+                                                      .site_facebook_link,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "site_facebook_link",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.site_facebook_link",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Instagram Page Link",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data
+                                                      .site_instagram_link,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "site_instagram_link",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.site_instagram_link",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Twitter Page Link",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data
+                                                      .site_twitter_link,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "site_twitter_link",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.site_twitter_link",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
                                             [
                                               _c(
-                                                "v-row",
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "custom-file d-flex",
+                                                },
                                                 [
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      attrs: {
-                                                        cols: "12",
-                                                        md: "12",
+                                                  _c("div", {}, [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        staticClass:
+                                                          "custom-file-label text-left",
+                                                        attrs: {
+                                                          for: "logo-input",
+                                                        },
                                                       },
+                                                      [_vm._v("Site Logo")]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      ref: "file",
+                                                      staticClass:
+                                                        "custom-file-input",
+                                                      attrs: {
+                                                        type: "file",
+                                                        id: "logo-input",
+                                                      },
+                                                      on: {
+                                                        change: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.handleLogoFileObject()
+                                                        },
+                                                      },
+                                                    }),
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("v-spacer"),
+                                                  _vm._v(" "),
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.logoImageFileName,
+                                                      width: "80",
+                                                      height: "80",
+                                                      alt: "",
                                                     },
-                                                    [
-                                                      _c(
-                                                        "v-row",
-                                                        [
-                                                          _c(
-                                                            "v-col",
-                                                            {
-                                                              attrs: {
-                                                                cols: "12",
-                                                                md: "12",
-                                                              },
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "v-text-field",
-                                                                {
-                                                                  attrs: {
-                                                                    label:
-                                                                      "Title",
-                                                                    required:
-                                                                      "",
-                                                                    outlined:
-                                                                      "",
-                                                                    clearable:
-                                                                      "",
-                                                                  },
-                                                                  model: {
-                                                                    value:
-                                                                      _vm
-                                                                        .form_data
-                                                                        .name,
-                                                                    callback:
-                                                                      function (
-                                                                        $$v
-                                                                      ) {
-                                                                        _vm.$set(
-                                                                          _vm.form_data,
-                                                                          "name",
-                                                                          $$v
-                                                                        )
-                                                                      },
-                                                                    expression:
-                                                                      "form_data.name",
-                                                                  },
-                                                                }
-                                                              ),
-                                                            ],
-                                                            1
-                                                          ),
-                                                        ],
-                                                        1
-                                                      ),
-                                                    ],
-                                                    1
-                                                  ),
+                                                  }),
                                                 ],
                                                 1
                                               ),
-                                            ],
-                                            1
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "custom-file d-flex",
+                                                },
+                                                [
+                                                  _c("div", {}, [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        staticClass:
+                                                          "custom-file-label text-left",
+                                                        attrs: {
+                                                          for: "favicon-input",
+                                                        },
+                                                      },
+                                                      [_vm._v("Site Favicon")]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      ref: "faviconFile",
+                                                      staticClass:
+                                                        "custom-file-input",
+                                                      attrs: {
+                                                        type: "file",
+                                                        id: "favicon-input",
+                                                      },
+                                                      on: {
+                                                        change: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.handleFaviconFileObject()
+                                                        },
+                                                      },
+                                                    }),
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("v-spacer"),
+                                                  _vm._v(" "),
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.faviconImageFileName,
+                                                      width: "80",
+                                                      height: "80",
+                                                      alt: "",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
+                                              ),
+                                            ]
                                           ),
                                         ],
                                         1
@@ -650,7 +1162,242 @@ var render = function () {
                           _c(
                             "v-card",
                             { attrs: { flat: "" } },
-                            [_c("v-card-text")],
+                            [
+                              _c("v-card-title", [_vm._v("Website Settings")]),
+                              _vm._v(" "),
+                              _c(
+                                "v-form",
+                                { attrs: { enctype: "multipart/form-data" } },
+                                [
+                                  _c(
+                                    "v-container",
+                                    [
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "custom-file d-flex",
+                                                },
+                                                [
+                                                  _c("div", {}, [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        staticClass:
+                                                          "custom-file-label text-left",
+                                                        attrs: {
+                                                          for: "website-login-input",
+                                                        },
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Login Page background"
+                                                        ),
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      ref: "WebsiteLoginFile",
+                                                      staticClass:
+                                                        "custom-file-input",
+                                                      attrs: {
+                                                        type: "file",
+                                                        id: "website-login-input",
+                                                      },
+                                                      on: {
+                                                        change: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.handleWebsiteLoginFileObject()
+                                                        },
+                                                      },
+                                                    }),
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("v-spacer"),
+                                                  _vm._v(" "),
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.websiteLoginFileName,
+                                                      width: "80",
+                                                      height: "80",
+                                                      alt: "",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "custom-file d-flex",
+                                                },
+                                                [
+                                                  _c("div", {}, [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        staticClass:
+                                                          "custom-file-label text-left",
+                                                        attrs: {
+                                                          for: "website-login-input",
+                                                        },
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Registration Page background"
+                                                        ),
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      ref: "WebsiteRegistrationFile",
+                                                      staticClass:
+                                                        "custom-file-input",
+                                                      attrs: {
+                                                        type: "file",
+                                                        id: "website-registration-input",
+                                                      },
+                                                      on: {
+                                                        change: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.handleWebsiteRegistrationFileObject()
+                                                        },
+                                                      },
+                                                    }),
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("v-spacer"),
+                                                  _vm._v(" "),
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.websiteRegistrationFileName,
+                                                      width: "80",
+                                                      height: "80",
+                                                      alt: "",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "custom-file d-flex",
+                                                },
+                                                [
+                                                  _c("div", {}, [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        staticClass:
+                                                          "custom-file-label text-left",
+                                                        attrs: {
+                                                          for: "website-login-input",
+                                                        },
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Customer Profile Page background"
+                                                        ),
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      ref: "WebsiteCustomerProfileBgFile",
+                                                      staticClass:
+                                                        "custom-file-input",
+                                                      attrs: {
+                                                        type: "file",
+                                                        id: "website-customer-input",
+                                                      },
+                                                      on: {
+                                                        change: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.handleWebsiteCustomerProfileBgFileObject()
+                                                        },
+                                                      },
+                                                    }),
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("v-spacer"),
+                                                  _vm._v(" "),
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.websiteCustomerProfileBgFileName,
+                                                      width: "80",
+                                                      height: "80",
+                                                      alt: "",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
+                                              ),
+                                            ]
+                                          ),
+                                        ],
+                                        1
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-card-actions",
+                                { staticClass: "text-right" },
+                                [
+                                  _c("v-spacer"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        loading: _vm.loading,
+                                        type: "submit",
+                                        color: "indigo",
+                                      },
+                                      on: { click: _vm.submit },
+                                    },
+                                    [
+                                      _c(
+                                        "span",
+                                        { staticClass: "white--text px-8" },
+                                        [_vm._v("Save")]
+                                      ),
+                                    ]
+                                  ),
+                                ],
+                                1
+                              ),
+                            ],
                             1
                           ),
                         ],
@@ -663,7 +1410,270 @@ var render = function () {
                           _c(
                             "v-card",
                             { attrs: { flat: "" } },
-                            [_c("v-card-text")],
+                            [
+                              _c("v-card-title", [_vm._v("Admin Settings")]),
+                              _vm._v(" "),
+                              _c(
+                                "v-form",
+                                { attrs: { enctype: "multipart/form-data" } },
+                                [
+                                  _c(
+                                    "v-container",
+                                    [
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Product SKU",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data
+                                                      .admin_product_sku,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "admin_product_sku",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.admin_product_sku",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Order SKU",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data
+                                                      .admin_order_sku,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "admin_order_sku",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.admin_order_sku",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label:
+                                                    "Estimated Delivery Time",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data
+                                                      .admin_estimated_delivery_time,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "admin_estimated_delivery_time",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.admin_estimated_delivery_time",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Shipping Charge",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data
+                                                      .admin_shipping_charge,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "admin_shipping_charge",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.admin_shipping_charge",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label:
+                                                    "Twilio message for order",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data
+                                                      .admin_twilio_order_message,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "admin_twilio_order_message",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.admin_twilio_order_message",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "custom-file d-flex",
+                                                },
+                                                [
+                                                  _c("div", {}, [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        staticClass:
+                                                          "custom-file-label text-left",
+                                                        attrs: {
+                                                          for: "admin-login-input",
+                                                        },
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Login Page background"
+                                                        ),
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      ref: "adminLoginFile",
+                                                      staticClass:
+                                                        "custom-file-input",
+                                                      attrs: {
+                                                        type: "file",
+                                                        id: "admin-login-input",
+                                                      },
+                                                      on: {
+                                                        change: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.handleAdminLoginFileObject()
+                                                        },
+                                                      },
+                                                    }),
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("v-spacer"),
+                                                  _vm._v(" "),
+                                                  _c("img", {
+                                                    attrs: {
+                                                      src: _vm.adminLoginFileName,
+                                                      width: "80",
+                                                      height: "80",
+                                                      alt: "",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
+                                              ),
+                                            ]
+                                          ),
+                                        ],
+                                        1
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-card-actions",
+                                { staticClass: "text-right" },
+                                [
+                                  _c("v-spacer"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        loading: _vm.loading,
+                                        type: "submit",
+                                        color: "indigo",
+                                      },
+                                      on: { click: _vm.submit },
+                                    },
+                                    [
+                                      _c(
+                                        "span",
+                                        { staticClass: "white--text px-8" },
+                                        [_vm._v("Save")]
+                                      ),
+                                    ]
+                                  ),
+                                ],
+                                1
+                              ),
+                            ],
                             1
                           ),
                         ],

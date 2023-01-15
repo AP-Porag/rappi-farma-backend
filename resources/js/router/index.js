@@ -5,7 +5,6 @@ import vueRouter from 'vue-router';
 import Login from "../pages/Login";
 import Invoice from "../pages/Invoice";
 import Home from "../pages/Home";
-import About from "../views/About";
 
 const Dashboard = () => import('../views/Dashboard.vue')
 
@@ -14,6 +13,7 @@ const UserProfile = () => import('../views/user/Profile.vue')
 const UserIndex = () => import('../views/user/Index.vue')
 const UserCreate = () => import('../views/user/Create.vue')
 const UserEdit = () => import('../views/user/Edit.vue')
+const ChangePassword = () => import('../views/user/ChangePassword.vue')
 
 const CustomerIndex = () => import('../views/user/customer.vue')
 const DriverIndex = () => import('../views/user/driver.vue')
@@ -125,6 +125,12 @@ const router = new vueRouter({
                     name:'profile',
                     meta:{title:'profile'},
                     component: UserProfile
+                },
+                {
+                    path:'change-password',
+                    name:'change-password',
+                    meta:{title:'change-password'},
+                    component: ChangePassword
                 },
                 {
                     path:'customer',

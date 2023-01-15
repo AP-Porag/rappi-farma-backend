@@ -102,7 +102,7 @@ class UserController extends Controller
         $item->gender = $request->gender;
         $item->date_of_birth = $request->date_of_birth;
         $item->user_type = $request->user_type;
-        $item->password = Hash::make($request->password);
+        //$item->password = Hash::make($request->password);
         $item->save();
 
         if ($item){
@@ -187,6 +187,29 @@ class UserController extends Controller
         ];
 
         return response()->json(['status'=>200,'data'=>$data]);
+    }
+
+    public function updatePassword(Request $request)
+    {
+//        dd($request->all());
+        # Validation
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required',
+        ]);
+
+        #Match The Old Password
+        if(!Hash::check($request->old_password, auth()->user()->password)){
+            return back()->with("error", "Old Password Doesn't match!");
+        }
+        //dd($request->all());
+
+        #Update the new Password
+        User::whereId(auth()->user()->id)->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        return response()->json(['status'=>200,'message'=>'Record updated successfully']);
     }
 
 }

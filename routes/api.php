@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::resource('user',UserController::class)->except('create','edit');
     Route::get('/user/search-user/{text}',[UserController::class,'datatableSearch']);
     Route::get('/user/card/card-data',[UserController::class,'administrationCardData']);
+    Route::post('/user/change-password', [UserController::class, 'updatePassword'])->name('update-password');
 
     //driver
     Route::get('/driver',[DriverController::class,'index']);

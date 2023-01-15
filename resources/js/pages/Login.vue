@@ -144,10 +144,10 @@ export default {
             }
         }
     },
-    created(){
-        this.data.email = 'admin@app.com';
-        this.data.password = '12345678';
-    }
+    // created(){
+    //     this.data.email = 'admin@app.com';
+    //     this.data.password = '12345678';
+    // }
 }
 </script>
 

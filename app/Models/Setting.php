@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
     use HasFactory,ModelBootHandler;
-    public const FILE_STORE_THUMB_PATH = 'settings';
+    public const FILE_STORE_PATH = 'settings';
 
     protected $fillable = [
         'key',
