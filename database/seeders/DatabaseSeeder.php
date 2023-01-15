@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\History;
+use App\Models\Order;
 use App\Models\User;
+use bfinlay\SpreadsheetSeeder\SpreadsheetSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,10 +17,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //User::factory(10)->create();
-        $this->call(UserSeeder::class);
-        $this->call(CategorySeeder::class);
-        $this->call(BrandSeeder::class);
-        $this->call(SettingSeeder::class);
+        $this->call([
+            UserSeeder::class,
+            CategorySeeder::class,
+            BrandSeeder::class,
+            SettingSeeder::class,
+            SpreadsheetSeeder::class,
+        ]);
+        User::factory(100)->create();
+        Order::factory(500)->create();
+        History::factory(600)->create();
     }
 }

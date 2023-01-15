@@ -143,7 +143,7 @@
                             </v-chip>
                         </template>
                         <template v-slot:item.action="{ item }">
-                            <v-btn color="success" outlined small shaped @click="$router.push({ name: 'show-product',params:{id:item.id} })">View</v-btn>
+                            <v-btn color="success" outlined small shaped @click="$router.push({ name: 'show-order',params:{id:item.id} })">View</v-btn>
                         </template>
                     </v-data-table>
                 </v-card>
@@ -251,8 +251,9 @@
                         if (response.data.status != 200){
                             console.log(response.data.status)
                         }else {
+                            console.log(response.data)
                             if (response.data.data != null){
-                                this.histories = response.data.data
+                                this.histories = response.data.data.last_order_history
                             }
 
                         }

@@ -34,8 +34,10 @@ export default {
     },
     actions:{
         async login({commit},payload){
-            return await axios.post('api/auth/login',{email:payload.email,'password':payload.password})
+            //console.log('from store login')
+            return await axios.post('/api/auth/login',{email:payload.email,'password':payload.password})
                 .then(({data})=>{
+                    console.log(payload)
                     commit('SET_USER',data.data)
                     commit('SET_TOKEN',data.data.token)
                     commit('SET_TOKEN_TO_LOCALSTORAGE')
@@ -43,7 +45,7 @@ export default {
                     //router.push({name:'home'})
             }).catch((err)=>{
                     commit('SET_USER',{})
-                    commit('REMOVE_TOKEN_TO_LOCALSTORAGE')
+                    commit('REMOVE_TOKEN_FROM_LOCALSTORAGE')
 
             })
         },

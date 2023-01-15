@@ -22,7 +22,7 @@ class HistoryResource extends JsonResource
             'status'=>$this->status,
             'customer_full_name'=>$this->order->user->fullName,
             'customer_avatar_url'=>$this->order->user->avatar_url,
-            'created_at'=>diffForHumans($this->created_at),
+            'created_at'=>$this->created_at->diffForHumans(),
         ];
     }
 }

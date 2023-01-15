@@ -209,7 +209,11 @@ class UserController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return response()->json(['status'=>200,'message'=>'Record updated successfully']);
+        $data = [
+            'email'=>auth()->user()->email,
+            'message'=>'Record updated successfully',
+        ];
+        return response()->json(['status'=>200,'data'=>$data]);
     }
 
 }

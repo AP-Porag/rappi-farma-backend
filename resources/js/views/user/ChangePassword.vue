@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations} from "vuex";
+import {mapActions} from "vuex";
 
 export default {
     name: "ChangePassword",
@@ -97,6 +97,10 @@ export default {
         form_data:{
             old_password:'',
             new_password:'',
+        },
+        data:{
+            email: null,
+            password: null,
         },
         rules:{
             old_password: [
@@ -113,6 +117,9 @@ export default {
         },
     }),
     methods:{
+        ...mapActions({
+            signIn:"login"
+        }),
         async submit(){
             if (this.valid){
 
@@ -146,7 +153,12 @@ export default {
                             this.message = response.data.message;
                             this.error = true;
                         }else {
-                            window.location.reload();
+                            this.data.email  = response.data.data.email
+                            this.data.password  = this.form_data.new_password
+
+                            this.signIn(this.data);
+                            console.log(this.data)
+                            //window.location.reload();
                             this.message = response.data.message;
                             this.success = true;
                         }

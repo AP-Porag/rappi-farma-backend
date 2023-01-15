@@ -132,7 +132,8 @@ class DashboardController extends Controller
 
     public function lastProductOrderHistoryData()
     {
-        $last_order_history = HistoryResource::collection(History::where('type','order')->take(3)->get());
+        $histories = History::latest()->take(3)->get();
+        $last_order_history = HistoryResource::collection($histories);
         $data = [
             "last_order_history"=>$last_order_history,
         ];

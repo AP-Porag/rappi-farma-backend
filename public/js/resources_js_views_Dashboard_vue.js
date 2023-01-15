@@ -826,8 +826,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (response.data.status != 200) {
                     console.log(response.data.status);
                   } else {
+                    console.log(response.data);
                     if (response.data.data != null) {
-                      _this2.histories = response.data.data;
+                      _this2.histories = response.data.data.last_order_history;
                     }
                   }
                 })["catch"](function (error) {
@@ -2112,7 +2113,7 @@ var render = function () {
                                 on: {
                                   click: function ($event) {
                                     return _vm.$router.push({
-                                      name: "show-product",
+                                      name: "show-order",
                                       params: { id: item.id },
                                     })
                                   },
