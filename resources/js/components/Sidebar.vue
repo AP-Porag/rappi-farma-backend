@@ -8,10 +8,10 @@
         <v-avatar class="mb-4" color="light" size="64">
           <v-img
             aspect-ratio="30"
-            :src="require('../assets/logo.svg')"
+            :src="settings.site_logo"
           />
         </v-avatar>
-        <h2 class="indigo--text">{{settings.name}}</h2>
+        <h2 class="indigo--text">{{settings.site_title}}</h2>
       </div>
     </div>
     <v-divider></v-divider>
@@ -151,26 +151,6 @@ export default {
                   },
               ],
           },
-          // {id:6,icon:'mdi-truck-delivery',title:'Delivery',path:''},
-          // {id:7,icon:'mdi-store-search',title:'Inventory',path:''},
-          // {id:8,icon:'mdi-card-account-details-outline',title:'Advertisement',path:''},
-          // {
-          //     id:9,
-          //     icon:'mdi-cog',
-          //     title:'Content Management',
-          //     subLinks: [
-          //         {
-          //             id:"9-1",
-          //             path:'about',
-          //             title: 'Home page settings',
-          //         },
-          //         {
-          //             id:"9-2",
-          //             path: '',
-          //             title: 'Category settings',
-          //         },
-          //     ],
-          // },
           {id:6,icon:'mdi-cog',title:'Settings',path:'settings'},
       ],
     };
@@ -180,7 +160,6 @@ export default {
             settings:'settings'
         })
     },
-
 
 };
 </script>

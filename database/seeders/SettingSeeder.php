@@ -53,23 +53,23 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key'   => 'website_login_bg',
-                'value' => 'default_website_login_bg.jpg',
+                'value' => 'default_website_login_bg.svg',
             ],
             [
                 'key'   => 'website_registration_bg',
-                'value' => 'default_website_registration_bg.jpg',
+                'value' => 'default_website_registration_bg.svg',
             ],
             [
                 'key'   => 'website_customer_profile_bg',
-                'value' => 'default_customer_profile_bg.jpg',
+                'value' => 'default_customer_profile_bg.png',
             ],
             [
-                'key'   => 'admin_product_sku',
-                'value' => '123456789',
+                'key'   => 'admin_stock_sku',
+                'value' => '7732330000',
             ],
             [
                 'key'   => 'admin_order_sku',
-                'value' => '123456789',
+                'value' => '3322440000',
             ],
             [
                 'key'   => 'admin_shipping_charge',
@@ -81,7 +81,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key'   => 'admin_twilio_order_message',
-                'value' => 'some message please track oerder by use this SKU # ',
+                'value' => 'Your order of # {$order_sku} has placed and should be delivered on {$deliveryDate}.Thanks, {$company}',
             ],
             [
                 'key'   => 'admin_login_bg',

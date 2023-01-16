@@ -382,9 +382,6 @@ export default {
                             this.message = response.data.message;
                             this.error = true;
                         }else {
-                            // commit('SET_USER',data.data)
-                            // commit('SET_TOKEN',data.data.token)
-                            // commit('SET_TOKEN_TO_LOCALSTORAGE')
                             window.location.reload();
                             this.message = response.data.message;
                             this.success = true;
@@ -421,7 +418,6 @@ export default {
     },
     created() {
         this.getUserData();
-
     },
 }
 </script>

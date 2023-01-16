@@ -142,8 +142,8 @@ class OrderController extends Controller
         if ($barcodes->count() > 0){
             $lastBarcodeId = Order::orderBy('id', 'DESC')->first()->SKU;
         }else{
-            //$setting = config('settings.barcode_initial_number');
-            $setting = 3322440000;
+            $setting = config('settings.admin_order_sku');
+            //$setting = 3322440000;
             $lastBarcodeId = $setting;
             //$lastBarcodeId = 0;
         }

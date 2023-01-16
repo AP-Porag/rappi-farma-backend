@@ -49,7 +49,8 @@ class ProductController extends Controller
         $lastSKU = Product::orderBy('id', 'DESC')->first()->SKU;
         $SKU = $lastSKU+1;
 
-        $SKU = sprintf('%010d', $SKU);
+        //$SKU = sprintf('%010d', $SKU);
+        //$SKU = config('settings.admin_product_sku');
 
         $item = Product::create([
             'category_id'=>$request->category_id,

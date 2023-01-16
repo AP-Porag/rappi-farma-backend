@@ -1,6 +1,6 @@
 <template>
     <v-app id="inspire">
-        <div class="backgruond"></div>
+        <div class="backgruond" v-bind:style="{ 'background-image': 'url(' + settings.admin_login_bg + ')' }"></div>
         <v-main class="d-flex justify-center align-center">
             <v-col cols="10" lg="4" class="mx-auto">
                 <v-card class="pa-4">
@@ -8,10 +8,10 @@
                         <v-avatar size="100" color="indigo lighten-4">
                             <v-img
                                 aspect-ratio="30"
-                                :src="require('../assets/logo.svg')"
+                                :src="settings.site_logo"
                             />
                         </v-avatar>
-                        <h2 class="indigo--text">Rappi Farma</h2>
+                        <h2 class="indigo--text">{{settings.name}}</h2>
                     </div>
                     <v-form @submit.prevent="submitHandler"
                             ref="form"
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 export default {
     name: "Login",
     data: () => ({
@@ -81,8 +81,10 @@ export default {
             v => !!v || 'Password is required',
         ],
     }),
-    computed:{
-
+    computed: {
+        ...mapGetters({
+            settings:'settings'
+        })
     },
     methods:{
         ...mapActions({
@@ -153,7 +155,7 @@ export default {
 
 <style scoped>
 .backgruond{
-    background-image: url(../assets/Order-Banner.jpg) !important;
+    /*background-image: url(../assets/Order-Banner.jpg) !important;*/
     height: 50vh;
     width: 100%;
     display: block;

@@ -131,7 +131,7 @@ class OrderController extends Controller
     public function shippedIndex(Request $request)
     {
         $items = OrderResource::collection(Order::where('status',GlobalConstant::ORDER_STATUS_SHIPPED)->orderBy('id','DESC')->paginate($request->per_page));
-        $total = Order::count();
+        $total = Order::where('status',GlobalConstant::ORDER_STATUS_SHIPPED)->count();
         $data = [
             "items"=>$items,
             "total"=>$total
@@ -146,7 +146,7 @@ class OrderController extends Controller
             ->orWhere('SKU',$text)
             ->paginate($request->per_page);
         $items = OrderResource::collection($items);
-        $total = Order::count();
+        $total = Order::where('status',GlobalConstant::ORDER_STATUS_SHIPPED)->count();
         $data = [
             "items"=>$items,
             "total"=>$total
@@ -159,7 +159,7 @@ class OrderController extends Controller
     public function deliveredIndex(Request $request)
     {
         $items = OrderResource::collection(Order::where('status',GlobalConstant::ORDER_STATUS_DELIVERED)->orderBy('id','DESC')->paginate($request->per_page));
-        $total = Order::count();
+        $total = Order::where('status',GlobalConstant::ORDER_STATUS_DELIVERED)->count();
         $data = [
             "items"=>$items,
             "total"=>$total
@@ -174,7 +174,7 @@ class OrderController extends Controller
             ->orWhere('SKU',$text)
             ->paginate($request->per_page);
         $items = OrderResource::collection($items);
-        $total = Order::count();
+        $total = Order::where('status',GlobalConstant::ORDER_STATUS_DELIVERED)->count();
         $data = [
             "items"=>$items,
             "total"=>$total
@@ -187,7 +187,7 @@ class OrderController extends Controller
     public function canceledIndex(Request $request)
     {
         $items = OrderResource::collection(Order::where('status',GlobalConstant::ORDER_STATUS_CANCELED)->orderBy('id','DESC')->paginate($request->per_page));
-        $total = Order::count();
+        $total = Order::where('status',GlobalConstant::ORDER_STATUS_CANCELED)->count();
         $data = [
             "items"=>$items,
             "total"=>$total
@@ -202,7 +202,7 @@ class OrderController extends Controller
             ->orWhere('SKU',$text)
             ->paginate($request->per_page);
         $items = OrderResource::collection($items);
-        $total = Order::count();
+        $total = Order::where('status',GlobalConstant::ORDER_STATUS_CANCELED)->count();
         $data = [
             "items"=>$items,
             "total"=>$total
@@ -215,7 +215,7 @@ class OrderController extends Controller
     public function rejectedIndex(Request $request)
     {
         $items = OrderResource::collection(Order::where('status',GlobalConstant::ORDER_STATUS_REJECTED)->orderBy('id','DESC')->paginate($request->per_page));
-        $total = Order::count();
+        $total = Order::where('status',GlobalConstant::ORDER_STATUS_REJECTED)->count();
         $data = [
             "items"=>$items,
             "total"=>$total
@@ -230,7 +230,7 @@ class OrderController extends Controller
             ->orWhere('SKU',$text)
             ->paginate($request->per_page);
         $items = OrderResource::collection($items);
-        $total = Order::count();
+        $total = Order::where('status',GlobalConstant::ORDER_STATUS_REJECTED)->count();
         $data = [
             "items"=>$items,
             "total"=>$total

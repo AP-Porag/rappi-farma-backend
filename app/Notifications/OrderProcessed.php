@@ -31,11 +31,12 @@ class OrderProcessed extends Notification
     public function toWhatsApp($notifiable)
     {
         $orderUrl = url("/orders/{$this->order->id}");
-        $company = env('APP_NAME');
-        $deliveryDate = $this->order->created_at->addDays(4)->toFormattedDateString();
-
+        $company = config('settings.site_title');
+        $order_sku = $this->order->SKU;
+        $deliveryDate = $this->order->created_at->addDays(config('settings.admin_estimated_delivery_time'))->toFormattedDateString();
+        $message = config('settings.admin_twilio_order_message');
 
         return (new WhatsAppMessage)
-            ->content("Your {$company} order of {$this->order->SKU} has placed and should be delivered on {$deliveryDate}.");
+            ->content($message);
     }
 }

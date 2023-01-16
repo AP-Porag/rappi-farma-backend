@@ -322,7 +322,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         site_facebook_link: '',
         site_instagram_link: '',
         site_twitter_link: '',
-        admin_product_sku: '',
+        admin_stock_sku: '',
         admin_order_sku: '',
         admin_shipping_charge: '',
         admin_estimated_delivery_time: '',
@@ -448,7 +448,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this2.form_data.site_facebook_link = response.data.data.settings.site_facebook_link;
                     _this2.form_data.site_instagram_link = response.data.data.settings.site_instagram_link;
                     _this2.form_data.site_twitter_link = response.data.data.settings.site_twitter_link;
-                    _this2.form_data.admin_product_sku = response.data.data.settings.admin_product_sku;
+                    _this2.form_data.admin_stock_sku = response.data.data.settings.admin_stock_sku;
                     _this2.form_data.admin_order_sku = response.data.data.settings.admin_order_sku;
                     _this2.form_data.admin_shipping_charge = response.data.data.settings.admin_shipping_charge;
                     _this2.form_data.admin_twilio_order_message = response.data.data.settings.admin_twilio_order_message;
@@ -1429,7 +1429,7 @@ var render = function () {
                                             [
                                               _c("v-text-field", {
                                                 attrs: {
-                                                  label: "Product SKU",
+                                                  label: "Stock SKU",
                                                   required: "",
                                                   outlined: "",
                                                   clearable: "",
@@ -1437,16 +1437,16 @@ var render = function () {
                                                 model: {
                                                   value:
                                                     _vm.form_data
-                                                      .admin_product_sku,
+                                                      .admin_stock_sku,
                                                   callback: function ($$v) {
                                                     _vm.$set(
                                                       _vm.form_data,
-                                                      "admin_product_sku",
+                                                      "admin_stock_sku",
                                                       $$v
                                                     )
                                                   },
                                                   expression:
-                                                    "form_data.admin_product_sku",
+                                                    "form_data.admin_stock_sku",
                                                 },
                                               }),
                                             ],

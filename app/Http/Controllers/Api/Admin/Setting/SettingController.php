@@ -21,17 +21,17 @@ class SettingController extends Controller
             'site_facebook_link'     => $request->site_facebook_link,
             'site_instagram_link'     => $request->site_instagram_link,
             'site_twitter_link'     => $request->site_twitter_link,
-            'site_logo'   => $request->logoImageFileName,
-            'site_favicon'   => $request->faviconImageFileName,
-            'website_login_bg'   => $request->websiteLoginFileName,
-            'website_registration_bg'   => $request->websiteRegistrationFileName,
-            'website_customer_profile_bg'   => $request->websiteCustomerProfileBgFileName,
-            'admin_product_sku'   => $request->admin_product_sku,
+            //'site_logo'   => $request->logoImageFileName,
+            //'site_favicon'   => $request->faviconImageFileName,
+            //'website_login_bg'   => $request->websiteLoginFileName,
+            //'website_registration_bg'   => $request->websiteRegistrationFileName,
+            //'website_customer_profile_bg'   => $request->websiteCustomerProfileBgFileName,
+            'admin_stock_sku'   => $request->admin_stock_sku,
             'admin_order_sku'   => $request->admin_order_sku,
             'admin_shipping_charge'   => $request->admin_shipping_charge,
             'admin_twilio_order_message'   => $request->admin_twilio_order_message,
             'admin_estimated_delivery_time'   => $request->admin_estimated_delivery_time,
-            'admin_login_bg'   => $request->adminLoginFileName,
+            //'admin_login_bg'   => $request->adminLoginFileName,
         ];
 
         //dd($request->all());
@@ -99,7 +99,14 @@ class SettingController extends Controller
         $items = Setting::all();
         $settings = [];
         foreach ($items as $item){
-            if ($item->key === 'site_logo' || $item->key === 'site_favicon'){
+            if (
+                $item->key === 'site_logo' ||
+                $item->key === 'site_favicon' ||
+                $item->key === 'website_login_bg' ||
+                $item->key === 'website_registration_bg' ||
+                $item->key === 'website_customer_profile_bg' ||
+                $item->key === 'admin_login_bg'
+            ){
                 $settings[$item->key] = get_storage_image(Setting::FILE_STORE_PATH, $item->value, 'setting');
             }else{
                 $settings[$item->key] = $item->value;

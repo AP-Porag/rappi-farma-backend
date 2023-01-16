@@ -11,7 +11,7 @@ const variables = {
     ORDER_STATUS_DELIVERED_COLOR : '#02522f',
     ORDER_STATUS_PENDING_COLOR   : '#f4511e',
     ORDER_STATUS_REJECTED_COLOR  : '#ff0500',
-    ORDER_STATUS_SHIPPED_COLOR   : '#168d9a',
+    ORDER_STATUS_SHIPPED_COLOR   : '#7b1fa2',
 
     // History type
     HISTORY_TYPE_ORDER_PENDING   : 'pending',

@@ -60,7 +60,8 @@ class StockController extends Controller
         if ($numbers->count() > 0){
             $lastSKUId = Stock::orderBy('id', 'DESC')->first()->SKU;
         }else{
-            $setting = 7732330000;
+            //$setting = 7732330000;
+            $setting = config('settings.admin_stock_sku');;
             $lastSKUId = $setting;
         }
 

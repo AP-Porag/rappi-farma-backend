@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('settings.site_title') ?? config('app.name') }}</title>
-    <link rel="icon" type="image/x-icon" href="{{ config('settings.site_favicon') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ config('settings.site_favicon') }}">
+{{--    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">--}}
+{{--    <link rel="icon" type="image/png" href="/assets/images/favicon.png">--}}
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
     <!-- nprogress -->

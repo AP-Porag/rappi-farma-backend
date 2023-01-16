@@ -26,7 +26,7 @@
                                 <div>
                                     <strong>Total Pending Orders</strong> <br>
                                 </div>
-                                <v-avatar size="60" color="deep-orange darken-1" style="border: 3px solid #444">
+                                <v-avatar size="60" :color="$variables.ORDER_STATUS_PENDING_COLOR" style="border: 3px solid #f4511e">
                                     <span style="color: white">{{total_pending_orders}} +</span>
                                 </v-avatar>
                             </v-card-text>
@@ -38,7 +38,7 @@
                                 <div>
                                     <strong>Total Shipped Orders</strong> <br>
                                 </div>
-                                <v-avatar size="60" color="purple darken-2" style="border: 3px solid #444">
+                                <v-avatar size="60" :color="$variables.ORDER_STATUS_SHIPPED_COLOR" style="border: 3px solid #7b1fa2">
                                     <span style="color: white">{{total_shipped_orders}} +</span>
                                 </v-avatar>
                             </v-card-text>
@@ -50,33 +50,31 @@
                                 <div>
                                     <strong>Total Delivered Orders</strong> <br>
                                 </div>
-                                <v-avatar size="60" color="green darken-2" style="border: 3px solid #444">
+                                <v-avatar size="60" :color="$variables.ORDER_STATUS_DELIVERED_COLOR" style="border: 3px solid #02522f">
                                     <span style="color: white">{{total_delivered_orders}} +</span>
                                 </v-avatar>
                             </v-card-text>
                         </v-card>
                     </v-col>
-
                     <v-col lg="3" cols="12">
                         <v-card elevation="2" class="rounded-lg">
                             <v-card-text class="d-flex justify-space-between align-center">
                                 <div>
                                     <strong>Total Rejected Orders</strong> <br>
                                 </div>
-                                <v-avatar size="60" color="red darken-1" style="border: 3px solid #444">
+                                <v-avatar size="60" :color="$variables.ORDER_STATUS_REJECTED_COLOR" style="border: 3px solid #ff0500">
                                     <span style="color: white">{{total_rejected_orders}} +</span>
                                 </v-avatar>
                             </v-card-text>
                         </v-card>
                     </v-col>
-
                     <v-col lg="3" cols="12">
                         <v-card elevation="2" class="rounded-lg">
                             <v-card-text class="d-flex justify-space-between align-center">
                                 <div>
                                     <strong>Total Canceled Orders</strong> <br>
                                 </div>
-                                <v-avatar size="60" color="blue darken-1" style="border: 3px solid #444">
+                                <v-avatar size="60" :color="$variables.ORDER_STATUS_CANCELED_COLOR" style="border: 3px solid #670016">
                                     <span style="color: white">{{total_canceled_orders}} +</span>
                                 </v-avatar>
                             </v-card-text>
@@ -128,7 +126,7 @@
                                     hide-details
                                     class="datatable-search"
                                 ></v-text-field>
-                                <v-spacer></v-spacer>
+<!--                                <v-spacer></v-spacer>-->
 <!--                                <v-btn-->
 <!--                                    color="primary"-->
 <!--                                    dark-->
@@ -142,7 +140,7 @@
                         </template>
                         <template v-slot:item.status="{ item }">
                             <v-chip
-                                :color="item.status == 'pending' ? 'red':'deep-purple accent-4 white--text'"
+                                :color="$helpers.getOrderStatusColor(item.status)"
                                 dark
                                 class="text-capitalize"
                             >
@@ -215,10 +213,8 @@
 </template>
 
 <script>
-import ActivityLog from "../../components/ActivityLog";
 export default {
     name: "Index",
-    components: {ActivityLog},
     data() {
         return {
             search: '',
@@ -258,7 +254,6 @@ export default {
             ],
             items: [],
             total:0,
-            category_count:10,
             rules:{
                 status: [
                     v => !!v || 'Status is required',
@@ -271,7 +266,6 @@ export default {
     },
     created() {
         this.getAllItemsData()
-        this.categoryCount()
         this.getOrderCardData()
     },
     methods: {
@@ -391,6 +385,7 @@ export default {
                     if (response.data.status != 200){
                         console.log(response.data.status)
                     }else {
+                        console.log(response.data.data)
                         if (response.data.data != null){
                             this.total_orders = response.data.data.total_orders;
                             this.total_pending_orders = response.data.data.total_pending_orders;

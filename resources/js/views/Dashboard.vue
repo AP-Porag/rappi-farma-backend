@@ -10,7 +10,7 @@
         <v-row>
             <v-col lg="7" cols="12">
                 <v-alert dense text type="success" color="indigo">
-                    Login Successfully! Welcome to <strong class="text-capitalize">{{settings.name}} admin</strong>
+                    Login Successfully! Welcome to <strong class="text-capitalize">{{settings.site_title}} admin</strong>
                 </v-alert>
                 <v-row>
                     <v-col lg="6" cols="12">

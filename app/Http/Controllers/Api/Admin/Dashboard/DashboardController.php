@@ -28,7 +28,7 @@ class DashboardController extends Controller
 //        pending #ff583d,
 //        rejected #ff0500
 //        shipped #168d9a,
-        $backgrounds = ['#670016', '#02522f', '#f4511e', '#ff0500','#168d9a'];
+        $backgrounds = ['#670016', '#02522f', '#f4511e', '#ff0500','#7b1fa2'];
         $counts = [];
         $statuses = [];
         $colors = [];

@@ -51,8 +51,8 @@ const app = new Vue({
 //             render: h => h(App),
 //         })
 //
-//         // console.log('hello from appjs')
-//         // console.log(settings)
+//         //console.log('hello from appjs')
+//         //console.log(settings)
 //     })
 //     .catch((error) => {
 //         // Don't forget to handle this

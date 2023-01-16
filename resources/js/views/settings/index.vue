@@ -211,8 +211,8 @@
                                         <v-row>
                                             <v-col cols="12" md="12">
                                                 <v-text-field
-                                                    v-model="form_data.admin_product_sku"
-                                                    label="Product SKU"
+                                                    v-model="form_data.admin_stock_sku"
+                                                    label="Stock SKU"
                                                     required
                                                     outlined
                                                     clearable
@@ -307,7 +307,7 @@ export default {
                 site_facebook_link:'',
                 site_instagram_link:'',
                 site_twitter_link:'',
-                admin_product_sku:'',
+                admin_stock_sku:'',
                 admin_order_sku:'',
                 admin_shipping_charge:'',
                 admin_estimated_delivery_time:'',
@@ -414,7 +414,7 @@ export default {
                         this.form_data.site_instagram_link = response.data.data.settings.site_instagram_link;
                         this.form_data.site_twitter_link = response.data.data.settings.site_twitter_link;
 
-                        this.form_data.admin_product_sku = response.data.data.settings.admin_product_sku;
+                        this.form_data.admin_stock_sku = response.data.data.settings.admin_stock_sku;
                         this.form_data.admin_order_sku = response.data.data.settings.admin_order_sku;
                         this.form_data.admin_shipping_charge = response.data.data.settings.admin_shipping_charge;
                         this.form_data.admin_twilio_order_message = response.data.data.settings.admin_twilio_order_message;

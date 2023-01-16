@@ -1633,7 +1633,7 @@ var render = function () {
                 [
                   _vm._v("\n                Login Successfully! Welcome to "),
                   _c("strong", { staticClass: "text-capitalize" }, [
-                    _vm._v(_vm._s(_vm.settings.name) + " admin"),
+                    _vm._v(_vm._s(_vm.settings.site_title) + " admin"),
                   ]),
                 ]
               ),

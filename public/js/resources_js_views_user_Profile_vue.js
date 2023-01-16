@@ -437,9 +437,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this2.message = response.data.message;
                     _this2.error = true;
                   } else {
-                    // commit('SET_USER',data.data)
-                    // commit('SET_TOKEN',data.data.token)
-                    // commit('SET_TOKEN_TO_LOCALSTORAGE')
                     window.location.reload();
                     _this2.message = response.data.message;
                     _this2.success = true;

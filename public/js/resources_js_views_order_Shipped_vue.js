@@ -332,8 +332,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -393,20 +391,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         value: 'action',
         sortable: false
       }],
-      activityLog: [{
-        title: 'Total Categories',
-        amount: self.category_count,
-        icon: 'mdi-account',
-        color: 'cyan lighten-3'
-      }, {
-        title: 'Total Brand',
-        amount: this.category_count,
-        icon: 'mdi-account-group-outline',
-        color: 'purple darken-2'
-      }],
       items: [],
       total: 0,
-      category_count: 10,
       rules: {
         status: [function (v) {
           return !!v || 'Status is required';
@@ -419,7 +405,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     this.getAllItemsData();
-    this.categoryCount();
     this.getOrderCardData();
   },
   methods: {
@@ -1069,10 +1054,11 @@ var render = function () {
                               _c(
                                 "v-avatar",
                                 {
-                                  staticStyle: { border: "3px solid #444" },
+                                  staticStyle: { border: "3px solid #f4511e" },
                                   attrs: {
                                     size: "60",
-                                    color: "deep-orange darken-1",
+                                    color:
+                                      _vm.$variables.ORDER_STATUS_PENDING_COLOR,
                                   },
                                 },
                                 [
@@ -1124,10 +1110,11 @@ var render = function () {
                               _c(
                                 "v-avatar",
                                 {
-                                  staticStyle: { border: "3px solid #444" },
+                                  staticStyle: { border: "3px solid #7b1fa2" },
                                   attrs: {
                                     size: "60",
-                                    color: "purple darken-2",
+                                    color:
+                                      _vm.$variables.ORDER_STATUS_SHIPPED_COLOR,
                                   },
                                 },
                                 [
@@ -1181,10 +1168,12 @@ var render = function () {
                               _c(
                                 "v-avatar",
                                 {
-                                  staticStyle: { border: "3px solid #444" },
+                                  staticStyle: { border: "3px solid #02522f" },
                                   attrs: {
                                     size: "60",
-                                    color: "green darken-2",
+                                    color:
+                                      _vm.$variables
+                                        .ORDER_STATUS_DELIVERED_COLOR,
                                   },
                                 },
                                 [
@@ -1237,8 +1226,13 @@ var render = function () {
                               _c(
                                 "v-avatar",
                                 {
-                                  staticStyle: { border: "3px solid #444" },
-                                  attrs: { size: "60", color: "red darken-1" },
+                                  staticStyle: { border: "3px solid #ff0500" },
+                                  attrs: {
+                                    size: "60",
+                                    color:
+                                      _vm.$variables
+                                        .ORDER_STATUS_REJECTED_COLOR,
+                                  },
                                 },
                                 [
                                   _c(
@@ -1289,8 +1283,13 @@ var render = function () {
                               _c(
                                 "v-avatar",
                                 {
-                                  staticStyle: { border: "3px solid #444" },
-                                  attrs: { size: "60", color: "blue darken-1" },
+                                  staticStyle: { border: "3px solid #670016" },
+                                  attrs: {
+                                    size: "60",
+                                    color:
+                                      _vm.$variables
+                                        .ORDER_STATUS_CANCELED_COLOR,
+                                  },
                                 },
                                 [
                                   _c(
@@ -1418,8 +1417,6 @@ var render = function () {
                                   },
                                   on: { input: _vm.datatableSearch },
                                 }),
-                                _vm._v(" "),
-                                _c("v-spacer"),
                               ],
                               1
                             ),
@@ -1437,10 +1434,9 @@ var render = function () {
                               {
                                 staticClass: "text-capitalize",
                                 attrs: {
-                                  color:
-                                    item.status == "pending"
-                                      ? "red"
-                                      : "deep-purple accent-4 white--text",
+                                  color: _vm.$helpers.getOrderStatusColor(
+                                    item.status
+                                  ),
                                   dark: "",
                                 },
                               },
