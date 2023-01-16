@@ -29,7 +29,7 @@ class GlobalConstant
 
 
     // History type
-    public const HISTORY_TYPE_ORDER   = 'order';
+    public const HISTORY_TYPE_ORDER   = 'pending';
     public const HISTORY_TYPE_ORDER_SHIPPED   = 'order-shipped';
     public const HISTORY_TYPE_ORDER_DELIVERED   = 'order-delivered';
     public const HISTORY_TYPE_ORDER_CANCELED   = 'order-canceled';

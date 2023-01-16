@@ -23,12 +23,12 @@ class DashboardController extends Controller
             ->get();
 
         //return $orders;
-//        pending #ff583d,
-//        shipped #1393a2,
+//        canceled #670016
 //        delivered #02522f,
-//        rejected #dd1b16
-//        canceled #b20021
-        $backgrounds = ['#02522f', '#ff583d', '#dd1b16', '#1393a2','#b20021'];
+//        pending #ff583d,
+//        rejected #ff0500
+//        shipped #168d9a,
+        $backgrounds = ['#670016', '#02522f', '#f4511e', '#ff0500','#168d9a'];
         $counts = [];
         $statuses = [];
         $colors = [];

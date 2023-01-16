@@ -76,7 +76,7 @@
                     <v-card-title>Activities</v-card-title>
                     <v-card-text class="py-0">
                         <v-timeline align-top dense v-if="histories.length">
-                            <v-timeline-item :color="history.type === 'order' ? 'indigo' : 'green'" small v-for="(history,index) in histories" :key="index">
+                            <v-timeline-item :color="$helpers.getHistoryStatusColor(history.type)" small v-for="(history,index) in histories" :key="index">
                                 <strong>{{history.created_at}}</strong>
                                 <div class="text-caption">
                                    {{history.message}}
@@ -135,7 +135,7 @@
                         </template>
                         <template v-slot:item.status="{ item }">
                             <v-chip
-                                :color="item.status == 'pending' ? 'red':'deep-purple accent-4 white--text'"
+                                :color="$helpers.getOrderStatusColor(item.status)"
                                 dark
                                 class="text-capitalize"
                             >
@@ -199,6 +199,8 @@
             this.getDashBoardCardData();
             this.getLastHistoryData();
             //console.log('hello from dashboard')
+            //console.log(this.$variables.ORDER_STATUS_PENDING)
+            //console.log(this.$helpers.getStatusColor('pending'))
         },
         methods: {
             async getRecentOrderData(){
@@ -251,7 +253,7 @@
                         if (response.data.status != 200){
                             console.log(response.data.status)
                         }else {
-                            console.log(response.data)
+                            //console.log(response.data)
                             if (response.data.data != null){
                                 this.histories = response.data.data.last_order_history
                             }

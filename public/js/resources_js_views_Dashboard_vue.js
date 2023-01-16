@@ -747,6 +747,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getDashBoardCardData();
     this.getLastHistoryData();
     //console.log('hello from dashboard')
+    //console.log(this.$variables.ORDER_STATUS_PENDING)
+    //console.log(this.$helpers.getStatusColor('pending'))
   },
 
   methods: {
@@ -826,7 +828,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (response.data.status != 200) {
                     console.log(response.data.status);
                   } else {
-                    console.log(response.data);
+                    //console.log(response.data)
                     if (response.data.data != null) {
                       _this2.histories = response.data.data.last_order_history;
                     }
@@ -1892,10 +1894,9 @@ var render = function () {
                                 {
                                   key: index,
                                   attrs: {
-                                    color:
-                                      history.type === "order"
-                                        ? "indigo"
-                                        : "green",
+                                    color: _vm.$helpers.getHistoryStatusColor(
+                                      history.type
+                                    ),
                                     small: "",
                                   },
                                 },
@@ -2078,10 +2079,9 @@ var render = function () {
                               {
                                 staticClass: "text-capitalize",
                                 attrs: {
-                                  color:
-                                    item.status == "pending"
-                                      ? "red"
-                                      : "deep-purple accent-4 white--text",
+                                  color: _vm.$helpers.getOrderStatusColor(
+                                    item.status
+                                  ),
                                   dark: "",
                                 },
                               },

@@ -20,7 +20,12 @@ import router from "./router";
 import vuetify from "./plugins/vuetify";
 import App from './pages/App';
 import store from './store'
+import variables from "./utils/globalconstant";
+import helpers from "./helpers/helpers";
 
+
+Vue.prototype.$variables = variables;
+Vue.prototype.$helpers = helpers
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
