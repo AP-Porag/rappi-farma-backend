@@ -141,6 +141,8 @@ Route::group(['prefix' => 'v1'], function(){
     ##customer
     Route::post('/customer/profile-update/{id}',[\App\Http\Controllers\Api\Client\User\UserController::class,'updateProfile']);
 
+    Route::get('/customer/details/{id}',[\App\Http\Controllers\Api\Client\User\UserController::class,'getUserData']);
+
 });
 
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
