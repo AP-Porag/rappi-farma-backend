@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Client\Order;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FrontEnd\OrderRequest;
+use App\Http\Resources\OrderResource;
 use App\Models\History;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -128,7 +129,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        //all order according auth user
+
     }
 
     public function details()
@@ -149,6 +150,33 @@ class OrderController extends Controller
         }
 
         return $lastBarcodeId+1;
+    }
+
+    public function customerLastFiveOrder($id)
+    {
+        //all order according auth user
+        $orders = Order::where('user_id',$id)->limit(5)->get();
+        $items = OrderResource::collection($orders);
+        $total = $orders->count();
+        $data = [
+            "items"=>$items,
+            "total"=>$total
+        ];
+        return response()->json(['status'=>200,'data'=>$data]);
+    }
+
+    public function customerAllOrder($id)
+    {
+        //all order according auth user
+        $orders = Order::where('user_id',$id)->get();
+        $items = OrderResource::collection($orders);
+
+        $total = $orders->count();
+        $data = [
+            "items"=>$items,
+            "total"=>$total
+        ];
+        return response()->json(['status'=>200,'data'=>$data]);
     }
 
 }

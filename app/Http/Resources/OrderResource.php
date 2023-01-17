@@ -31,6 +31,7 @@ class OrderResource extends JsonResource
             'whats_app_number'=>$this->whats_app_number,
             'status'=>$this->status,
             'created_at'=>custom_date($this->created_at),
+            'updated_at'=>custom_date($this->updated_at),
             'user'=>new UserResource($this->user),
             'products'=>OrderProductResource::collection($this->orderProducts)
         ];

@@ -132,9 +132,14 @@ Route::group(['prefix' => 'v1'], function(){
     Route::post('/order',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'store']);
     Route::get('/order',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'index']);
     Route::get('/order/{id}',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'details']);
+    Route::get('/order/last-five-order/{id}',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'customerLastFiveOrder']);
+    Route::get('/order/all-order/{id}',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'customerAllOrder']);
 
     ## Settings
     Route::get('/setting/front/get',[SettingController::class,'getAllSettings']);
+
+    ##customer
+    Route::post('/customer/profile-update/{id}',[\App\Http\Controllers\Api\Client\User\UserController::class,'updateProfile']);
 
 });
 

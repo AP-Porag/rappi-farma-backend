@@ -54,12 +54,15 @@ class AuthController extends Controller
 
                 $user = Auth::user();
                 $data['id'] = $user->id;
+                $data['first_name'] = $user->first_name;
+                $data['last_name'] = $user->last_name;
                 $data['fullName'] = $user->full_name;
                 $data['username'] = $user->username;
                 $data['email'] = $user->email;
                 $data['phone'] = $user->phone;
                 $data['gender'] = $user->gender;
-                $data['date_of_birth'] = custom_date($user->date_of_birth);
+                //$data['date_of_birth'] = custom_date($user->date_of_birth);
+                $data['date_of_birth'] = date('Y-m-d', strtotime($user->date_of_birth));
                 $data['user_type'] = $user->user_type;
                 $data['avatar_url'] = $user->avatar_url;
                 $data['token'] = $user->createToken('API TOKEN')-> plainTextToken;
