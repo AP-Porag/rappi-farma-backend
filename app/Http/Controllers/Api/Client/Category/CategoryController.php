@@ -47,7 +47,7 @@ class CategoryController extends Controller
 
     public function categoryBrand()
     {
-        $items = CategoryBrandResource::collection(Category::orderBy('id','DESC')->get());
+        $items = CategoryBrandResource::collection(Category::where('id','!=',1)->orderBy('id','ASC')->get());
         $total = Category::count();
         $data = [
             "items"=>$items,

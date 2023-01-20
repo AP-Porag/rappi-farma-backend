@@ -117,7 +117,7 @@ Route::group(['prefix' => 'v1'], function(){
     Route::get('/category',[\App\Http\Controllers\Api\Client\Category\CategoryController::class,'index']);
     Route::get('/category/{slug}',[\App\Http\Controllers\Api\Client\Category\CategoryController::class,'details']);
     Route::get('/category/{slug}/product',[\App\Http\Controllers\Api\Client\Category\CategoryController::class,'categoryProduct']);
-    Route::get('/category-brand',[\App\Http\Controllers\Api\Client\Category\CategoryController::class,'categoryBrand']);
+    Route::get('/category/front/category-brand',[\App\Http\Controllers\Api\Client\Category\CategoryController::class,'categoryBrand']);
 
     //brand route
     Route::get('/brand',[\App\Http\Controllers\Api\Client\Brand\BrandController::class,'index']);
@@ -127,6 +127,7 @@ Route::group(['prefix' => 'v1'], function(){
     //product route
     Route::get('/product',[\App\Http\Controllers\Api\Client\Product\ProductController::class,'index']);
     Route::get('/product/{slug}',[\App\Http\Controllers\Api\Client\Product\ProductController::class,'details']);
+    Route::get('/product/get/search-products', [\App\Http\Controllers\Api\Client\Product\ProductController::class, 'getSearchedProduct']);
 
     //order route
     Route::post('/order',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'store']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Client\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use function PHPUnit\Framework\isEmpty;
@@ -20,22 +21,26 @@ class ProductController extends Controller
 //        ];
 //
 //        return response()->json(['status'=>200,'data'=>$data]);
+
+//        if (!isEmpty($request)){
+//
+//        }
+
         $query = Product::query();
-        if (!isEmpty($request)){
-            //keywords filter
-            if ($request->keywords != 'null'){
-                $query->where('name', 'LIKE','%'.$request->keywords.'%');
-            }
+        //keywords filter
+        if ($request->keywords != 'null'){
+            $query->where('name', 'LIKE','%'.$request->keywords.'%');
+        }
 
-            //color filter
-            if ($request->category != 'null'){
-                $query->where('category_id',$request->category);
-            }
+        //color filter
+        if ($request->category != 'null'){
+            $category = Category::where('slug','=',$request->category)->first();
+            $query->where('category_id',$category->id);
+        }
 
-            //brand filter
-            if ($request->brand != 'null'){
-                $query->where('brand_id',$request->brand);
-            }
+        //brand filter
+        if ($request->brand != 'null'){
+            $query->where('brand_id',$request->brand);
         }
 
         $products = $query->orderBy('id','DESC')->paginate(12);
@@ -56,4 +61,22 @@ class ProductController extends Controller
         $item = new ProductResource($item);
         return response()->json(['status'=>200,'item'=>$item]);
     }
+
+    public function getSearchedProduct(Request $request)
+    {
+        if ($request->keywords != 'null'){
+            $data = Product::where('name', 'LIKE','%'.$request->keywords.'%')->get();
+            $data = ProductResource::collection($data);
+        }else{
+            $data = [];
+        }
+
+        $total = $data->count();
+        $data = [
+            "items"=>$data,
+            "total"=>$total
+        ];
+        return response()->json(['status'=>200,'data'=>$data]);
+    }
+
 }
