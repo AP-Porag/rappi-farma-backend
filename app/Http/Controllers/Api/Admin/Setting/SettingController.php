@@ -29,8 +29,11 @@ class SettingController extends Controller
             'admin_stock_sku'   => $request->admin_stock_sku,
             'admin_order_sku'   => $request->admin_order_sku,
             'admin_shipping_charge'   => $request->admin_shipping_charge,
-            'admin_twilio_order_message'   => $request->admin_twilio_order_message,
             'admin_estimated_delivery_time'   => $request->admin_estimated_delivery_time,
+            'admin_twilio_order_message'   => $request->admin_twilio_order_message,
+            'twilio_auth_sid'   => $request->twilio_auth_sid,
+            'twilio_auth_token'   => $request->twilio_auth_token,
+            'twilio_whatsapp_from'   => $request->twilio_whatsapp_from,
             //'admin_login_bg'   => $request->adminLoginFileName,
         ];
 

@@ -16,12 +16,12 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $categories = [
-            ['name'=>'todos','thumbnail'=>'','banner'=>''],
-            ['name'=>'salud y medicina','thumbnail'=>'','banner'=>''],
-            ['name'=>'belleza','thumbnail'=>'','banner'=>''],
-            ['name'=>'cuidado del bebé','thumbnail'=>'','banner'=>''],
-            ['name'=>'cuidado personal','thumbnail'=>'','banner'=>''],
-            ['name'=>'alimentos y bebidas','thumbnail'=>'','banner'=>''],
+            ['name'=>'todos','thumbnail'=>'todos.png','banner'=>'banner-2.jpeg'],
+            ['name'=>'salud y medicina','thumbnail'=>'health_medicine_icon.png','banner'=>'banner-1.jpeg'],
+            ['name'=>'belleza','thumbnail'=>'beauty_icon.png','banner'=>'banner-3.jpeg'],
+            ['name'=>'cuidado del bebé','thumbnail'=>'baby_care.png','banner'=>'banner-4.jpeg'],
+            ['name'=>'cuidado personal','thumbnail'=>'personal_care.png','banner'=>'banner-5.jpeg'],
+            ['name'=>'alimentos y bebidas','thumbnail'=>'food_drinks.png','banner'=>'banner-6.jpeg'],
         ];
         foreach ($categories as $category){
             $items = [

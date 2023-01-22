@@ -74,7 +74,7 @@ class OrderController extends Controller
                     'apartment'=>$request->apartment,
                     'city'=>$request->city,
                     'country'=>$request->country,
-                    'whats_app_number'=>$request->whatsapp,
+                    'whats_app_number'=>$request->phone,
                     'status'=>GlobalConstant::ORDER_STATUS_PENDING,
                     'zip_code'=>$request->zip_code,
                 ]);

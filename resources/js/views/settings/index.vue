@@ -257,6 +257,36 @@
                                             </v-col>
 
                                             <v-col cols="12" md="12">
+                                                <v-text-field
+                                                    v-model="form_data.twilio_auth_sid"
+                                                    label="Twilio Auth SID"
+                                                    required
+                                                    outlined
+                                                    clearable
+                                                ></v-text-field>
+                                            </v-col>
+
+                                            <v-col cols="12" md="12">
+                                                <v-text-field
+                                                    v-model="form_data.twilio_auth_token"
+                                                    label="Twilio Auth Token"
+                                                    required
+                                                    outlined
+                                                    clearable
+                                                ></v-text-field>
+                                            </v-col>
+
+                                            <v-col cols="12" md="12">
+                                                <v-text-field
+                                                    v-model="form_data.twilio_whatsapp_from"
+                                                    label="Twilio whatsapp form"
+                                                    required
+                                                    outlined
+                                                    clearable
+                                                ></v-text-field>
+                                            </v-col>
+
+                                            <v-col cols="12" md="12">
                                                 <div class="custom-file d-flex">
                                                     <div class="">
                                                         <label class="custom-file-label text-left" for="admin-login-input">Login Page background</label>
@@ -312,6 +342,9 @@ export default {
                 admin_shipping_charge:'',
                 admin_estimated_delivery_time:'',
                 admin_twilio_order_message:'',
+                twilio_auth_sid:'',
+                twilio_auth_token:'',
+                twilio_whatsapp_from:'',
             },
 
             logoImageFile: null,
@@ -418,6 +451,9 @@ export default {
                         this.form_data.admin_order_sku = response.data.data.settings.admin_order_sku;
                         this.form_data.admin_shipping_charge = response.data.data.settings.admin_shipping_charge;
                         this.form_data.admin_twilio_order_message = response.data.data.settings.admin_twilio_order_message;
+                        this.form_data.twilio_auth_sid = response.data.data.settings.twilio_auth_sid;
+                        this.form_data.twilio_auth_token = response.data.data.settings.twilio_auth_token;
+                        this.form_data.twilio_whatsapp_from = response.data.data.settings.twilio_whatsapp_from;
                         this.form_data.admin_estimated_delivery_time = response.data.data.settings.admin_estimated_delivery_time;
 
 

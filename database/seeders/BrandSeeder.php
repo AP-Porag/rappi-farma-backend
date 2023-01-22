@@ -16,12 +16,12 @@ class BrandSeeder extends Seeder
     public function run()
     {
         $brands = [
-            ['category_id'=>'5','name'=>'Genfar','thumbnail'=>'Genfar.png'],
-            ['category_id'=>'5','name'=>'Sanofi','thumbnail'=>'Sanofi.png'],
-            ['category_id'=>'1','name'=>'Loreal','thumbnail'=>'Loreal.png'],
-            ['category_id'=>'1','name'=>'Vogue','thumbnail'=>'Vogue.png'],
-            ['category_id'=>'2','name'=>'Garnier','thumbnail'=>'Garnier.png'],
-            ['category_id'=>'1','name'=>'Nivea','thumbnail'=>'Nivea.png'],
+            ['category_id'=>'2','name'=>'Genfar','thumbnail'=>'Genfar.png'],
+            ['category_id'=>'2','name'=>'Sanofi','thumbnail'=>'Sanofi.png'],
+            ['category_id'=>'3','name'=>'Loreal','thumbnail'=>'Loreal.png'],
+            ['category_id'=>'5','name'=>'Vogue','thumbnail'=>'Vogue.png'],
+            ['category_id'=>'3','name'=>'Garnier','thumbnail'=>'Garnier.png'],
+            ['category_id'=>'3','name'=>'Nivea','thumbnail'=>'Nivea.png'],
             ['category_id'=>'3','name'=>'P&G','thumbnail'=>'P&G.png'],
             ['category_id'=>'4','name'=>'Johnsons','thumbnail'=>'Johnsons.png'],
         ];

@@ -305,6 +305,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "index",
@@ -326,7 +356,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         admin_order_sku: '',
         admin_shipping_charge: '',
         admin_estimated_delivery_time: '',
-        admin_twilio_order_message: ''
+        admin_twilio_order_message: '',
+        twilio_auth_sid: '',
+        twilio_auth_token: '',
+        twilio_whatsapp_from: ''
       },
       logoImageFile: null,
       logoImageFileName: null,
@@ -452,6 +485,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this2.form_data.admin_order_sku = response.data.data.settings.admin_order_sku;
                     _this2.form_data.admin_shipping_charge = response.data.data.settings.admin_shipping_charge;
                     _this2.form_data.admin_twilio_order_message = response.data.data.settings.admin_twilio_order_message;
+                    _this2.form_data.twilio_auth_sid = response.data.data.settings.twilio_auth_sid;
+                    _this2.form_data.twilio_auth_token = response.data.data.settings.twilio_auth_token;
+                    _this2.form_data.twilio_whatsapp_from = response.data.data.settings.twilio_whatsapp_from;
                     _this2.form_data.admin_estimated_delivery_time = response.data.data.settings.admin_estimated_delivery_time;
                     _this2.logoImageFileName = response.data.data.settings.site_logo;
                     _this2.faviconImageFileName = response.data.data.settings.site_favicon;
@@ -1569,6 +1605,96 @@ var render = function () {
                                                   },
                                                   expression:
                                                     "form_data.admin_twilio_order_message",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Twilio Auth SID",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data
+                                                      .twilio_auth_sid,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "twilio_auth_sid",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.twilio_auth_sid",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Twilio Auth Token",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data
+                                                      .twilio_auth_token,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "twilio_auth_token",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.twilio_auth_token",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Twilio whatsapp form",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data
+                                                      .twilio_whatsapp_from,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "twilio_whatsapp_from",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.twilio_whatsapp_from",
                                                 },
                                               }),
                                             ],

@@ -25,7 +25,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key'   => 'site_contact',
-                'value' => '+00812345678',
+                'value' => '+14155238886',
             ],
             [
                 'key'   => 'site_address',
@@ -86,6 +86,19 @@ class SettingSeeder extends Seeder
             [
                 'key'   => 'admin_login_bg',
                 'value' => 'default_admin_login_bg.jpg',
+            ],
+            //twilio settings
+            [
+                'key'   => 'twilio_auth_sid',
+                'value' => 'AC72f804641aeb364f427ccb55a0e574e7',
+            ],
+            [
+                'key'   => 'twilio_auth_token',
+                'value' => 'b618c1057af419f6e81cb5e22dd8dde5',
+            ],
+            [
+                'key'   => 'twilio_whatsapp_from',
+                'value' => '+14155238886',
             ],
         ];
 
