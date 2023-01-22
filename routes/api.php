@@ -116,13 +116,13 @@ Route::group(['prefix' => 'v1'], function(){
     //category route
     Route::get('/category',[\App\Http\Controllers\Api\Client\Category\CategoryController::class,'index']);
     Route::get('/category/{slug}',[\App\Http\Controllers\Api\Client\Category\CategoryController::class,'details']);
-    Route::get('/category/{slug}/product',[\App\Http\Controllers\Api\Client\Category\CategoryController::class,'categoryProduct']);
+    Route::get('/category/front/product/{id}',[\App\Http\Controllers\Api\Client\Category\CategoryController::class,'categoryProduct']);
     Route::get('/category/front/category-brand',[\App\Http\Controllers\Api\Client\Category\CategoryController::class,'categoryBrand']);
 
     //brand route
     Route::get('/brand',[\App\Http\Controllers\Api\Client\Brand\BrandController::class,'index']);
     Route::get('/brand/{slug}',[\App\Http\Controllers\Api\Client\Brand\BrandController::class,'details']);
-    Route::get('/brand/{slug}/product',[\App\Http\Controllers\Api\Client\Brand\BrandController::class,'brandProduct']);
+    Route::get('/brand/front/product/{id}',[\App\Http\Controllers\Api\Client\Brand\BrandController::class,'brandProduct']);
 
     //product route
     Route::get('/product',[\App\Http\Controllers\Api\Client\Product\ProductController::class,'index']);

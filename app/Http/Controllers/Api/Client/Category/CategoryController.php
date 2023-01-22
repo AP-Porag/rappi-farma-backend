@@ -32,10 +32,10 @@ class CategoryController extends Controller
         return response()->json(['status'=>200,'item'=>$item]);
     }
 
-    public function categoryProduct($slug)
+    public function categoryProduct($id)
     {
-        $item = Category::where('slug',$slug)->first();
-        $items = ProductResource::collection(Product::where('category_id',$item->id)->orderBy('id','DESC')->limit(10)->get());
+        $item = Category::find($id);
+        $items = ProductResource::collection(Product::where('category_id',$item->id)->orderBy('id','ASC')->limit(10)->get());
         $total = Product::where('category_id',$item->id)->count();
         $data = [
             "items"=>$items,

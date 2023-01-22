@@ -31,9 +31,9 @@ class BrandController extends Controller
         return response()->json(['status'=>200,'item'=>$item]);
     }
 
-    public function brandProduct($slug)
+    public function brandProduct($id)
     {
-        $item = Brand::where('slug',$slug)->first();
+        $item = Brand::find($id);
         $items = ProductResource::collection(Product::where('brand_id',$item->id)->orderBy('id','DESC')->limit(10)->get());
         $total = Product::where('brand_id',$item->id)->count();
         $data = [
