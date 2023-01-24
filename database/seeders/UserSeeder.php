@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
                 'user_type'         => User::USER_TYPE_CUSTOMER,
                 'gender'            => 'male',
                 'remember_token'    => Str::random(60),
-                'phone'             => '012345678910',
+                'phone'             => '+8801828963235',
                 'date_of_birth'     => '2000-10-21',
             ],
         ];

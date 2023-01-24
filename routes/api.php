@@ -130,7 +130,7 @@ Route::group(['prefix' => 'v1'], function(){
     Route::get('/product/get/search-products', [\App\Http\Controllers\Api\Client\Product\ProductController::class, 'getSearchedProduct']);
 
     //order route
-    Route::post('/order',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'store']);
+    Route::post('/order/front/save-order',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'store']);
     Route::get('/order',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'index']);
     Route::get('/order/{id}',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'details']);
     Route::get('/order/last-five-order/{id}',[\App\Http\Controllers\Api\Client\Order\OrderController::class,'customerLastFiveOrder']);

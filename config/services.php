@@ -30,15 +30,15 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-//    'twilio' => [
-//        'sid' => env('TWILIO_AUTH_SID'),
-//        'token' => env('TWILIO_AUTH_TOKEN'),
-//        'whatsapp_from' => env('TWILIO_WHATSAPP_FROM')
-//    ],
     'twilio' => [
-        'sid' => config('settings.twilio_auth_sid'),
-        'token' => config('settings.twilio_auth_token'),
-        'whatsapp_from' => config('settings.twilio_whatsapp_from'),
+        'sid' => env('TWILIO_AUTH_SID'),
+        'token' => env('TWILIO_AUTH_TOKEN'),
+        'whatsapp_from' => env('TWILIO_WHATSAPP_FROM')
     ],
+//    'twilio' => [
+//        'sid' => config('settings.twilio_auth_sid'),
+//        'token' => config('settings.twilio_auth_token'),
+//        'whatsapp_from' => config('settings.twilio_whatsapp_from'),
+//    ],
 
 ];

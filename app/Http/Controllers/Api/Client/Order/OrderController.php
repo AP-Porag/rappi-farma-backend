@@ -116,12 +116,12 @@ class OrderController extends Controller
             return response()->json(['massage' => 'Server error'], 500);
         }
 
-//        $order = Order::create([
-//            'user_id'=>3,
-//            'SKU'=>$this->getBarcodeNumber(),
-//            'status'=>GlobalConstant::ORDER_STATUS_PENDING,
-//        ]);
-        //$order->user->notify(new OrderProcessed($order));
+        // $order = Order::create([
+        //     'user_id'=>3,
+        //     'SKU'=>$this->getBarcodeNumber(),
+        //     'status'=>GlobalConstant::ORDER_STATUS_PENDING,
+        // ]);
+        // $order->user->notify(new OrderProcessed($order));
 
         return response()->json(['success' => 'Order submitted successfully','status'=>200], 200);
     }
