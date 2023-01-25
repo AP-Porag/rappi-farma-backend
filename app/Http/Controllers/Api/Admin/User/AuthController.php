@@ -17,21 +17,25 @@ class AuthController extends Controller
 
         try {
             if (Auth::attempt($credentials)){
-
                 $user = Auth::user();
-                $data['id'] = $user->id;
-                $data['fullName'] = $user->full_name;
-                $data['username'] = $user->username;
-                $data['email'] = $user->email;
-                $data['phone'] = $user->phone;
-                $data['gender'] = $user->gender;
-                $data['date_of_birth'] = custom_date($user->date_of_birth);
-                $data['user_type'] = $user->user_type;
-                $data['avatar_url'] = $user->avatar_url;
-                $data['token'] = $user->createToken('API TOKEN')-> plainTextToken;
+                if ($user->user_type != User::USER_TYPE_ADMIN){
+                    return response()->json(['message'=>'Wrong credentials !'],200);
+                }else{
+                    $data['id'] = $user->id;
+                    $data['fullName'] = $user->full_name;
+                    $data['username'] = $user->username;
+                    $data['email'] = $user->email;
+                    $data['phone'] = $user->phone;
+                    $data['gender'] = $user->gender;
+                    $data['date_of_birth'] = custom_date($user->date_of_birth);
+                    $data['user_type'] = $user->user_type;
+                    $data['avatar_url'] = $user->avatar_url;
+                    $data['token'] = $user->createToken('API TOKEN')-> plainTextToken;
 
 
-                return response()->json(['data'=>$data],200);
+                    return response()->json(['data'=>$data],200);
+                }
+
             }else{
                 return response()->json(['message'=>'Wrong credentials !'],200);
             }
