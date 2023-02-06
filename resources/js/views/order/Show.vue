@@ -173,15 +173,18 @@
                         </template>
                     </v-simple-table>
                 </v-card>
+                <page-chat/>
             </v-col>
         </v-row>
     </div>
 </template>
 
 <script>
+import PageChatComponent from "../../components/chat/PageChatComponent";
 export default {
     name: "Show",
     components: {
+        'page-chat':PageChatComponent
     },
     data: () => ({
         success:false,

@@ -40,4 +40,26 @@ export default {
     background: #f3f9fd !important;
     padding-bottom:60px;
 }
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #c3c1e6 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #c3c1e6;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+}
 </style>
