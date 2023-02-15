@@ -50,8 +50,8 @@ class AuthController extends Controller
         $credentials = $request->only('email','password');
 
         try {
-            if (Auth::attempt($credentials)){
-
+//            if (Auth::attempt($credentials)){
+            if (Auth::attempt(['phone' => request('email'), 'password' => request('password')]) || Auth::attempt(['email' => request('email'), 'password' => request('password')])){
                 $user = Auth::user();
                 $data['id'] = $user->id;
                 $data['first_name'] = $user->first_name;
