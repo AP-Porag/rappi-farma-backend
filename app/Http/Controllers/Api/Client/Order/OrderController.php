@@ -37,6 +37,8 @@ class OrderController extends Controller
                         'email'=>$request->email,
                         'password'=>Hash::make($request->phone),
                         'phone'=>$request->phone,
+                        'country_code'=>$request->country_code,
+                        'country_calling_code'=>$request->country_calling_code,
                         'user_type'=>User::USER_TYPE_CUSTOMER,
                         'status'=>GlobalConstant::STATUS_ACTIVE,
                     ]);
@@ -51,6 +53,8 @@ class OrderController extends Controller
                     'email'=>$request->email,
                     'password'=>Hash::make($request->phone),
                     'phone'=>$request->phone,
+                    'country_code'=>$request->country_code,
+                    'country_calling_code'=>$request->country_calling_code,
                     'user_type'=>User::USER_TYPE_CUSTOMER,
                     'status'=>GlobalConstant::STATUS_ACTIVE,
                 ]);
@@ -113,7 +117,7 @@ class OrderController extends Controller
         }catch (\Exception $exception){
             record_verified_flash('Something went wrong, Server error !');
 
-            return response()->json(['massage' => 'Server error'], 500);
+            return response()->json(['status'=>500,'massage' => 'Server error'], 500);
         }
 
         // $order = Order::create([

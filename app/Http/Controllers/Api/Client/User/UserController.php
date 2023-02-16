@@ -17,6 +17,7 @@ class UserController extends Controller
             $user->last_name = $request->last_name;
             $user->email = $request->email;
             $user->phone = $request->phone;
+            $user->country_code = $request->country_code;
             $user->date_of_birth = $request->date_of_birth;
             $user->save();
 
@@ -49,6 +50,8 @@ class UserController extends Controller
         $data['username'] = $user->username;
         $data['email'] = $user->email;
         $data['phone'] = $user->phone;
+        $data['country_code'] = $user->country_code;
+        $data['country_calling_code'] = $user->country_calling_code;
         $data['gender'] = $user->gender;
         //$data['date_of_birth'] = custom_date($user->date_of_birth);
         $data['date_of_birth'] = date('Y-m-d', strtotime($user->date_of_birth));

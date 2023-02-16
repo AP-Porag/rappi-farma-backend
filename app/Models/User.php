@@ -36,6 +36,8 @@ class User extends Authenticatable
         'email',
         'gender',
         'phone',
+        'country_code',
+        'country_calling_code',
         'avatar',
         'user_type',
         'date_of_birth',
@@ -76,7 +78,9 @@ class User extends Authenticatable
 
     public function routeNotificationForWhatsApp()
     {
-        return $this->phone;
+        $phone = '+'.$this->country_calling_code.$this->phone;
+        return $phone;
+        //return $this->phone;
     }
 
     public function order()
