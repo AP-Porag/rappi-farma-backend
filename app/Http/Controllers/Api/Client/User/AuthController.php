@@ -39,14 +39,15 @@ class AuthController extends Controller
                 ]);
                 return response()->json(['message'=>'Customer created successfully !','status'=>200],200);
             }else{
-                return response()->json(['message'=>'validation error !'],403);
+                //return response()->json(['message'=>'validation error !'],403);
+                return response()->json(['status'=>403,'message'=>'validation error !']);
             }
         }catch (\Throwable $throwable){
 
             return response()->json([
-                'status' => false,
+                'status' => 500,
                 'message' => $throwable->getMessage()
-            ], 500);
+            ]);
         }
     }
     public function login(Request $request)
