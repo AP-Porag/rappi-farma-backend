@@ -8,15 +8,18 @@ jobs:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
+    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+        with:
+          php-version: '7.3'
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
     - name: Install Dependencies
       run: composer update
-    - name: Generate key
+    - name: Seeding database
       run: php artisan migrate:fresh --seed
-    - name: Generate keygegwew
+    - name: install npm
       run: npm install
-    - name: Generate keywegwg
+    - name: Run production
       run: npm run prod
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.1.0
