@@ -2,29 +2,28 @@ on:
   push:
     branches:
       - master
-name: 🚀 Deploy website on push
+name: ?? Deploy website on push
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: Deploying...
     runs-on: ubuntu-latest
     steps:
-    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
         with:
           php-version: '7.3'
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2
-    - name: Install Dependencies
-      run: composer update
-    - name: Seeding database
-      run: php artisan migrate:fresh --seed
-    - name: install npm
-      run: npm install
-    - name: Run production
-      run: npm run prod
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.1.0
-      with:
-        server: asrafporag.me
-        username: ${{ secrets.ftp_username }}
-        password: ${{ secrets.ftp_password }}
-        server-dir: /home/asraf/rappi-farma-admin.asrafporag.me/rappi
+      - uses: actions/checkout@v2.3.2
+      - name: Install Dependencies
+        run: composer update
+      - name: Seeding database
+        run: php artisan migrate:fresh --seed
+      - name: install npm
+        run: npm install
+      - name: Run production
+        run: npm run prod
+      - name: ðŸ“‚ Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: asrafporag.me
+          username: ${{ secrets.ftp_username }}
+          password: ${{ secrets.ftp_password }}
+          server-dir: /home/asraf/rappi-farma-admin.asrafporag.me/rappi
