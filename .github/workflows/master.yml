@@ -20,4 +20,4 @@ jobs:
           server: asrafporag.me
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
-          server-dir: /home/asraf/rappi-farma-admin.asrafporag.me/rappi
+          server-dir: /home/asraf/rappi-farma-admin.asrafporag.me/rappi/
