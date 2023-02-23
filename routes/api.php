@@ -144,6 +144,11 @@ Route::group(['prefix' => 'v1'], function(){
 
     Route::get('/customer/details/{id}',[\App\Http\Controllers\Api\Client\User\UserController::class,'getUserData']);
 
+    ##whatsapp-message-save
+    Route::post('/customer/message/save',[\App\Http\Controllers\Api\Client\Message\MessageController::class,'save']);
+
+
+
 });
 
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

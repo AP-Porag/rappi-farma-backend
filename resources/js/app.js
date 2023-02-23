@@ -22,10 +22,13 @@ import App from './pages/App';
 import store from './store'
 import variables from "./utils/globalconstant";
 import helpers from "./helpers/helpers";
+import VueChatScroll from 'vue-chat-scroll'
+
 
 
 Vue.prototype.$variables = variables;
 Vue.prototype.$helpers = helpers
+Vue.use(VueChatScroll)
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 

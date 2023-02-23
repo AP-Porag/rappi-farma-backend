@@ -173,7 +173,7 @@
                         </template>
                     </v-simple-table>
                 </v-card>
-                <page-chat/>
+                <page-chat :user="admin" :customer="customer"/>
             </v-col>
         </v-row>
     </div>
@@ -194,11 +194,15 @@ export default {
         message:'',
         item:'',
         user:'',
+        admin:'',
+        customer:'',
         stocks:[],
         tab: null,
     }),
     created() {
         this.getItemData();
+        this.admin = JSON.parse(localStorage.getItem('user') || "[]");
+        this.customer = JSON.parse(localStorage.getItem('customer') || "[]");
     },
     methods:{
         async getItemData(){
@@ -235,6 +239,7 @@ export default {
                         if (response.data.item != null){
                             this.item = response.data.item;
                             this.user = response.data.item.user;
+                            localStorage.setItem('customer',JSON.stringify(this.user));
                         }
 
                     }
