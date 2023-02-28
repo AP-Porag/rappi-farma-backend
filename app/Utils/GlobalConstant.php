@@ -43,4 +43,9 @@ class GlobalConstant
     public const HISTORY_MESSAGE_ORDER_REJECTED   = 'A order has rejected!';
 
 
+    // Chat message
+    public const CHAT_MESSAGE_READ   = 'read';
+    public const CHAT_MESSAGE_UNREAD   = 'unread';
+
+
 }

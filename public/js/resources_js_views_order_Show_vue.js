@@ -119,35 +119,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PageChatComponent",
-  props: ['user', 'customer'],
+  props: ['customer'],
   data: function data() {
     return {
       fab: false,
       fav: true,
       menu: false,
-      messages: [{
-        from_id: this.user.id,
-        to_id: this.customer.id,
-        message: "Sure, I'll see you later.",
-        time: '10:42am',
-        color: 'deep-purple lighten-1'
-      }, {
-        from_id: this.customer.id,
-        to_id: this.user.id,
-        message: 'Yeah, sure. Does 1:00pm work?',
-        time: '10:37am',
-        color: 'green'
-      }, {
-        from_id: this.user.id,
-        to_id: this.customer.id,
-        message: 'Did you still want to grab lunch today?Did you still want to grab lunch today?Did you still want to grab lunch today?Did you still want to grab lunch todayDid you still want to grab lunch today?',
-        time: '9:47am',
-        color: 'deep-purple lighten-1'
-      }],
+      admin: '',
+      messages: [],
+      // messages: [
+      //     {
+      //         from_id: 1,
+      //         to_id:this.customer.id,
+      //         message: `Sure, I'll see you later.`,
+      //         time: '10:42am',
+      //         color: 'deep-purple lighten-1',
+      //     },
+      //     {
+      //         from_id: this.customer.id,
+      //         to_id:1,
+      //         message: 'Yeah, sure. Does 1:00pm work?',
+      //         time: '10:37am',
+      //         color: 'green',
+      //     },
+      //     {
+      //         from_id: 1,
+      //         to_id:this.customer.id,
+      //         message: 'Did you still want to grab lunch today?Did you still want to grab lunch today?Did you still want to grab lunch today?Did you still want to grab lunch todayDid you still want to grab lunch today?',
+      //         time: '9:47am',
+      //         color: 'deep-purple lighten-1',
+      //     },
+      // ],
       hints: true,
       phone: '5521997642382',
       text: ""
     };
+  },
+  created: function created() {
+    this.admin = JSON.parse(localStorage.getItem('user') || "[]");
   },
   methods: {
     send: function send() {
@@ -158,18 +167,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (_this.text.length > 0) {
-                  newMessage = {
-                    customer_id: _this.customer.id,
-                    from_id: _this.user.id,
-                    to_id: _this.customer.id,
-                    message: _this.text,
-                    color: 'deep-purple lighten-1'
-                  };
-                  _this.messages.push(newMessage);
-                  _this.text = '';
+                if (!(_this.text.length > 0)) {
+                  _context.next = 4;
+                  break;
                 }
-              case 1:
+                newMessage = {
+                  customer_id: _this.customer.id,
+                  admin_id: _this.admin.id,
+                  message: _this.text
+                };
+                _context.next = 4;
+                return axios.post('/api/v1/customer/message/save', newMessage).then(function (response) {
+                  if (response.data.status === 200) {
+                    console.log(response);
+                    _this.text = '';
+                    _this.messages.push(response.data.message);
+                  }
+                })["catch"](function (error) {
+                  console.log(error);
+                });
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -401,7 +418,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       message: '',
       item: '',
       user: '',
-      admin: '',
       customer: '',
       stocks: [],
       tab: null
@@ -409,8 +425,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     this.getItemData();
-    this.admin = JSON.parse(localStorage.getItem('user') || "[]");
-    this.customer = JSON.parse(localStorage.getItem('customer') || "[]");
   },
   methods: {
     getItemData: function getItemData() {
@@ -458,7 +472,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     if (response.data.item != null) {
                       _this.item = response.data.item;
                       _this.user = response.data.item.user;
-                      localStorage.setItem('customer', JSON.stringify(_this.user));
+                      // localStorage.setItem('customer',JSON.stringify(this.user));
                     }
                   }
                 })["catch"](function (error) {
@@ -973,7 +987,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.my-input{*/\n/*    padding-top: 0px;*/\n/*    padding-bottom: 0px;*/\n/*    border-radius: 100px;*/\n/*}*/\n.chat-container[data-v-6710afaa]{\n    max-width:300px;\n    padding: 0 0;\n}\n.chat-header[data-v-6710afaa] {\n    background-color: #075E54 !important\n}\n.chat-message[data-v-6710afaa] {\n    display: unset !important;\n    white-space: break-spaces;\n}\n.chat-screen[data-v-6710afaa] {\n    max-height: 320px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    padding-left: 0px;\n}\n.flex-none[data-v-6710afaa] {\n    flex: unset;\n}\n.received-message[data-v-6710afaa]::after {\n    content: ' ';\n    position: absolute;\n    width: 0;\n    height: 0;\n    left: 54px;\n    right: auto;\n    top: 12px;\n    bottom: auto;\n    border: 12px solid;\n    border-color: #4caf50 transparent transparent transparent;\n}\n.sent-message[data-v-6710afaa]::after {\n    content: ' ';\n    position: absolute;\n    width: 0;\n    height: 0;\n    left: auto;\n    right: 54px;\n    top: 12px;\n    bottom: auto;\n    border: 12px solid;\n    border-color: #3F51B5 transparent transparent transparent;\n}\n.text-box[data-v-6710afaa]{\n    background: #f2efef;\n    padding-right: 15px;\n    padding-left: 15px;\n}\n.text_right[data-v-6710afaa]{\n    text-align: right;\n}\n.text_left[data-v-6710afaa]{\n    text-align: left;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.text-input{*/\n/*    padding-top: 0px;*/\n/*    padding-bottom: 0px;*/\n/*    border-radius: 100px;*/\n/*}*/\n.chat-container[data-v-6710afaa]{\n    max-width:300px;\n    padding: 0 0;\n}\n.chat-header[data-v-6710afaa] {\n    background-color: #075E54 !important\n}\n.chat-message[data-v-6710afaa] {\n    display: unset !important;\n    white-space: break-spaces;\n}\n.chat-screen[data-v-6710afaa] {\n    max-height: 350px;\n    min-height: 350px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    padding-left: 0px;\n}\n.flex-none[data-v-6710afaa] {\n    flex: unset;\n}\n.received-message[data-v-6710afaa]::after {\n    content: ' ';\n    position: absolute;\n    width: 0;\n    height: 0;\n    left: 54px;\n    right: auto;\n    top: 12px;\n    bottom: auto;\n    border: 12px solid;\n    border-color: #4caf50 transparent transparent transparent;\n}\n.sent-message[data-v-6710afaa]::after {\n    content: ' ';\n    position: absolute;\n    width: 0;\n    height: 0;\n    left: auto;\n    right: 54px;\n    top: 12px;\n    bottom: auto;\n    border: 12px solid;\n    border-color: #3F51B5 transparent transparent transparent;\n}\n.text-box[data-v-6710afaa]{\n    padding: 10px 5px;\n}\n.text-input[data-v-6710afaa]{\n    background: #f2efef;\n    width: 100%;\n    border-radius: 50px;\n    resize: none;\n    border: none;\n    outline: none;\n    padding: 5px 15px;\n}\n.text-input[data-v-6710afaa]:focus{\n    border: none;\n    outline: none;\n}\n.send-btn[data-v-6710afaa]{\n    font-size: 18px;\n    background: #3d783d;\n    padding-left: 10px;\n    padding-right: 10px;\n    border-radius: 50px;\n    height: 37px;\n    margin-top: 12px;\n}\n.text_right[data-v-6710afaa]{\n    text-align: right;\n}\n.text_left[data-v-6710afaa]{\n    text-align: left;\n}\n.v-text-field__details[data-v-6710afaa]{\n    display: none !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -996,7 +1010,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-967f339a]{\n    width: 0px !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-967f339a]{\r\n    width: 0px !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1436,13 +1450,13 @@ var render = function () {
                   _vm._l(_vm.messages, function (message, index) {
                     return _c(
                       "v-card",
-                      { key: message.time, attrs: { flat: "" } },
+                      { key: message.id, attrs: { flat: "" } },
                       [
-                        message.from_id != _vm.user.id
+                        message.from_id !== _vm.admin.id
                           ? _c(
                               "v-list-item",
                               {
-                                key: message.time,
+                                key: message.id,
                                 staticClass: "message-item text_right",
                               },
                               [
@@ -1455,7 +1469,7 @@ var render = function () {
                                       { attrs: { size: "40" } },
                                       [
                                         _c("v-img", {
-                                          attrs: { src: _vm.customer.avatar },
+                                          attrs: { src: message.avatar },
                                         }),
                                       ],
                                       1
@@ -1487,9 +1501,8 @@ var render = function () {
                                               { staticClass: "text-caption" },
                                               [
                                                 _vm._v(
-                                                  _vm._s(
-                                                    _vm.customer.full_name
-                                                  ) + " "
+                                                  _vm._s(message.full_name) +
+                                                    " "
                                                 ),
                                               ]
                                             ),
@@ -1525,7 +1538,7 @@ var render = function () {
                           : _c(
                               "v-list-item",
                               {
-                                key: message.time,
+                                key: message.id,
                                 staticClass: "message-item text_left",
                               },
                               [
@@ -1547,6 +1560,17 @@ var render = function () {
                                               "white--text pa-2 d-flex flex-column",
                                           },
                                           [
+                                            _c(
+                                              "span",
+                                              { staticClass: "text-caption" },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(message.full_name) +
+                                                    " "
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
                                             _c(
                                               "span",
                                               {
@@ -1578,7 +1602,7 @@ var render = function () {
                                   { staticClass: "align-self-start ml-2" },
                                   [
                                     _c("v-img", {
-                                      attrs: { src: _vm.user.avatar_url },
+                                      attrs: { src: message.avatar },
                                     }),
                                   ],
                                   1
@@ -1592,15 +1616,58 @@ var render = function () {
                   }),
                   1
                 ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-box d-flex" },
-                  [
-                    _c("v-textarea", {
-                      staticClass: "my-input",
-                      attrs: { rows: "2", color: "teal" },
+              ]),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-box d-flex" },
+                [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.text,
+                        expression: "text",
+                      },
+                    ],
+                    staticClass: "text-input",
+                    attrs: { rows: "2" },
+                    domProps: { value: _vm.text },
+                    on: {
+                      keyup: function ($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.send.apply(null, arguments)
+                      },
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.text = $event.target.value
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "v-icon",
+                    {
+                      staticClass: "white--text send-btn",
+                      attrs: { small: "" },
                       on: {
+                        click: _vm.send,
                         keyup: function ($event) {
                           if (
                             !$event.type.indexOf("key") &&
@@ -1617,28 +1684,12 @@ var render = function () {
                           return _vm.send.apply(null, arguments)
                         },
                       },
-                      model: {
-                        value: _vm.text,
-                        callback: function ($$v) {
-                          _vm.text = $$v
-                        },
-                        expression: "text",
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "v-icon",
-                      {
-                        staticClass: "teal--text send-btn",
-                        attrs: { small: "" },
-                        on: { click: _vm.send },
-                      },
-                      [_vm._v("mdi-send")]
-                    ),
-                  ],
-                  1
-                ),
-              ]),
+                    },
+                    [_vm._v("mdi-send")]
+                  ),
+                ],
+                1
+              ),
             ],
             1
           ),
@@ -2021,9 +2072,7 @@ var render = function () {
                 1
               ),
               _vm._v(" "),
-              _c("page-chat", {
-                attrs: { user: _vm.admin, customer: _vm.customer },
-              }),
+              _c("page-chat", { attrs: { customer: _vm.user } }),
             ],
             1
           ),

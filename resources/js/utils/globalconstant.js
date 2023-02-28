@@ -19,6 +19,10 @@ const variables = {
     HISTORY_TYPE_ORDER_DELIVERED   : 'order-delivered',
     HISTORY_TYPE_ORDER_CANCELED   : 'order-canceled',
     HISTORY_TYPE_ORDER_REJECTED   : 'order-rejected',
+
+    // Chat message
+    CHAT_MESSAGE_READ   : 'read',
+    CHAT_MESSAGE_UNREAD   : 'unread',
 }
 
 export default variables;

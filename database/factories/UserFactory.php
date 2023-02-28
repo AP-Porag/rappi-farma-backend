@@ -22,7 +22,9 @@ class UserFactory extends Factory
             'username' => $this->faker->unique()->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'gender' => $gender,
-            'phone'=>$this->faker->unique()->e164PhoneNumber(),
+            'phone'             => '1828963235',
+            'country_code'      => 'BD',
+            'country_calling_code'=>'880',
             'user_type'=>User::USER_TYPE_CUSTOMER,
             'email_verified_at' => now(),
             'password' => '$2y$10$mmv2lR.uMmhG.EC9FQEirO4YrLtjqATfmzDPwIPKLIDLSCNhPtVqu', // 12345678

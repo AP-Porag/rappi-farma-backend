@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Twilio\Rest\Client;
 
 if (!function_exists('seconds_to_hour')) {
     function seconds_to_hour($init){
@@ -420,5 +421,17 @@ if (!function_exists('category_name')) {
     {
         $category =  Category::where('id', $category_id)->select('name')->first();
         return $category->name;
+    }
+}
+
+if (!function_exists('send_whatsapp_message')) {
+    function send_whatsapp_message($to,$from,$message){
+        $twilio = new Client(env('TWILIO_AUTH_SID'), env('TWILIO_AUTH_TOKEN'));
+        $whatsapp = $twilio->messages->create('whatsapp:' . $to, [
+            "from" => 'whatsapp:' . $from,
+            "body" => $message
+        ]);
+
+        return $whatsapp;
     }
 }

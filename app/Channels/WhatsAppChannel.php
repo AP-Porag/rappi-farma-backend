@@ -12,15 +12,12 @@ class WhatsAppChannel
 
 
         $to = $notifiable->routeNotificationFor('WhatsApp');
-        $from = config('services.twilio.whatsapp_from');
+        //$from = config('services.twilio.whatsapp_from');
+        $from = env('TWILIO_WHATSAPP_FROM');
+        $message=$message->content;
 
+        $whatsapp = send_whatsapp_message($to,$from,$message);
 
-        $twilio = new Client(config('services.twilio.sid'), config('services.twilio.token'));
-
-
-        return $twilio->messages->create('whatsapp:' . $to, [
-            "from" => 'whatsapp:' . $from,
-            "body" => $message->content
-        ]);
+        return $whatsapp;
     }
 }

@@ -41,21 +41,21 @@
                 <v-divider></v-divider>
                 <v-container class="chat-container">
                     <ul class="chat-screen" id="style-2" v-chat-scroll>
-                        <v-card v-for="(message,index) in messages" :key="message.time" flat>
+                        <v-card v-for="(message,index) in messages" :key="message.id" flat>
                             <v-list-item
-                                :key="message.time"
-                                v-if="message.from_id != user.id"
+                                :key="message.id"
+                                v-if="message.from_id !== admin.id"
                                 class="message-item text_right"
                             >
                                 <v-list-item-avatar class="align-self-start mr-2">
                                     <v-avatar size="40">
-                                        <v-img :src="customer.avatar"></v-img>
+                                        <v-img :src="message.avatar"></v-img>
                                     </v-avatar>
                                 </v-list-item-avatar>
                                 <v-list-item-content class="received-message">
                                     <v-card color="success" class="flex-none">
                                         <v-card-text class="white--text pa-2 d-flex flex-column">
-                                            <span class="text-caption">{{customer.full_name}} </span>
+                                            <span class="text-caption">{{message.full_name}} </span>
                                             <span class="align-self-start text-subtitle-1">{{ message.message }}</span>
                                             <span class="text-caption font-italic align-self-end">{{
                                                     message.time
@@ -64,10 +64,11 @@
                                     </v-card>
                                 </v-list-item-content>
                             </v-list-item>
-                            <v-list-item v-else :key="message.time" class="message-item text_left">
+                            <v-list-item v-else :key="message.id" class="message-item text_left">
                                 <v-list-item-content class="sent-message justify-end">
                                     <v-card color="primary" class="flex-none">
                                         <v-card-text class="white--text pa-2 d-flex flex-column">
+                                            <span class="text-caption">{{message.full_name}} </span>
                                             <span class="text-subtitle-1 chat-message">{{ message.message }}</span>
                                             <span class="text-caption font-italic align-self-start">{{
                                                     message.time
@@ -76,22 +77,21 @@
                                     </v-card>
                                 </v-list-item-content>
                                 <v-list-item-avatar class="align-self-start ml-2">
-                                    <v-img :src="user.avatar_url"></v-img>
+                                    <v-img :src="message.avatar"></v-img>
                                 </v-list-item-avatar>
                             </v-list-item>
                         </v-card>
                     </ul>
-
-                    <div class="text-box d-flex">
-                        <v-textarea
-                            rows="2"
-                            color="teal"
-                            class="my-input"
-                            v-model="text" @keyup.enter="send"
-                        ></v-textarea>
-                        <v-icon small class="teal--text send-btn" @click="send">mdi-send</v-icon>
-                    </div>
                 </v-container>
+                <v-divider></v-divider>
+                <div class="text-box d-flex">
+                    <textarea
+                        rows="2"
+                        class="text-input"
+                        v-model="text" @keyup.enter="send"
+                    ></textarea>
+                    <v-icon small class="white--text send-btn" @click="send" @keyup.enter="send">mdi-send</v-icon>
+                </div>
             </v-card>
         </v-menu>
     </div>
@@ -102,52 +102,65 @@ import customer from "../../views/user/customer";
 
 export default {
     name: "PageChatComponent",
-    props:['user','customer'],
+    props:['customer'],
     data(){
         return{
             fab: false,
             fav: true,
             menu: false,
-            messages: [
-                {
-                    from_id: this.user.id,
-                    to_id:this.customer.id,
-                    message: `Sure, I'll see you later.`,
-                    time: '10:42am',
-                    color: 'deep-purple lighten-1',
-                },
-                {
-                    from_id: this.customer.id,
-                    to_id:this.user.id,
-                    message: 'Yeah, sure. Does 1:00pm work?',
-                    time: '10:37am',
-                    color: 'green',
-                },
-                {
-                    from_id: this.user.id,
-                    to_id:this.customer.id,
-                    message: 'Did you still want to grab lunch today?Did you still want to grab lunch today?Did you still want to grab lunch today?Did you still want to grab lunch todayDid you still want to grab lunch today?',
-                    time: '9:47am',
-                    color: 'deep-purple lighten-1',
-                },
-            ],
+            admin:'',
+            messages :[],
+            // messages: [
+            //     {
+            //         from_id: 1,
+            //         to_id:this.customer.id,
+            //         message: `Sure, I'll see you later.`,
+            //         time: '10:42am',
+            //         color: 'deep-purple lighten-1',
+            //     },
+            //     {
+            //         from_id: this.customer.id,
+            //         to_id:1,
+            //         message: 'Yeah, sure. Does 1:00pm work?',
+            //         time: '10:37am',
+            //         color: 'green',
+            //     },
+            //     {
+            //         from_id: 1,
+            //         to_id:this.customer.id,
+            //         message: 'Did you still want to grab lunch today?Did you still want to grab lunch today?Did you still want to grab lunch today?Did you still want to grab lunch todayDid you still want to grab lunch today?',
+            //         time: '9:47am',
+            //         color: 'deep-purple lighten-1',
+            //     },
+            // ],
             hints: true,
             phone: '5521997642382',
             text: "",
         }
+    },
+    created() {
+        this.admin = JSON.parse(localStorage.getItem('user') || "[]");
     },
     methods: {
         async send(){
             if (this.text.length > 0){
                 let newMessage = {
                     customer_id:this.customer.id,
-                    from_id:this.user.id,
-                    to_id:this.customer.id,
+                    admin_id:this.admin.id,
                     message: this.text,
-                    color: 'deep-purple lighten-1',
                 }
-                this.messages.push(newMessage)
-                this.text='';
+                await axios.post('/api/v1/customer/message/save',newMessage)
+                    .then((response)=>{
+                        if (response.data.status === 200){
+                            console.log(response)
+                            this.text='';
+                            this.messages.push(response.data.message)
+                        }
+                    })
+                    .catch((error)=>{
+                        console.log(error)
+                    })
+
             }
         },
 
@@ -165,7 +178,7 @@ export default {
 </script>
 
 <style scoped>
-/*.my-input{*/
+/*.text-input{*/
 /*    padding-top: 0px;*/
 /*    padding-bottom: 0px;*/
 /*    border-radius: 100px;*/
@@ -183,7 +196,8 @@ export default {
     white-space: break-spaces;
 }
 .chat-screen {
-    max-height: 320px;
+    max-height: 350px;
+    min-height: 350px;
     overflow-y: auto;
     overflow-x: hidden;
     padding-left: 0px;
@@ -216,14 +230,37 @@ export default {
     border-color: #3F51B5 transparent transparent transparent;
 }
 .text-box{
+    padding: 10px 5px;
+}
+.text-input{
     background: #f2efef;
-    padding-right: 15px;
-    padding-left: 15px;
+    width: 100%;
+    border-radius: 50px;
+    resize: none;
+    border: none;
+    outline: none;
+    padding: 5px 15px;
+}
+.text-input:focus{
+    border: none;
+    outline: none;
+}
+.send-btn{
+    font-size: 18px;
+    background: #3d783d;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 50px;
+    height: 37px;
+    margin-top: 12px;
 }
 .text_right{
     text-align: right;
 }
 .text_left{
     text-align: left;
+}
+.v-text-field__details{
+    display: none !important;
 }
 </style>
