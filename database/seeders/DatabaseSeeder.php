@@ -25,9 +25,9 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             SpreadsheetSeeder::class,
         ]);
-        User::factory(100)->create();
-        Order::factory(500)->create();
-        History::factory(600)->create();
-        OrderProduct::factory(1500)->create();
+        //User::factory(100)->create();
+//        Order::factory(500)->create();
+//        History::factory(600)->create();
+//        OrderProduct::factory(1500)->create();
     }
 }

@@ -112,6 +112,7 @@ export default {
                 }
                 await axios.post('/api/v1/customer/message/save',newMessage)
                     .then((response)=>{
+                        //console.log(response)
                         if (response.data.status === 200){
                             //console.log(response)
                             this.text='';

@@ -28,32 +28,32 @@ class UserSeeder extends Seeder
                 'phone'             => '012345678910',
                 'date_of_birth'     => '2000-10-21',
             ],
-            [
-                'first_name'        => 'Driver',
-                'last_name'         => 'Last',
-                'email'             => 'driver@app.com',
-                'email_verified_at' => now(),
-                'password'          => '$2y$10$mmv2lR.uMmhG.EC9FQEirO4YrLtjqATfmzDPwIPKLIDLSCNhPtVqu',   // 12345678
-                'user_type'         => User::USER_TYPE_DRIVER,
-                'gender'            => 'male',
-                'remember_token'    => Str::random(60),
-                'phone'             => '012345678910',
-                'date_of_birth'     => '2000-10-21',
-            ],
-            [
-                'first_name'        => 'Customer',
-                'last_name'         => 'Last',
-                'email'             => 'customer@app.com',
-                'email_verified_at' => now(),
-                'password'          => '$2y$10$mmv2lR.uMmhG.EC9FQEirO4YrLtjqATfmzDPwIPKLIDLSCNhPtVqu',   // 12345678
-                'user_type'         => User::USER_TYPE_CUSTOMER,
-                'gender'            => 'male',
-                'remember_token'    => Str::random(60),
-                'phone'             => '1828963235',
-                'country_code'      => 'BD',
-                'country_calling_code'=>'880',
-                'date_of_birth'     => '2000-10-21',
-            ],
+//            [
+//                'first_name'        => 'Driver',
+//                'last_name'         => 'Last',
+//                'email'             => 'driver@app.com',
+//                'email_verified_at' => now(),
+//                'password'          => '$2y$10$mmv2lR.uMmhG.EC9FQEirO4YrLtjqATfmzDPwIPKLIDLSCNhPtVqu',   // 12345678
+//                'user_type'         => User::USER_TYPE_DRIVER,
+//                'gender'            => 'male',
+//                'remember_token'    => Str::random(60),
+//                'phone'             => '012345678910',
+//                'date_of_birth'     => '2000-10-21',
+//            ],
+//            [
+//                'first_name'        => 'Customer',
+//                'last_name'         => 'Last',
+//                'email'             => 'customer@app.com',
+//                'email_verified_at' => now(),
+//                'password'          => '$2y$10$mmv2lR.uMmhG.EC9FQEirO4YrLtjqATfmzDPwIPKLIDLSCNhPtVqu',   // 12345678
+//                'user_type'         => User::USER_TYPE_CUSTOMER,
+//                'gender'            => 'male',
+//                'remember_token'    => Str::random(60),
+//                'phone'             => '1828963235',
+//                'country_code'      => 'BD',
+//                'country_calling_code'=>'880',
+//                'date_of_birth'     => '2000-10-21',
+//            ],
         ];
 
 

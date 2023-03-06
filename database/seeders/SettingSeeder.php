@@ -94,7 +94,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key'   => 'twilio_auth_token',
-                'value' => '2a6f58cb4a19b14601eeb19999c478c3',
+                'value' => '838aadebc6316e0e8b34c182aecc45a5',
             ],
             [
                 'key'   => 'twilio_whatsapp_from',

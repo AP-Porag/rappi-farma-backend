@@ -78,6 +78,7 @@ class MessageController extends Controller
 
                     $user = User::find($message->to_id);
                     broadcast(new MessageSent($user, $data))->toOthers();
+                    //Log::debug($data['Body']);
                     return response()->json(['success' => 'Message save successfully','status'=>200,'message'=>$data],200);
                 }else{
                     return response()->json(['message' => 'Something went wong to save data','status'=>500],500);
@@ -124,7 +125,7 @@ class MessageController extends Controller
 
                     $user = User::find($message->to_id);
                     broadcast(new MessageSent($user, $data))->toOthers();
-
+                    //Log::debug($data['Body']);
                     return response()->json(['success' => 'Message save successfully','status'=>200,'message'=>$data],200);
                 }else{
                     return response()->json(['message' => 'Something went wong to save data','status'=>500],500);
