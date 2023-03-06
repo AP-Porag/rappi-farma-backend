@@ -147,6 +147,12 @@
                             </thead>
                             <tbody>
                             <tr>
+                                <td>Name</td>
+                                <td>
+                                    {{user.full_name}}
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>Avatar</td>
                                 <td>
                                     <v-avatar size="36px">
@@ -194,7 +200,7 @@ export default {
         message:'',
         item:'',
         user:'',
-        customer:'',
+        //customer:'',
         stocks:[],
         tab: null,
     }),

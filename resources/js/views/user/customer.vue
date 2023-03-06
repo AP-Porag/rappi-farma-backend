@@ -130,48 +130,44 @@
                                 {{ item.user_type }}
                             </v-chip>
                         </template>
-<!--                        <template v-slot:item.action="{ item }">-->
-<!--                            <v-btn icon color="blue" @click="$router.push({ name: 'edit-user',params:{id:item.id} })">-->
-<!--                                <v-icon small>mdi-pencil</v-icon>-->
-<!--                            </v-btn>-->
-<!--                            <v-btn-->
-<!--                                color="red lighten-2"-->
-<!--                                dark-->
-<!--                                icon-->
-<!--                                @click="showDeleteDialog(item)"-->
-<!--                            >-->
-<!--                                <v-icon small>mdi-delete</v-icon>-->
-<!--                            </v-btn>-->
-<!--                        </template>-->
+                        <template v-slot:item.action="{ item }">
+                            <v-btn icon color="orange" @click="$router.push({ name: 'customer-details',params:{id:item.id} })">
+                                <v-icon small>mdi-eye</v-icon>
+                            </v-btn>
+
+                            <v-btn icon color="green" @click="$router.push({ name: 'customer-chat',params:{id:item.id} })">
+                                <v-icon small>mdi-comment</v-icon>
+                            </v-btn>
+                        </template>
                     </v-data-table>
-                    <v-dialog v-model="dialog" width="400">
-                        <v-card>
-                            <div class="text-center pt-2">
-                                <v-avatar size="100" color="red lighten-4">
-                                    <v-icon size="40" color="red">mdi-comment-question</v-icon>
-                                </v-avatar>
-                                <h3 class="error--text">Are you sure?</h3>
-                            </div>
+<!--                    <v-dialog v-model="dialog" width="400">-->
+<!--                        <v-card>-->
+<!--                            <div class="text-center pt-2">-->
+<!--                                <v-avatar size="100" color="red lighten-4">-->
+<!--                                    <v-icon size="40" color="red">mdi-comment-question</v-icon>-->
+<!--                                </v-avatar>-->
+<!--                                <h3 class="error&#45;&#45;text">Are you sure?</h3>-->
+<!--                            </div>-->
 
-                            <v-card-text class="text-center">
-                                <p>You wont be revert this !</p>
-                            </v-card-text>
+<!--                            <v-card-text class="text-center">-->
+<!--                                <p>You wont be revert this !</p>-->
+<!--                            </v-card-text>-->
 
-                            <v-divider></v-divider>
+<!--                            <v-divider></v-divider>-->
 
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" @click="closeDelete">Cancel</v-btn>
+<!--                            <v-card-actions>-->
+<!--                                <v-spacer></v-spacer>-->
+<!--                                <v-btn color="blue darken-1" @click="closeDelete">Cancel</v-btn>-->
 
-                                <v-btn
-                                    color="red"
-                                    @click="deleteItem"
-                                >
-                                    Confirm
-                                </v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
+<!--                                <v-btn-->
+<!--                                    color="red"-->
+<!--                                    @click="deleteItem"-->
+<!--                                >-->
+<!--                                    Confirm-->
+<!--                                </v-btn>-->
+<!--                            </v-card-actions>-->
+<!--                        </v-card>-->
+<!--                    </v-dialog>-->
                 </v-card>
             </v-col>
         </v-row>
@@ -209,7 +205,7 @@ export default {
                 {text: 'DOB', value: 'date_of_birth'},
                 {text: 'Gender', value: 'gender'},
                 {text: 'User Type', value: 'user_type'},
-                // {text: 'Actions', value: 'action',sortable: false},
+                {text: 'Actions', value: 'action',sortable: false},
             ],
             users: [],
             total:0,

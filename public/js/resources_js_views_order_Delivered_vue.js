@@ -229,6 +229,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index",
@@ -547,7 +550,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-250f0698]{\r\n    width: 0px !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-250f0698]{\n    width: 0px !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1187,6 +1190,27 @@ var render = function () {
                         fn: function (ref) {
                           var item = ref.item
                           return [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { icon: "", color: "green" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.$router.push({
+                                      name: "customer-chat",
+                                      params: { id: item.user.id },
+                                    })
+                                  },
+                                },
+                              },
+                              [
+                                _c("v-icon", { attrs: { small: "" } }, [
+                                  _vm._v("mdi-comment"),
+                                ]),
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
                             _c(
                               "v-btn",
                               {

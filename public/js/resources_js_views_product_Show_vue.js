@@ -354,7 +354,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
                 token = JSON.parse(window.localStorage.getItem('token'));
                 _context3.next = 5;
-                return axios.get("/api/product/order-history/".concat(_this3.$route.params.id), {
+                return axios.get("/api/product/order/history/".concat(_this3.$route.params.id), {
                   headers: {
                     'Authorization': 'Bearer ' + token
                   }
@@ -363,7 +363,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this3.message = response.data.message;
                     _this3.error = true;
                   } else {
-                    console.log(response.data.data.order_history);
                     if (response.data.data.order_history != null) {
                       _this3.histories = response.data.data.order_history;
                     }
@@ -2932,9 +2931,9 @@ var render = function () {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "\n                                            " +
+                                                      "\n                                            Quantity :" +
                                                         _vm._s(
-                                                          history.message
+                                                          history.quantity
                                                         ) +
                                                         "\n                                        "
                                                     ),

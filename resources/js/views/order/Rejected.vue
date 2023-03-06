@@ -148,6 +148,9 @@
                             </v-chip>
                         </template>
                         <template v-slot:item.action="{ item }">
+                            <v-btn icon color="green" @click="$router.push({ name: 'customer-chat',params:{id:item.user.id} })">
+                                <v-icon small>mdi-comment</v-icon>
+                            </v-btn>
                             <v-btn icon color="blue" @click="$router.push({ name: 'invoice',params:{id:item.id} })">
                                 <v-icon small>mdi-download</v-icon>
                             </v-btn>

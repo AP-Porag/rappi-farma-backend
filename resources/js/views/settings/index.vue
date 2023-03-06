@@ -215,7 +215,7 @@
                                                     label="Stock SKU"
                                                     required
                                                     outlined
-                                                    clearable
+                                                    readonly
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col cols="12" md="12">
@@ -224,7 +224,7 @@
                                                     label="Order SKU"
                                                     required
                                                     outlined
-                                                    clearable
+                                                    readonly
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col cols="12" md="12">
@@ -287,6 +287,56 @@
                                             </v-col>
 
                                             <v-col cols="12" md="12">
+                                                <v-text-field
+                                                    v-model="form_data.google_map_api_key"
+                                                    label="Google Map Api Key"
+                                                    required
+                                                    outlined
+                                                    clearable
+                                                ></v-text-field>
+                                            </v-col>
+
+<!--                                            <v-col cols="12" md="12">-->
+<!--                                                <v-text-field-->
+<!--                                                    v-model="form_data.pusher_app_id"-->
+<!--                                                    label="Twilio whatsapp form"-->
+<!--                                                    required-->
+<!--                                                    outlined-->
+<!--                                                    clearable-->
+<!--                                                ></v-text-field>-->
+<!--                                            </v-col>-->
+
+<!--                                            <v-col cols="12" md="12">-->
+<!--                                                <v-text-field-->
+<!--                                                    v-model="form_data.pusher_app_key"-->
+<!--                                                    label="Twilio whatsapp form"-->
+<!--                                                    required-->
+<!--                                                    outlined-->
+<!--                                                    clearable-->
+<!--                                                ></v-text-field>-->
+<!--                                            </v-col>-->
+
+<!--                                            <v-col cols="12" md="12">-->
+<!--                                                <v-text-field-->
+<!--                                                    v-model="form_data.pusher_app_secret"-->
+<!--                                                    label="Twilio whatsapp form"-->
+<!--                                                    required-->
+<!--                                                    outlined-->
+<!--                                                    clearable-->
+<!--                                                ></v-text-field>-->
+<!--                                            </v-col>-->
+
+<!--                                            <v-col cols="12" md="12">-->
+<!--                                                <v-text-field-->
+<!--                                                    v-model="form_data.pusher_app_cluster"-->
+<!--                                                    label="Twilio whatsapp form"-->
+<!--                                                    required-->
+<!--                                                    outlined-->
+<!--                                                    clearable-->
+<!--                                                ></v-text-field>-->
+<!--                                            </v-col>-->
+
+                                            <v-col cols="12" md="12">
                                                 <div class="custom-file d-flex">
                                                     <div class="">
                                                         <label class="custom-file-label text-left" for="admin-login-input">Login Page background</label>
@@ -345,6 +395,7 @@ export default {
                 twilio_auth_sid:'',
                 twilio_auth_token:'',
                 twilio_whatsapp_from:'',
+                google_map_api_key:'',
             },
 
             logoImageFile: null,
@@ -454,6 +505,7 @@ export default {
                         this.form_data.twilio_auth_sid = response.data.data.settings.twilio_auth_sid;
                         this.form_data.twilio_auth_token = response.data.data.settings.twilio_auth_token;
                         this.form_data.twilio_whatsapp_from = response.data.data.settings.twilio_whatsapp_from;
+                        this.form_data.google_map_api_key = response.data.data.settings.google_map_api_key;
                         this.form_data.admin_estimated_delivery_time = response.data.data.settings.admin_estimated_delivery_time;
 
 

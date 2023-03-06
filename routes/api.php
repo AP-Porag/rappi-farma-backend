@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Notification\NotificationController;
 use App\Http\Controllers\Api\Admin\Brand\BrandController;
 use App\Http\Controllers\Api\Admin\Category\CategoryController;
 use App\Http\Controllers\Api\Admin\Dashboard\DashboardController;
@@ -34,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function (){
     //customer
     Route::get('/customer',[CustomerController::class,'index']);
     Route::get('/customer/search-customer/{text}',[CustomerController::class,'datatableSearch']);
+    Route::get('/customer/get/data/{id}',[CustomerController::class,'show']);
 
     //category
     Route::resource('category',CategoryController::class)->except('create','edit');
@@ -52,6 +54,7 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::get('/product/all/category-brand/{category_id}',[ProductController::class,'allBrandForCategory']);
     Route::get('/product/stock-history/{product_id}',[ProductController::class,'getProductHistory']);
     Route::get('/product/order-history/{product_id}',[ProductController::class,'productOrderHistoryData']);
+    Route::get('/product/order/history/{product_id}',[ProductController::class,'orderProductHistoryData']);
     Route::get('/product/card/card-data',[ProductController::class,'productCardData']);
 
     //stock
@@ -101,6 +104,10 @@ Route::middleware('auth:sanctum')->group(function (){
     ## Settings
     Route::post('/setting/save', [SettingController::class, 'saveSettings']);
     Route::get('/setting/get',[SettingController::class,'getAllSettings']);
+
+    ## Notification
+    Route::get('/notification/get/all/unread', [NotificationController::class, 'getAllUnread']);
+    Route::post('/notification/change/all/status', [NotificationController::class, 'changeAllStatus']);
 });
 
 /*
@@ -144,7 +151,8 @@ Route::group(['prefix' => 'v1'], function(){
 
     Route::get('/customer/details/{id}',[\App\Http\Controllers\Api\Client\User\UserController::class,'getUserData']);
 
-    ##whatsapp-message-save
+    ##whatsapp-message
+    Route::get('/customer/message/get/{id}',[\App\Http\Controllers\Api\Client\Message\MessageController::class,'fetchMessages']);
     Route::post('/customer/message/save',[\App\Http\Controllers\Api\Client\Message\MessageController::class,'save']);
 
 

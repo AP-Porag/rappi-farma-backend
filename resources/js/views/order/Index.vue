@@ -148,6 +148,9 @@
                             </v-chip>
                         </template>
                         <template v-slot:item.action="{ item }">
+                            <v-btn icon color="green" @click="$router.push({ name: 'customer-chat',params:{id:item.user.id} })">
+                                <v-icon small>mdi-comment</v-icon>
+                            </v-btn>
                             <v-btn icon color="blue" @click="$router.push({ name: 'invoice',params:{id:item.id} })">
                                 <v-icon small>mdi-download</v-icon>
                             </v-btn>
@@ -275,7 +278,7 @@ export default {
                 await axios.get(`/api/order/search-order/${$e}?page=${this.page}`, {params:{'per_page':this.per_page},headers: { 'Authorization': 'Bearer ' + token }})
                     .then((response)=>{
                         if (response.data.status != 200){
-                            console.log(response.data.status)
+                            //console.log(response.data.status)
                         }else {
                             this.total = response.data.data.total
                             this.items = response.data.data.items
@@ -291,7 +294,7 @@ export default {
                 await axios.get(`/api/order?page=${this.page}`, {params:{'per_page':this.per_page},headers: { 'Authorization': 'Bearer ' + token }})
                     .then((response)=>{
                         if (response.data.status != 200){
-                            console.log(response.data.status)
+                            //console.log(response.data.status)
                         }else {
                             this.total = response.data.data.total
                             this.items = response.data.data.items
@@ -310,7 +313,7 @@ export default {
             await axios.get(`/api/order?page=${this.page}`, {params:{'per_page':this.per_page},headers: { 'Authorization': 'Bearer ' + token }})
                 .then((response)=>{
                     if (response.data.status != 200){
-                        console.log(response.data.status)
+                        //console.log(response.data.status)
                     }else {
                         this.total = response.data.data.total
                         this.items = response.data.data.items
@@ -383,9 +386,8 @@ export default {
             await axios.get(`/api/order/card/card-data`, {headers: { 'Authorization': 'Bearer ' + token }})
                 .then((response)=>{
                     if (response.data.status != 200){
-                        console.log(response.data.status)
+                        //console.log(response.data.status)
                     }else {
-                        console.log(response.data.data)
                         if (response.data.data != null){
                             this.total_orders = response.data.data.total_orders;
                             this.total_pending_orders = response.data.data.total_pending_orders;

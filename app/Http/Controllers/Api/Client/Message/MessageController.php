@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers\Api\Client\Message;
 
+use App\Events\MessageSent;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\MessageResource;
 use App\Models\Message;
 use App\Models\User;
 use App\Utils\GlobalConstant;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Twilio\TwiML\MessagingResponse;
 use Twilio\Rest\Client;
 
 class MessageController extends Controller
 {
+    public function fetchMessages($id)
+    {
+        $messages =  Message::where('customer_id',$id)->get();
+
+        $data = MessageResource::collection($messages);
+        return response()->json(['success' => 'Data fetched successfully','status'=>200,'message'=>$data],200);
+    }
     public function save(Request $request)
     {
         //dd('hello from message controller save method');
@@ -68,8 +76,9 @@ class MessageController extends Controller
                     $data['user_type'] = $message->owner->user_type;
                     $data['time'] = Carbon::parse($message->created_at)->diffForHumans();
 
-
-                    return response()->json(['message' => 'Message save successfully','status'=>200,'message'=>$data],200);
+                    $user = User::find($message->to_id);
+                    broadcast(new MessageSent($user, $data))->toOthers();
+                    return response()->json(['success' => 'Message save successfully','status'=>200,'message'=>$data],200);
                 }else{
                     return response()->json(['message' => 'Something went wong to save data','status'=>500],500);
                 }
@@ -84,8 +93,10 @@ class MessageController extends Controller
             $phone = substr($WaId, strlen($WaId)-10);
             $countryCallingCode = substr($WaId, 0, -10);
 
-            $user = User::where('phone',$phone)
-                ->where('country_calling_code',$countryCallingCode)
+//            $user = User::where('phone',$phone)
+//                ->where('country_calling_code',$countryCallingCode)
+//                ->first();
+            $user = User::where('id',14)
                 ->first();
 
             if ($user){
@@ -111,8 +122,10 @@ class MessageController extends Controller
                     $data['user_type'] = $message->owner->user_type;
                     $data['time'] = Carbon::parse($message->created_at)->diffForHumans();
 
-                    Log::debug($data);
-                    return response()->json(['message' => 'Message save successfully','status'=>200,'message'=>$data],200);
+                    $user = User::find($message->to_id);
+                    broadcast(new MessageSent($user, $data))->toOthers();
+
+                    return response()->json(['success' => 'Message save successfully','status'=>200,'message'=>$data],200);
                 }else{
                     return response()->json(['message' => 'Something went wong to save data','status'=>500],500);
                 }

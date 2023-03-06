@@ -335,6 +335,56 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "index",
@@ -359,7 +409,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         admin_twilio_order_message: '',
         twilio_auth_sid: '',
         twilio_auth_token: '',
-        twilio_whatsapp_from: ''
+        twilio_whatsapp_from: '',
+        google_map_api_key: ''
       },
       logoImageFile: null,
       logoImageFileName: null,
@@ -488,6 +539,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this2.form_data.twilio_auth_sid = response.data.data.settings.twilio_auth_sid;
                     _this2.form_data.twilio_auth_token = response.data.data.settings.twilio_auth_token;
                     _this2.form_data.twilio_whatsapp_from = response.data.data.settings.twilio_whatsapp_from;
+                    _this2.form_data.google_map_api_key = response.data.data.settings.google_map_api_key;
                     _this2.form_data.admin_estimated_delivery_time = response.data.data.settings.admin_estimated_delivery_time;
                     _this2.logoImageFileName = response.data.data.settings.site_logo;
                     _this2.faviconImageFileName = response.data.data.settings.site_favicon;
@@ -553,7 +605,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.v-slide-group__wrapper{\r\n    border-right: 20px solid #f3f9fd !important;\n}\n.custom-file{\r\n    border: 1px solid #999;\r\n    padding: 10px;\r\n    border-radius: 4px;\n}\n.custom-file label{\r\n    margin-right: 30px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.v-slide-group__wrapper{\n    border-right: 20px solid #f3f9fd !important;\n}\n.custom-file{\n    border: 1px solid #999;\n    padding: 10px;\n    border-radius: 4px;\n}\n.custom-file label{\n    margin-right: 30px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -726,9 +778,9 @@ var render = function () {
                     },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(_vm.message) +
-                          "\n                "
+                          "\n                    "
                       ),
                     ]
                   ),
@@ -747,9 +799,9 @@ var render = function () {
                     },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(_vm.message) +
-                          "\n                "
+                          "\n                    "
                       ),
                     ]
                   ),
@@ -764,11 +816,11 @@ var render = function () {
                         [
                           _c("v-icon", { attrs: { left: "" } }, [
                             _vm._v(
-                              "\n                            mdi-spider-web\n                        "
+                              "\n                                mdi-spider-web\n                            "
                             ),
                           ]),
                           _vm._v(
-                            "\n                        Common\n                        "
+                            "\n                            Common\n                            "
                           ),
                           _c("v-spacer"),
                         ],
@@ -780,11 +832,11 @@ var render = function () {
                         [
                           _c("v-icon", { attrs: { left: "" } }, [
                             _vm._v(
-                              "\n                            mdi-web\n                        "
+                              "\n                                mdi-web\n                            "
                             ),
                           ]),
                           _vm._v(
-                            "\n                        Website\n                        "
+                            "\n                            Website\n                            "
                           ),
                           _c("v-spacer"),
                         ],
@@ -797,11 +849,11 @@ var render = function () {
                         [
                           _c("v-icon", { attrs: { left: "" } }, [
                             _vm._v(
-                              "\n                                mdi-security\n                            "
+                              "\n                                    mdi-security\n                                "
                             ),
                           ]),
                           _vm._v(
-                            "\n                            Admin\n                        "
+                            "\n                                Admin\n                            "
                           ),
                           _c("v-spacer"),
                         ],
@@ -1468,7 +1520,7 @@ var render = function () {
                                                   label: "Stock SKU",
                                                   required: "",
                                                   outlined: "",
-                                                  clearable: "",
+                                                  readonly: "",
                                                 },
                                                 model: {
                                                   value:
@@ -1498,7 +1550,7 @@ var render = function () {
                                                   label: "Order SKU",
                                                   required: "",
                                                   outlined: "",
-                                                  clearable: "",
+                                                  readonly: "",
                                                 },
                                                 model: {
                                                   value:
@@ -1695,6 +1747,36 @@ var render = function () {
                                                   },
                                                   expression:
                                                     "form_data.twilio_whatsapp_from",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12", md: "12" } },
+                                            [
+                                              _c("v-text-field", {
+                                                attrs: {
+                                                  label: "Google Map Api Key",
+                                                  required: "",
+                                                  outlined: "",
+                                                  clearable: "",
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.form_data
+                                                      .google_map_api_key,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.form_data,
+                                                      "google_map_api_key",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "form_data.google_map_api_key",
                                                 },
                                               }),
                                             ],

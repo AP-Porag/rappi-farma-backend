@@ -44,6 +44,8 @@
 <!--        </template>-->
 <!--      </v-list>-->
 <!--    </v-menu>-->
+
+      <TopbarNotification/>
     <v-menu offset-y>
       <template v-slot:activator="{ attrs, on }">
         <span style="cursor: pointer" v-bind="attrs" v-on="on">
@@ -102,9 +104,13 @@
 
 <script>
 import {mapActions,mapGetters} from "vuex";
+import TopbarNotification from "./TopbarNotification.vue";
 
 export default {
   name: "Topbar",
+    components:{
+      TopbarNotification
+    },
   data() {
     return {
         valid: false,
@@ -217,4 +223,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

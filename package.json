@@ -25,7 +25,9 @@
     },
     "dependencies": {
         "chart.js": "^3.8.0",
+        "laravel-echo": "^1.15.0",
         "moment": "^2.29.4",
+        "pusher-js": "^8.0.1",
         "vue-chartjs": "^4.0.0",
         "vue-chat-scroll": "^1.4.0",
         "vue-html2pdf": "^1.8.0",

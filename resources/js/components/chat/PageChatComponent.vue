@@ -28,7 +28,7 @@
             </template>
             <v-card style="height: 485px;">
                 <div dark class="chat-header py-2 pl-4 pr-4 d-flex">
-                    <p class="white--text">Chat</p>
+                    <p class="white--text">Chat with {{customer.full_name}}</p>
                     <v-spacer/>
                     <v-btn
                         icon
@@ -110,36 +110,27 @@ export default {
             menu: false,
             admin:'',
             messages :[],
-            // messages: [
-            //     {
-            //         from_id: 1,
-            //         to_id:this.customer.id,
-            //         message: `Sure, I'll see you later.`,
-            //         time: '10:42am',
-            //         color: 'deep-purple lighten-1',
-            //     },
-            //     {
-            //         from_id: this.customer.id,
-            //         to_id:1,
-            //         message: 'Yeah, sure. Does 1:00pm work?',
-            //         time: '10:37am',
-            //         color: 'green',
-            //     },
-            //     {
-            //         from_id: 1,
-            //         to_id:this.customer.id,
-            //         message: 'Did you still want to grab lunch today?Did you still want to grab lunch today?Did you still want to grab lunch today?Did you still want to grab lunch todayDid you still want to grab lunch today?',
-            //         time: '9:47am',
-            //         color: 'deep-purple lighten-1',
-            //     },
-            // ],
             hints: true,
-            phone: '5521997642382',
             text: "",
         }
     },
     created() {
         this.admin = JSON.parse(localStorage.getItem('user') || "[]");
+        setTimeout(()=>{
+            this.fetchMessages();
+        },2000);
+
+        // window.Echo.private('chat')
+        //     .listen('MessageSent', (e) => {
+        //         console.log(e)
+        //         //this.messages.push(e.data.message)
+        //     });
+        window.Echo.channel('chat')
+            .listen('.server.created', (e) => {
+                //console.log(e.message);
+                this.messages.push(e.message)
+            });
+
     },
     methods: {
         async send(){
@@ -152,7 +143,7 @@ export default {
                 await axios.post('/api/v1/customer/message/save',newMessage)
                     .then((response)=>{
                         if (response.data.status === 200){
-                            console.log(response)
+                            //console.log(response)
                             this.text='';
                             this.messages.push(response.data.message)
                         }
@@ -164,6 +155,11 @@ export default {
             }
         },
 
+        async fetchMessages() {
+            await axios.get(`/api/v1/customer/message/get/${this.customer.id}`).then(response => {
+                this.messages = response.data.message;
+            });
+        },
 
         isMobile() {
             var check = false;

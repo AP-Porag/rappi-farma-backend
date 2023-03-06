@@ -125,7 +125,7 @@
                                         <v-timeline-item :color="history.type === 'order' ? 'indigo' : 'green'" small v-for="(history,index) in histories" :key="index">
                                             <strong>{{history.created_at}}</strong>
                                             <div class="text-caption">
-                                                {{history.message}}
+                                                Quantity :{{history.quantity}}
                                             </div>
                                         </v-timeline-item>
                                     </v-timeline>
@@ -296,13 +296,12 @@ export default {
                 return Promise.reject(error);
             });
             let token = JSON.parse(window.localStorage.getItem('token'))
-            await axios.get(`/api/product/order-history/${this.$route.params.id}`, {headers: { 'Authorization': 'Bearer ' + token }})
+            await axios.get(`/api/product/order/history/${this.$route.params.id}`, {headers: { 'Authorization': 'Bearer ' + token }})
                 .then((response)=>{
                     if (response.data.status != 200){
                         this.message = response.data.message;
                         this.error = true;
                     }else {
-                        console.log(response.data.data.order_history)
                         if (response.data.data.order_history != null){
                             this.histories = response.data.data.order_history;
                         }

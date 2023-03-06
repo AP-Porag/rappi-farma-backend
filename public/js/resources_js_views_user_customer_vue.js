@@ -191,10 +191,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index",
@@ -237,10 +233,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, {
         text: 'User Type',
         value: 'user_type'
-      }
-      // {text: 'Actions', value: 'action',sortable: false},
-      ],
-
+      }, {
+        text: 'Actions',
+        value: 'action',
+        sortable: false
+      }],
       users: [],
       total: 0
     };
@@ -496,7 +493,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-967f339a]{\r\n    width: 0px !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-967f339a]{\n    width: 0px !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1019,95 +1016,57 @@ var render = function () {
                           ]
                         },
                       },
-                    ]),
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "v-dialog",
-                    {
-                      attrs: { width: "400" },
-                      model: {
-                        value: _vm.dialog,
-                        callback: function ($$v) {
-                          _vm.dialog = $$v
-                        },
-                        expression: "dialog",
-                      },
-                    },
-                    [
-                      _c(
-                        "v-card",
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "text-center pt-2" },
-                            [
-                              _c(
-                                "v-avatar",
-                                {
-                                  attrs: {
-                                    size: "100",
-                                    color: "red lighten-4",
+                      {
+                        key: "item.action",
+                        fn: function (ref) {
+                          var item = ref.item
+                          return [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { icon: "", color: "orange" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.$router.push({
+                                      name: "customer-details",
+                                      params: { id: item.id },
+                                    })
                                   },
                                 },
-                                [
-                                  _c(
-                                    "v-icon",
-                                    { attrs: { size: "40", color: "red" } },
-                                    [_vm._v("mdi-comment-question")]
-                                  ),
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("h3", { staticClass: "error--text" }, [
-                                _vm._v("Are you sure?"),
-                              ]),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-card-text", { staticClass: "text-center" }, [
-                            _c("p", [_vm._v("You wont be revert this !")]),
-                          ]),
-                          _vm._v(" "),
-                          _c("v-divider"),
-                          _vm._v(" "),
-                          _c(
-                            "v-card-actions",
-                            [
-                              _c("v-spacer"),
-                              _vm._v(" "),
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: { color: "blue darken-1" },
-                                  on: { click: _vm.closeDelete },
+                              },
+                              [
+                                _c("v-icon", { attrs: { small: "" } }, [
+                                  _vm._v("mdi-eye"),
+                                ]),
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { icon: "", color: "green" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.$router.push({
+                                      name: "customer-chat",
+                                      params: { id: item.id },
+                                    })
+                                  },
                                 },
-                                [_vm._v("Cancel")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: { color: "red" },
-                                  on: { click: _vm.deleteItem },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                    Confirm\n                                "
-                                  ),
-                                ]
-                              ),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                    ],
-                    1
-                  ),
+                              },
+                              [
+                                _c("v-icon", { attrs: { small: "" } }, [
+                                  _vm._v("mdi-comment"),
+                                ]),
+                              ],
+                              1
+                            ),
+                          ]
+                        },
+                      },
+                    ]),
+                  }),
                 ],
                 1
               ),

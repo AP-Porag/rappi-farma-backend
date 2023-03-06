@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Api\Admin\Setting\SettingController;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,7 @@ Route::get('/{any}', function () {
 //Route::get('/stock-price-bar-chart-data',[DashboardController::class,'orderPriceBarChartData']);
 //Route::get('/recent-order-limit',[DashboardController::class,'recentOrderData']);
 //Route::get('/setting',[SettingController::class,'getAllSettings']);
+
+Route::post('/broadcast',function (Request $request){
+    return true;
+});

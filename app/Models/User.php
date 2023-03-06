@@ -88,4 +88,9 @@ class User extends Authenticatable
         return $this->hasMany(Order::class,'user_id');
     }
 
+    public function messages()
+    {
+        return $this->hasMany(Message::class,'from_id');
+    }
+
 }

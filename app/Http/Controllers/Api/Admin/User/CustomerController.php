@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api\Admin\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\OrderResource;
 use App\Http\Resources\UserResource;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -39,5 +41,14 @@ class CustomerController extends Controller
         ];
 
         return response()->json(['status'=>200,'data'=>$data]);
+    }
+
+    public function show($id)
+    {
+        $user = User::find($id);
+        $user = new UserResource($user);
+        $orders = Order::where('user_id',$id)->get();
+        $orders = OrderResource::collection($orders);
+        return response()->json(['status'=>200,'user'=>$user,'orders'=>$orders]);
     }
 }

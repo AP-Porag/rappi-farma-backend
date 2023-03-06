@@ -20,6 +20,7 @@ class OrderProductResource extends JsonResource
             'image'=>$this->image,
             'price'=>$this->price,
             'quantity'=>$this->quantity,
+            'created_at'=>custom_date($this->created_at)
         ];
     }
 }

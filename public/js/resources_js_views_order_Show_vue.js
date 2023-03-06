@@ -127,61 +127,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       menu: false,
       admin: '',
       messages: [],
-      // messages: [
-      //     {
-      //         from_id: 1,
-      //         to_id:this.customer.id,
-      //         message: `Sure, I'll see you later.`,
-      //         time: '10:42am',
-      //         color: 'deep-purple lighten-1',
-      //     },
-      //     {
-      //         from_id: this.customer.id,
-      //         to_id:1,
-      //         message: 'Yeah, sure. Does 1:00pm work?',
-      //         time: '10:37am',
-      //         color: 'green',
-      //     },
-      //     {
-      //         from_id: 1,
-      //         to_id:this.customer.id,
-      //         message: 'Did you still want to grab lunch today?Did you still want to grab lunch today?Did you still want to grab lunch today?Did you still want to grab lunch todayDid you still want to grab lunch today?',
-      //         time: '9:47am',
-      //         color: 'deep-purple lighten-1',
-      //     },
-      // ],
       hints: true,
-      phone: '5521997642382',
       text: ""
     };
   },
   created: function created() {
+    var _this = this;
     this.admin = JSON.parse(localStorage.getItem('user') || "[]");
+    setTimeout(function () {
+      _this.fetchMessages();
+    }, 2000);
+
+    // window.Echo.private('chat')
+    //     .listen('MessageSent', (e) => {
+    //         console.log(e)
+    //         //this.messages.push(e.data.message)
+    //     });
+    window.Echo.channel('chat').listen('.server.created', function (e) {
+      //console.log(e.message);
+      _this.messages.push(e.message);
+    });
   },
   methods: {
     send: function send() {
-      var _this = this;
+      var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var newMessage;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.text.length > 0)) {
+                if (!(_this2.text.length > 0)) {
                   _context.next = 4;
                   break;
                 }
                 newMessage = {
-                  customer_id: _this.customer.id,
-                  admin_id: _this.admin.id,
-                  message: _this.text
+                  customer_id: _this2.customer.id,
+                  admin_id: _this2.admin.id,
+                  message: _this2.text
                 };
                 _context.next = 4;
                 return axios.post('/api/v1/customer/message/save', newMessage).then(function (response) {
                   if (response.data.status === 200) {
-                    console.log(response);
-                    _this.text = '';
-                    _this.messages.push(response.data.message);
+                    //console.log(response)
+                    _this2.text = '';
+                    _this2.messages.push(response.data.message);
                   }
                 })["catch"](function (error) {
                   console.log(error);
@@ -192,6 +182,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee);
+      }))();
+    },
+    fetchMessages: function fetchMessages() {
+      var _this3 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get("/api/v1/customer/message/get/".concat(_this3.customer.id)).then(function (response) {
+                  _this3.messages = response.data.message;
+                });
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     },
     isMobile: function isMobile() {
@@ -402,6 +411,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -418,7 +433,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       message: '',
       item: '',
       user: '',
-      customer: '',
+      //customer:'',
       stocks: [],
       tab: null
     };
@@ -682,10 +697,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index",
@@ -728,10 +739,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, {
         text: 'User Type',
         value: 'user_type'
-      }
-      // {text: 'Actions', value: 'action',sortable: false},
-      ],
-
+      }, {
+        text: 'Actions',
+        value: 'action',
+        sortable: false
+      }],
       users: [],
       total: 0
     };
@@ -987,7 +999,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.text-input{*/\n/*    padding-top: 0px;*/\n/*    padding-bottom: 0px;*/\n/*    border-radius: 100px;*/\n/*}*/\n.chat-container[data-v-6710afaa]{\n    max-width:300px;\n    padding: 0 0;\n}\n.chat-header[data-v-6710afaa] {\n    background-color: #075E54 !important\n}\n.chat-message[data-v-6710afaa] {\n    display: unset !important;\n    white-space: break-spaces;\n}\n.chat-screen[data-v-6710afaa] {\n    max-height: 350px;\n    min-height: 350px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    padding-left: 0px;\n}\n.flex-none[data-v-6710afaa] {\n    flex: unset;\n}\n.received-message[data-v-6710afaa]::after {\n    content: ' ';\n    position: absolute;\n    width: 0;\n    height: 0;\n    left: 54px;\n    right: auto;\n    top: 12px;\n    bottom: auto;\n    border: 12px solid;\n    border-color: #4caf50 transparent transparent transparent;\n}\n.sent-message[data-v-6710afaa]::after {\n    content: ' ';\n    position: absolute;\n    width: 0;\n    height: 0;\n    left: auto;\n    right: 54px;\n    top: 12px;\n    bottom: auto;\n    border: 12px solid;\n    border-color: #3F51B5 transparent transparent transparent;\n}\n.text-box[data-v-6710afaa]{\n    padding: 10px 5px;\n}\n.text-input[data-v-6710afaa]{\n    background: #f2efef;\n    width: 100%;\n    border-radius: 50px;\n    resize: none;\n    border: none;\n    outline: none;\n    padding: 5px 15px;\n}\n.text-input[data-v-6710afaa]:focus{\n    border: none;\n    outline: none;\n}\n.send-btn[data-v-6710afaa]{\n    font-size: 18px;\n    background: #3d783d;\n    padding-left: 10px;\n    padding-right: 10px;\n    border-radius: 50px;\n    height: 37px;\n    margin-top: 12px;\n}\n.text_right[data-v-6710afaa]{\n    text-align: right;\n}\n.text_left[data-v-6710afaa]{\n    text-align: left;\n}\n.v-text-field__details[data-v-6710afaa]{\n    display: none !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.text-input{*/\n/*    padding-top: 0px;*/\n/*    padding-bottom: 0px;*/\n/*    border-radius: 100px;*/\n/*}*/\n.chat-container[data-v-6710afaa]{\n    max-width:300px;\n    padding: 0 0;\n}\n.chat-header[data-v-6710afaa] {\n    background-color: #075E54 !important\n}\n.chat-message[data-v-6710afaa] {\n    display: unset !important;\n    white-space: break-spaces;\n}\n.chat-screen[data-v-6710afaa] {\n    max-height: 350px;\n    min-height: 350px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    padding-left: 0px;\n}\n.flex-none[data-v-6710afaa] {\n    flex: unset;\n}\n.received-message[data-v-6710afaa]::after {\n    content: ' ';\n    position: absolute;\n    width: 0;\n    height: 0;\n    left: 54px;\n    right: auto;\n    top: 12px;\n    bottom: auto;\n    border: 12px solid;\n    border-color: #4caf50 transparent transparent transparent;\n}\n.sent-message[data-v-6710afaa]::after {\n    content: ' ';\n    position: absolute;\n    width: 0;\n    height: 0;\n    left: auto;\n    right: 54px;\n    top: 12px;\n    bottom: auto;\n    border: 12px solid;\n    border-color: #3F51B5 transparent transparent transparent;\n}\n.text-box[data-v-6710afaa]{\n    padding: 10px 5px;\n}\n.text-input[data-v-6710afaa]{\n    background: #f2efef;\n    width: 100%;\n    border-radius: 50px;\n    resize: none;\n    border: none;\n    outline: none;\n    padding: 5px 15px;\n}\n.text-input[data-v-6710afaa]:focus{\n    border: none;\n    outline: none;\n}\n.send-btn[data-v-6710afaa]{\n    font-size: 18px;\n    background: #3d783d;\n    padding-left: 10px;\n    padding-right: 10px;\n    border-radius: 50px;\n    height: 37px;\n    margin-top: 12px;\n}\n.text_right[data-v-6710afaa]{\n    text-align: right;\n}\n.text_left[data-v-6710afaa]{\n    text-align: left;\n}\n.v-text-field__details[data-v-6710afaa]{\n    display: none !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1010,7 +1022,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-967f339a]{\r\n    width: 0px !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-967f339a]{\n    width: 0px !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1408,7 +1420,9 @@ var render = function () {
                   attrs: { dark: "" },
                 },
                 [
-                  _c("p", { staticClass: "white--text" }, [_vm._v("Chat")]),
+                  _c("p", { staticClass: "white--text" }, [
+                    _vm._v("Chat with " + _vm._s(_vm.customer.full_name)),
+                  ]),
                   _vm._v(" "),
                   _c("v-spacer"),
                   _vm._v(" "),
@@ -2016,6 +2030,18 @@ var render = function () {
                             _vm._v(" "),
                             _c("tbody", [
                               _c("tr", [
+                                _c("td", [_vm._v("Name")]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(_vm.user.full_name) +
+                                      "\n                            "
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
                                 _c("td", [_vm._v("Avatar")]),
                                 _vm._v(" "),
                                 _c(
@@ -2494,95 +2520,57 @@ var render = function () {
                           ]
                         },
                       },
-                    ]),
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "v-dialog",
-                    {
-                      attrs: { width: "400" },
-                      model: {
-                        value: _vm.dialog,
-                        callback: function ($$v) {
-                          _vm.dialog = $$v
-                        },
-                        expression: "dialog",
-                      },
-                    },
-                    [
-                      _c(
-                        "v-card",
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "text-center pt-2" },
-                            [
-                              _c(
-                                "v-avatar",
-                                {
-                                  attrs: {
-                                    size: "100",
-                                    color: "red lighten-4",
+                      {
+                        key: "item.action",
+                        fn: function (ref) {
+                          var item = ref.item
+                          return [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { icon: "", color: "orange" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.$router.push({
+                                      name: "customer-details",
+                                      params: { id: item.id },
+                                    })
                                   },
                                 },
-                                [
-                                  _c(
-                                    "v-icon",
-                                    { attrs: { size: "40", color: "red" } },
-                                    [_vm._v("mdi-comment-question")]
-                                  ),
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("h3", { staticClass: "error--text" }, [
-                                _vm._v("Are you sure?"),
-                              ]),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-card-text", { staticClass: "text-center" }, [
-                            _c("p", [_vm._v("You wont be revert this !")]),
-                          ]),
-                          _vm._v(" "),
-                          _c("v-divider"),
-                          _vm._v(" "),
-                          _c(
-                            "v-card-actions",
-                            [
-                              _c("v-spacer"),
-                              _vm._v(" "),
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: { color: "blue darken-1" },
-                                  on: { click: _vm.closeDelete },
+                              },
+                              [
+                                _c("v-icon", { attrs: { small: "" } }, [
+                                  _vm._v("mdi-eye"),
+                                ]),
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { icon: "", color: "green" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.$router.push({
+                                      name: "customer-chat",
+                                      params: { id: item.id },
+                                    })
+                                  },
                                 },
-                                [_vm._v("Cancel")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: { color: "red" },
-                                  on: { click: _vm.deleteItem },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                    Confirm\n                                "
-                                  ),
-                                ]
-                              ),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                    ],
-                    1
-                  ),
+                              },
+                              [
+                                _c("v-icon", { attrs: { small: "" } }, [
+                                  _vm._v("mdi-comment"),
+                                ]),
+                              ],
+                              1
+                            ),
+                          ]
+                        },
+                      },
+                    ]),
+                  }),
                 ],
                 1
               ),

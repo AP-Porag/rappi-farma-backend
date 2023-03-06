@@ -44,6 +44,10 @@ const OrderDelivered = () => import('../views/order/Delivered.vue')
 const OrderCanceled = () => import('../views/order/Canceled.vue')
 const OrderRejected = () => import('../views/order/Rejected.vue')
 
+const CustomerChat = () => import('../views/chat/CustomerChat.vue')
+
+const CustomerView = () => import('../views/user/CustomerView.vue')
+
 //settings component
 const Settings = () => import('../views/settings/index.vue')
 
@@ -143,6 +147,18 @@ const router = new vueRouter({
                     name:'driver',
                     meta:{title:'driver'},
                     component: DriverIndex
+                },
+                {
+                    path:'customer-chat/:id',
+                    name:'customer-chat',
+                    meta:{title:'Customer Chat'},
+                    component: CustomerChat
+                },
+                {
+                    path:'customer-view/:id',
+                    name:'customer-details',
+                    meta:{title:'Customer Details'},
+                    component: CustomerView
                 },
                 {
                     path:'category',

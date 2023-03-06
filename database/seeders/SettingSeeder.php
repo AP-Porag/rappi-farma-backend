@@ -81,7 +81,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key'   => 'admin_twilio_order_message',
-                'value' => 'Your order of # {$order_sku} has placed and should be delivered on {$deliveryDate}.Thanks, {$company}',
+                'value' => 'Your order number # {$order_sku} has {$status} and should be delivered on {$deliveryDate}. Thanks, {$company}',
             ],
             [
                 'key'   => 'admin_login_bg',
@@ -94,11 +94,15 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key'   => 'twilio_auth_token',
-                'value' => 'b618c1057af419f6e81cb5e22dd8dde5',
+                'value' => '2a6f58cb4a19b14601eeb19999c478c3',
             ],
             [
                 'key'   => 'twilio_whatsapp_from',
                 'value' => '+14155238886',
+            ],
+            [
+                'key'   => 'google_map_api_key',
+                'value' => 'AIzaSyDpAz0wssQspDgZDeCUYm5hGayKJKpWtFI',
             ],
         ];
 
