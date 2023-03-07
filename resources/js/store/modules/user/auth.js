@@ -6,6 +6,8 @@ let user = window.localStorage.getItem('user');
 export default {
     namespace:true,
     state:{
+        message:'',
+        error:false,
         token: token ? JSON.parse(token) : '',
         user:user ? JSON.parse(user) : {},
     },
@@ -30,18 +32,25 @@ export default {
         },
         REMOVE_TOKEN_FROM_LOCALSTORAGE(){
             window.localStorage.removeItem('token');
-        }
+        },
+        SET_ERROR (state, value) {
+            state.message = value
+            state.error = true
+        },
     },
     actions:{
         async login({commit},payload){
             //console.log('from store login')
             return await axios.post('/api/auth/login',{email:payload.email,'password':payload.password})
                 .then(({data})=>{
-                    console.log(payload)
-                    commit('SET_USER',data.data)
-                    commit('SET_TOKEN',data.data.token)
-                    commit('SET_TOKEN_TO_LOCALSTORAGE')
-                    router.push('/home')
+                    if (data.status === 403){
+                        commit('SET_ERROR',data.message)
+                    }else {
+                        commit('SET_USER',data.data)
+                        commit('SET_TOKEN',data.data.token)
+                        commit('SET_TOKEN_TO_LOCALSTORAGE')
+                        router.push('/home')
+                    }
                     //router.push({name:'home'})
             }).catch((err)=>{
                     commit('SET_USER',{})

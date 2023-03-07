@@ -40,7 +40,7 @@
                 </div>
                 <v-divider></v-divider>
                 <v-container class="chat-container">
-                    <ul class="chat-screen" id="style-2" v-chat-scroll>
+                    <ul class="chat-screen" id="style-2" v-chat-scroll @scroll="handleScroll">
                         <v-card v-for="(message,index) in messages" :key="message.id" flat>
                             <v-list-item
                                 :key="message.id"
@@ -159,6 +159,21 @@ export default {
             await axios.get(`/api/v1/customer/message/get/${this.customer.id}`).then(response => {
                 this.messages = response.data.message;
             });
+        },
+        async handleScroll(){
+            let token = JSON.parse(window.localStorage.getItem('token'))
+            let form_data ={
+                'customer_id':this.customer_id,
+                'admin_id':this.admin.id,
+            }
+            await axios.post(`/api/notification/change/all/status`,form_data ,{headers: { 'Authorization': 'Bearer ' + token }})
+                .then((response)=>{
+                    let data = response.data.data;
+                    //this.$emit('MessageStatusChanged',data)
+                })
+                .catch((error)=>{
+                    console.log(error)
+                })
         },
 
         isMobile() {

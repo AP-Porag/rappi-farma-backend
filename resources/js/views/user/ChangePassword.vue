@@ -95,6 +95,7 @@ export default {
         menu:false,
         confirmPassword: '',
         form_data:{
+            user_id:'',
             old_password:'',
             new_password:'',
         },
@@ -116,6 +117,10 @@ export default {
             ],
         },
     }),
+    created() {
+        let user = JSON.parse(window.localStorage.getItem('user'))
+        this.form_data.user_id = user.id;
+    },
     methods:{
         ...mapActions({
             signIn:"login"
@@ -153,14 +158,14 @@ export default {
                             this.message = response.data.message;
                             this.error = true;
                         }else {
+                            this.message = response.data.data.message;
+                            this.success = true;
+
                             this.data.email  = response.data.data.email
                             this.data.password  = this.form_data.new_password
 
                             this.signIn(this.data);
-                            console.log(this.data)
                             //window.location.reload();
-                            this.message = response.data.message;
-                            this.success = true;
                         }
                     })
                     .catch((error)=>{

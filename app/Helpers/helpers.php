@@ -426,7 +426,8 @@ if (!function_exists('category_name')) {
 
 if (!function_exists('send_whatsapp_message')) {
     function send_whatsapp_message($to,$from,$message){
-        $twilio = new Client(env('TWILIO_AUTH_SID'), env('TWILIO_AUTH_TOKEN'));
+        //$twilio = new Client(env('TWILIO_AUTH_SID'), env('TWILIO_AUTH_TOKEN'));
+        $twilio = new Client(config('settings.twilio_auth_sid'), config('settings.twilio_auth_token'));
         $whatsapp = $twilio->messages->create('whatsapp:' . $to, [
             "from" => 'whatsapp:' . $from,
             "body" => $message

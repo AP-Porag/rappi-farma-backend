@@ -116,6 +116,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       menu: false,
       confirmPassword: '',
       form_data: {
+        user_id: '',
         old_password: '',
         new_password: ''
       },
@@ -139,6 +140,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }]
       }
     };
+  },
+  created: function created() {
+    var user = JSON.parse(window.localStorage.getItem('user'));
+    this.form_data.user_id = user.id;
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
     signIn: "login"
@@ -189,13 +194,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     _this.message = response.data.message;
                     _this.error = true;
                   } else {
+                    _this.message = response.data.data.message;
+                    _this.success = true;
                     _this.data.email = response.data.data.email;
                     _this.data.password = _this.form_data.new_password;
                     _this.signIn(_this.data);
-                    console.log(_this.data);
                     //window.location.reload();
-                    _this.message = response.data.message;
-                    _this.success = true;
                   }
                 })["catch"](function (error) {
                   _this.message = 'Something went wrong !';

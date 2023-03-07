@@ -203,6 +203,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
+    handleScroll: function handleScroll() {
+      var _this4 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var token, form_data;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                token = JSON.parse(window.localStorage.getItem('token'));
+                form_data = {
+                  'customer_id': _this4.customer_id,
+                  'admin_id': _this4.admin.id
+                };
+                _context3.next = 4;
+                return axios.post("/api/notification/change/all/status", form_data, {
+                  headers: {
+                    'Authorization': 'Bearer ' + token
+                  }
+                }).then(function (response) {
+                  var data = response.data.data;
+                  //this.$emit('MessageStatusChanged',data)
+                })["catch"](function (error) {
+                  console.log(error);
+                });
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
     isMobile: function isMobile() {
       var check = false;
       (function (a) {
@@ -979,7 +1011,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.text-input{*/\n/*    padding-top: 0px;*/\n/*    padding-bottom: 0px;*/\n/*    border-radius: 100px;*/\n/*}*/\n.chat-container[data-v-6710afaa]{\n    max-width:300px;\n    padding: 0 0;\n}\n.chat-header[data-v-6710afaa] {\n    background-color: #075E54 !important\n}\n.chat-message[data-v-6710afaa] {\n    display: unset !important;\n    white-space: break-spaces;\n}\n.chat-screen[data-v-6710afaa] {\n    max-height: 350px;\n    min-height: 350px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    padding-left: 0px;\n}\n.flex-none[data-v-6710afaa] {\n    flex: unset;\n}\n.received-message[data-v-6710afaa]::after {\n    content: ' ';\n    position: absolute;\n    width: 0;\n    height: 0;\n    left: 54px;\n    right: auto;\n    top: 12px;\n    bottom: auto;\n    border: 12px solid;\n    border-color: #4caf50 transparent transparent transparent;\n}\n.sent-message[data-v-6710afaa]::after {\n    content: ' ';\n    position: absolute;\n    width: 0;\n    height: 0;\n    left: auto;\n    right: 54px;\n    top: 12px;\n    bottom: auto;\n    border: 12px solid;\n    border-color: #3F51B5 transparent transparent transparent;\n}\n.text-box[data-v-6710afaa]{\n    padding: 10px 5px;\n}\n.text-input[data-v-6710afaa]{\n    background: #f2efef;\n    width: 100%;\n    border-radius: 50px;\n    resize: none;\n    border: none;\n    outline: none;\n    padding: 5px 15px;\n}\n.text-input[data-v-6710afaa]:focus{\n    border: none;\n    outline: none;\n}\n.send-btn[data-v-6710afaa]{\n    font-size: 18px;\n    background: #3d783d;\n    padding-left: 10px;\n    padding-right: 10px;\n    border-radius: 50px;\n    height: 37px;\n    margin-top: 12px;\n}\n.text_right[data-v-6710afaa]{\n    text-align: right;\n}\n.text_left[data-v-6710afaa]{\n    text-align: left;\n}\n.v-text-field__details[data-v-6710afaa]{\n    display: none !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.text-input{*/\n/*    padding-top: 0px;*/\n/*    padding-bottom: 0px;*/\n/*    border-radius: 100px;*/\n/*}*/\n.chat-container[data-v-6710afaa]{\n    max-width:300px;\n    padding: 0 0;\n}\n.chat-header[data-v-6710afaa] {\n    background-color: #075E54 !important\n}\n.chat-message[data-v-6710afaa] {\n    display: unset !important;\n    white-space: break-spaces;\n}\n.chat-screen[data-v-6710afaa] {\n    max-height: 350px;\n    min-height: 350px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    padding-left: 0px;\n}\n.flex-none[data-v-6710afaa] {\n    flex: unset;\n}\n.received-message[data-v-6710afaa]::after {\n    content: ' ';\n    position: absolute;\n    width: 0;\n    height: 0;\n    left: 54px;\n    right: auto;\n    top: 12px;\n    bottom: auto;\n    border: 12px solid;\n    border-color: #4caf50 transparent transparent transparent;\n}\n.sent-message[data-v-6710afaa]::after {\n    content: ' ';\n    position: absolute;\n    width: 0;\n    height: 0;\n    left: auto;\n    right: 54px;\n    top: 12px;\n    bottom: auto;\n    border: 12px solid;\n    border-color: #3F51B5 transparent transparent transparent;\n}\n.text-box[data-v-6710afaa]{\n    padding: 10px 5px;\n}\n.text-input[data-v-6710afaa]{\n    background: #f2efef;\n    width: 100%;\n    border-radius: 50px;\n    resize: none;\n    border: none;\n    outline: none;\n    padding: 5px 15px;\n}\n.text-input[data-v-6710afaa]:focus{\n    border: none;\n    outline: none;\n}\n.send-btn[data-v-6710afaa]{\n    font-size: 18px;\n    background: #3d783d;\n    padding-left: 10px;\n    padding-right: 10px;\n    border-radius: 50px;\n    height: 37px;\n    margin-top: 12px;\n}\n.text_right[data-v-6710afaa]{\n    text-align: right;\n}\n.text_left[data-v-6710afaa]{\n    text-align: left;\n}\n.v-text-field__details[data-v-6710afaa]{\n    display: none !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1440,6 +1472,7 @@ var render = function () {
                     ],
                     staticClass: "chat-screen",
                     attrs: { id: "style-2" },
+                    on: { scroll: _vm.handleScroll },
                   },
                   _vm._l(_vm.messages, function (message, index) {
                     return _c(

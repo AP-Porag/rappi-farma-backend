@@ -55,6 +55,9 @@
         <v-snackbar top color="red" v-model="error">
             {{message}}
         </v-snackbar>
+        <v-snackbar top color="red" v-model="store_error">
+            {{store_message}}
+        </v-snackbar>
     </v-app>
 </template>
 
@@ -84,7 +87,14 @@ export default {
     computed: {
         ...mapGetters({
             settings:'settings'
-        })
+        }),
+        store_error() {
+            return this.$store.state.auth.error;
+        },
+        store_message() {
+            return this.$store.state.auth.message;
+        },
+
     },
     methods:{
         ...mapActions({

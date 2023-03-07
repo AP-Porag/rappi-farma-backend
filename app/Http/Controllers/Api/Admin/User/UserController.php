@@ -198,19 +198,23 @@ class UserController extends Controller
             'new_password' => 'required',
         ]);
 
+        $user_id = $request->user_id;
+        $user = User::find($user_id);
+
+
         #Match The Old Password
-        if(!Hash::check($request->old_password, auth()->user()->password)){
+        if(!Hash::check($request->old_password, $user->password)){
             return back()->with("error", "Old Password Doesn't match!");
         }
         //dd($request->all());
 
         #Update the new Password
-        User::whereId(auth()->user()->id)->update([
-            'password' => Hash::make($request->password)
+        User::whereId($user->id)->update([
+            'password' => Hash::make($request->new_password)
         ]);
 
         $data = [
-            'email'=>auth()->user()->email,
+            'email'=>$user->email,
             'message'=>'Record updated successfully',
         ];
         return response()->json(['status'=>200,'data'=>$data]);

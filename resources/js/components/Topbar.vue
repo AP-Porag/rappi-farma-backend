@@ -79,14 +79,14 @@
               Profile
           </v-list-item-title>
         </v-list-item>
-<!--          <v-list-item link @click="$router.push({ name: 'change-password' })">-->
-<!--              <v-list-item-icon>-->
-<!--                  <v-icon>mdi-key</v-icon>-->
-<!--              </v-list-item-icon>-->
-<!--              <v-list-item-title>-->
-<!--                  Change Password-->
-<!--              </v-list-item-title>-->
-<!--          </v-list-item>-->
+          <v-list-item link @click="$router.push({ name: 'change-password' })">
+              <v-list-item-icon>
+                  <v-icon>mdi-key</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>
+                  Change Password
+              </v-list-item-title>
+          </v-list-item>
           <v-list-item
           @click="logout"
           >
