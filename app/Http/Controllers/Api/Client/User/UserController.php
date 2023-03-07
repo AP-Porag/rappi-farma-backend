@@ -60,4 +60,33 @@ class UserController extends Controller
 
         return response()->json(['data'=>$data,'status'=>200],200);
     }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required',
+        ]);
+
+        $user_id = $request->user_id;
+        $user = User::find($user_id);
+
+
+        #Match The Old Password
+        if(!Hash::check($request->old_password, $user->password)){
+            return back()->with("error", "Old Password Doesn't match!");
+        }
+        //dd($request->all());
+
+        #Update the new Password
+        User::whereId($user->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        $data = [
+            'email'=>$user->email,
+            'message'=>'Record updated successfully',
+        ];
+        return response()->json(['status'=>200,'data'=>$data]);
+    }
 }

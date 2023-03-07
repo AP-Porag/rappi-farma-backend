@@ -148,6 +148,7 @@ Route::group(['prefix' => 'v1'], function(){
 
     ##customer
     Route::post('/customer/profile-update/{id}',[\App\Http\Controllers\Api\Client\User\UserController::class,'updateProfile']);
+    Route::post('/customer/change/password',[\App\Http\Controllers\Api\Client\User\UserController::class,'changePassword']);
 
     Route::get('/customer/details/{id}',[\App\Http\Controllers\Api\Client\User\UserController::class,'getUserData']);
 
