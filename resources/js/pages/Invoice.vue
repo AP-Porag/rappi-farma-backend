@@ -16,7 +16,7 @@
         :enable-download="true"
         :preview-modal="false"
         :paginate-elements-by-height="800"
-        filename="nightprogrammerpdf"
+        :filename="'RPI-'+invoice_number"
         :pdf-quality="2"
         :manual-pagination="false"
         pdf-format="a4"
@@ -27,89 +27,105 @@
         ref="html2Pdf"
     >
       <section slot="pdf-content">
-        <div class="invoice-box">
-          <table>
-            <tr class="top">
-              <td colspan="2">
-                <table>
-                  <tr>
-                    <td class="title">
-                      <img :src="require('../assets/logo.svg')" alt="Company logo" style="height:80px;width: 80px;" />
-                    </td>
+          <div class="invoice-box">
+              <table>
+                  <tr class="top">
+                      <td colspan="3">
+                          <table>
+                              <tr>
+                                  <td class="title">
+                                      <img :src="require('../assets/logo.svg')" alt="Company logo" style="height:80px;width: 80px;" />
+                                  </td>
 
-                    <td>
-                      Invoice #: 123<br />
-                      Created: January 1, 2015<br />
-                      Due: February 1, 2015
-                    </td>
+                                  <td></td>
+                                  <td>
+                                      Invoice # : RPI-{{invoice_number}}<br />
+                                      Order # : {{item.SKU}}<br />
+                                      Created : {{invoice_created_date}}<br />
+                                      Order Date : {{item.created_at}}
+                                  </td>
+                              </tr>
+                          </table>
+                      </td>
                   </tr>
-                </table>
-              </td>
-            </tr>
 
-            <tr class="information">
-              <td colspan="2">
-                <table>
-                  <tr>
-                    <td>
-                      Sparksuite, Inc.<br />
-                      12345 Sunny Road<br />
-                      Sunnyville, TX 12345
-                    </td>
+                  <tr class="information">
+                      <td colspan="3">
+                          <table>
+                              <tr>
+                                  <td>
+                                      Rappi Farma.<br />
+                                      12345 Sunny Road<br />
+                                      Sunnyville, TX 12345
+                                  </td>
 
-                    <td>
-                      Acme Corp.<br />
-                      John Doe<br />
-                      john@example.com
-                    </td>
+                                  <td></td>
+                                  <td>
+                                      {{user.full_name}}<br />
+                                      {{user.phone}}<br />
+                                      {{user.email}}<br />
+                                      {{item.address}}
+                                  </td>
+                              </tr>
+                          </table>
+                      </td>
                   </tr>
-                </table>
-              </td>
-            </tr>
 
-            <tr class="heading">
-              <td>Payment Method</td>
+                  <tr class="heading">
+                      <td>Payment Method</td>
+                      <td></td>
 
-              <td>Check #</td>
-            </tr>
+                      <td>{{payment_method === 'check'?'Check #':payment_method === 'card'?'Card #':payment_method ==='COD'?'':''}}</td>
+                  </tr>
 
-            <tr class="details">
-              <td>Check</td>
+                  <tr class="details">
+                      <td>{{payment_method}}</td>
+                      <td></td>
 
-              <td>1000</td>
-            </tr>
+                      <td>{{payment_method === 'check'? payment_check_number:payment_method === 'card'?payment_card_number:payment_method ==='COD'?'Cash On Delivery':''}}</td>
+                  </tr>
 
-            <tr class="heading">
-              <td>Item</td>
+                  <tr class="heading">
+                      <td>Item</td>
+                      <td>Quantity</td>
+                      <td>Price</td>
+                  </tr>
 
-              <td>Price</td>
-            </tr>
+                  <tr :class="`item ${index === products.length - 1 ? 'last':''}`" v-for="(product,index) in products" :key="product.id">
+                      <td>{{product.name}}</td>
+                      <td>{{product.quantity}}</td>
+                      <td>${{product.price * product.quantity}}</td>
+                  </tr>
 
-            <tr class="item">
-              <td>Website design</td>
+                  <tr class="sub-total">
+                      <td></td>
+                      <td></td>
 
-              <td>$300.00</td>
-            </tr>
+                      <td>Subtotal: ${{item.subtotal}}</td>
+                  </tr>
 
-            <tr class="item">
-              <td>Hosting (3 months)</td>
+                  <tr class="sub-total">
+                      <td></td>
+                      <td></td>
 
-              <td>$75.00</td>
-            </tr>
+                      <td>Discount: ${{item.discount_amount}}</td>
+                  </tr>
 
-            <tr class="item last">
-              <td>Domain name (1 year)</td>
+                  <tr class="sub-total">
+                      <td></td>
+                      <td></td>
 
-              <td>$10.00</td>
-            </tr>
+                      <td>Shipping: ${{item.shipping_charge != null ? item.shipping_charge :'0'}}</td>
+                  </tr>
 
-            <tr class="total">
-              <td></td>
+                  <tr class="total">
+                      <td></td>
+                      <td></td>
 
-              <td>Total: $385.00</td>
-            </tr>
-          </table>
-        </div>
+                      <td>Total: ${{item.total_price}}</td>
+                  </tr>
+              </table>
+          </div>
       </section>
     </vue-html2pdf>
     <div class="print-invoice-box">

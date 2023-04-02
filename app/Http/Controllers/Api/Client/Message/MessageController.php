@@ -49,7 +49,8 @@ class MessageController extends Controller
             $customer = User::find($customer_id);
             $customer_phone = '+'.$customer->country_calling_code.$customer->phone;
             $to = $customer_phone;
-            $from = env('TWILIO_WHATSAPP_FROM');
+            //$from = env('TWILIO_WHATSAPP_FROM');
+            $from = config('settings.twilio_whatsapp_from');
             $message = $request->message;
             $whatsapp = send_whatsapp_message($to,$from,$message);
 
@@ -94,11 +95,11 @@ class MessageController extends Controller
             $phone = substr($WaId, strlen($WaId)-10);
             $countryCallingCode = substr($WaId, 0, -10);
 
-//            $user = User::where('phone',$phone)
-//                ->where('country_calling_code',$countryCallingCode)
-//                ->first();
-            $user = User::where('id',14)
+            $user = User::where('phone',$phone)
+                ->where('country_calling_code',$countryCallingCode)
                 ->first();
+            // $user = User::where('id',14)
+            //     ->first();
 
             if ($user){
                 $message = Message::create([

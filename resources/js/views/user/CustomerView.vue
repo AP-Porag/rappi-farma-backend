@@ -117,6 +117,12 @@
                                     {{order.address}}
                                 </td>
                             </tr>
+                            <tr>
+                                <td>Order Date</td>
+                                <td>
+                                    {{order.created_at}}
+                                </td>
+                            </tr>
                             </tbody>
                         </template>
                     </v-simple-table>

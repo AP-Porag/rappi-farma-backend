@@ -86,6 +86,10 @@
                                 <td>Status</td>
                                 <td>{{ item.status }}</td>
                             </tr>
+                            <tr>
+                                <td>Order Date</td>
+                                <td>{{ item.created_at }}</td>
+                            </tr>
                             </tbody>
                         </template>
                     </v-simple-table>
