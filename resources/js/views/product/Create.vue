@@ -147,10 +147,10 @@
                                                     cols="12"
                                                     md="6"
                                                 >
+<!--                                                    :rules="rules.status"-->
                                                     <v-select
                                                         v-model="form_data.status"
                                                         :items="status"
-                                                        :rules="rules.status"
                                                         label="Status"
                                                         outlined
                                                         clearable
@@ -239,12 +239,12 @@ export default {
             name: [
                 v => !!v || 'Name is required',
             ],
-            status: [
-                v => !!v || 'Status is required',
-            ],
-            thumbnail_image: [
-                v => !!v || 'Thumbnail is required',
-            ],
+            // status: [
+            //     v => !!v || 'Status is required',
+            // ],
+            // thumbnail_image: [
+            //     v => !!v || 'Thumbnail is required',
+            // ],
             price: [
                 v => !!v || 'Price is required',
             ],
@@ -267,10 +267,10 @@ export default {
         },
 
         async submit(){
-            if (this.form_data.thumbnail_image == ''){
-                this.thumbnail_error = true;
-                return
-            }
+            // if (this.form_data.thumbnail_image == ''){
+            //     this.thumbnail_error = true;
+            //     return
+            // }
             if (this.valid){
 
                 // Add a request interceptor

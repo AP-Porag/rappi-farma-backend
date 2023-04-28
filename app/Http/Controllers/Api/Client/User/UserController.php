@@ -69,8 +69,8 @@ class UserController extends Controller
         ]);
 
         $user_id = $request->user_id;
+        //$user_id = (int)$user_id;
         $user = User::find($user_id);
-
 
         #Match The Old Password
         if(!Hash::check($request->old_password, $user->password)){
@@ -87,6 +87,7 @@ class UserController extends Controller
             'email'=>$user->email,
             'message'=>'Record updated successfully',
         ];
+        dd($data);
         return response()->json(['status'=>200,'data'=>$data]);
     }
 }

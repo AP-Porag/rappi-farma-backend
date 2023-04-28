@@ -258,12 +258,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: [function (v) {
           return !!v || 'Name is required';
         }],
-        status: [function (v) {
-          return !!v || 'Status is required';
-        }],
-        thumbnail_image: [function (v) {
-          return !!v || 'Thumbnail is required';
-        }],
+        // status: [
+        //     v => !!v || 'Status is required',
+        // ],
+        // thumbnail_image: [
+        //     v => !!v || 'Thumbnail is required',
+        // ],
         price: [function (v) {
           return !!v || 'Price is required';
         }]
@@ -293,15 +293,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.form_data.thumbnail_image == '')) {
-                  _context.next = 3;
-                  break;
-                }
-                _this.thumbnail_error = true;
-                return _context.abrupt("return");
-              case 3:
                 if (!_this.valid) {
-                  _context.next = 11;
+                  _context.next = 8;
                   break;
                 }
                 // Add a request interceptor
@@ -328,7 +321,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return Promise.reject(error);
                 });
                 token = JSON.parse(window.localStorage.getItem('token'));
-                _context.next = 9;
+                _context.next = 6;
                 return axios.post('/api/product', _this.form_data, {
                   headers: {
                     'Authorization': 'Bearer ' + token
@@ -346,17 +339,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.message = 'Something went wrong !';
                   _this.error = true;
                 });
-              case 9:
-                _context.next = 13;
+              case 6:
+                _context.next = 10;
                 break;
-              case 11:
+              case 8:
                 _this.loading = true;
                 setTimeout(function () {
                   _this.loading = false;
                   _this.message = 'Validation error !';
                   _this.error = true;
                 }, 3000);
-              case 13:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -2702,7 +2695,7 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("\n            All Products\n        ")]
+            [_vm._v("\n                All Products\n            ")]
           ),
         ],
         1
@@ -2733,9 +2726,9 @@ var render = function () {
                     },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(_vm.message) +
-                          "\n                "
+                          "\n                    "
                       ),
                     ]
                   ),
@@ -2754,9 +2747,9 @@ var render = function () {
                     },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                        " +
                           _vm._s(_vm.message) +
-                          "\n                "
+                          "\n                    "
                       ),
                     ]
                   ),
@@ -3095,7 +3088,6 @@ var render = function () {
                                                   _c("v-select", {
                                                     attrs: {
                                                       items: _vm.status,
-                                                      rules: _vm.rules.status,
                                                       label: "Status",
                                                       outlined: "",
                                                       clearable: "",
@@ -3196,7 +3188,7 @@ var render = function () {
                                                 [_vm._v("mdi-cloud-upload")]
                                               ),
                                               _vm._v(
-                                                "\n                                            Upload thumbnail\n                                        "
+                                                "\n                                                Upload thumbnail\n                                            "
                                               ),
                                             ],
                                             1

@@ -191,6 +191,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index",
@@ -493,7 +534,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-967f339a]{\n    width: 0px !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.datatable-search[data-v-967f339a]{\n    width: 0px !important;\n}\n.datatable-action-item .v-list-item__icon[data-v-967f339a]:first-child{\n    margin-right: 0px !important;\n}\n.v-list-item[data-v-967f339a]{\n    padding-right: 70px;\n    padding-top: 5px;\n    padding-bottom: 5px;\n    min-height: 0px !important;\n}\n.v-list-item__icon[data-v-967f339a]{\n    margin-top: 5px !important;\n    margin-bottom: 5px !important;\n}\n.v-list-item__content[data-v-967f339a]{\n    padding: 0px !important;\n}\n.edit-text[data-v-967f339a]{\n    color: #2196f3;\n}\n.delete-text[data-v-967f339a]{\n     color: #e57373;\n}\n.details-text[data-v-967f339a]{\n     color: #ff9800;\n}\n.chat-text[data-v-967f339a]{\n     color: #4caf50;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1022,43 +1063,157 @@ var render = function () {
                           var item = ref.item
                           return [
                             _c(
-                              "v-btn",
+                              "v-menu",
                               {
-                                attrs: { icon: "", color: "orange" },
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.$router.push({
-                                      name: "customer-details",
-                                      params: { id: item.id },
-                                    })
-                                  },
-                                },
+                                attrs: { transition: "slide-x-transition" },
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "activator",
+                                      fn: function (ref) {
+                                        var on = ref.on
+                                        var attrs = ref.attrs
+                                        return [
+                                          _c(
+                                            "v-btn",
+                                            _vm._g(
+                                              _vm._b(
+                                                {
+                                                  attrs: {
+                                                    color: "black",
+                                                    dark: "",
+                                                    small: "",
+                                                  },
+                                                },
+                                                "v-btn",
+                                                attrs,
+                                                false
+                                              ),
+                                              on
+                                            ),
+                                            [
+                                              _c("v-icon", [
+                                                _vm._v("mdi-dots-vertical"),
+                                              ]),
+                                            ],
+                                            1
+                                          ),
+                                        ]
+                                      },
+                                    },
+                                  ],
+                                  null,
+                                  true
+                                ),
                               },
                               [
-                                _c("v-icon", { attrs: { small: "" } }, [
-                                  _vm._v("mdi-eye"),
-                                ]),
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-btn",
-                              {
-                                attrs: { icon: "", color: "green" },
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.$router.push({
-                                      name: "customer-chat",
-                                      params: { id: item.id },
-                                    })
-                                  },
-                                },
-                              },
-                              [
-                                _c("v-icon", { attrs: { small: "" } }, [
-                                  _vm._v("mdi-comment"),
-                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list",
+                                  [
+                                    _c(
+                                      "v-list-item-group",
+                                      { staticClass: "datatable-action-item" },
+                                      [
+                                        _c(
+                                          "v-list-item",
+                                          {
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.$router.push({
+                                                  name: "customer-details",
+                                                  params: { id: item.id },
+                                                })
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c(
+                                              "v-list-item-icon",
+                                              [
+                                                _c(
+                                                  "v-icon",
+                                                  {
+                                                    attrs: {
+                                                      color: "orange",
+                                                      small: "",
+                                                    },
+                                                  },
+                                                  [_vm._v("mdi-eye")]
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item-content",
+                                              [
+                                                _c(
+                                                  "v-list-item-title",
+                                                  {
+                                                    staticClass: "details-text",
+                                                  },
+                                                  [_vm._v("Details")]
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-list-item",
+                                          {
+                                            staticClass:
+                                              "datatable-dropdown-item",
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.$router.push({
+                                                  name: "customer-chat",
+                                                  params: { id: item.id },
+                                                })
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c(
+                                              "v-list-item-icon",
+                                              [
+                                                _c(
+                                                  "v-icon",
+                                                  {
+                                                    attrs: {
+                                                      color: "green",
+                                                      small: "",
+                                                    },
+                                                  },
+                                                  [_vm._v("mdi-comment")]
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item-content",
+                                              [
+                                                _c(
+                                                  "v-list-item-title",
+                                                  { staticClass: "chat-text" },
+                                                  [_vm._v("Chat")]
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                          ],
+                                          1
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                  ],
+                                  1
+                                ),
                               ],
                               1
                             ),

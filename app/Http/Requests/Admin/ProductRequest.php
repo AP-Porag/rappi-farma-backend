@@ -25,7 +25,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'thumbnail_image'=>'required',
+//            'thumbnail_image'=>'required',
         ];
     }
 }

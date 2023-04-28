@@ -148,23 +148,83 @@
                             </v-chip>
                         </template>
                         <template v-slot:item.action="{ item }">
-                            <v-btn icon color="green" @click="$router.push({ name: 'customer-chat',params:{id:item.user.id} })">
-                                <v-icon small>mdi-comment</v-icon>
-                            </v-btn>
-                            <v-btn icon color="blue" @click="$router.push({ name: 'invoice',params:{id:item.id} })">
-                                <v-icon small>mdi-download</v-icon>
-                            </v-btn>
-                            <v-btn icon color="yellow darken-4" @click="$router.push({ name: 'show-order',params:{id:item.id} })">
-                                <v-icon small>mdi-eye</v-icon>
-                            </v-btn>
-                            <v-btn
-                                color="red lighten-2"
-                                dark
-                                icon
-                                @click="showDeleteDialog(item)"
-                            >
-                                <v-icon small>mdi-check-decagram</v-icon>
-                            </v-btn>
+
+
+                            <v-menu transition="slide-x-transition">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn
+                                        v-bind="attrs"
+                                        v-on="on"
+                                        color="black"
+                                        dark
+                                        small
+                                    >
+                                        <v-icon>mdi-dots-vertical</v-icon>
+                                    </v-btn>
+                                </template>
+
+                                <v-list>
+                                    <v-list-item-group class="datatable-action-item">
+
+                                        <v-list-item @click="$router.push({ name: 'customer-chat',params:{id:item.id} })" class="datatable-dropdown-item">
+                                            <v-list-item-icon>
+                                                <v-icon color="green" small>mdi-comment</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title class="chat-text">Chat</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+
+
+                                        <v-list-item @click="$router.push({ name: 'invoice',params:{id:item.id} })" class="datatable-dropdown-item">
+                                            <v-list-item-icon>
+                                                <v-icon color="blue" small>mdi-download</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title class="invoice-text">Invoice</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+
+                                        <v-list-item @click="$router.push({ name: 'show-order',params:{id:item.id} })">
+                                            <v-list-item-icon>
+                                                <v-icon color="orange" small>mdi-eye</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title class="details-text">Details</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+
+
+                                        <v-list-item @click="showDeleteDialog(item)" class="datatable-dropdown-item">
+                                            <v-list-item-icon>
+                                                <v-icon color="red lighten-2" small>mdi-check-decagram</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title class="status-text">Change Status</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+
+                                    </v-list-item-group>
+                                </v-list>
+                            </v-menu>
+
+<!--                            <v-btn icon color="green" @click="$router.push({ name: 'customer-chat',params:{id:item.user.id} })">-->
+<!--                                <v-icon small>mdi-comment</v-icon>-->
+<!--                            </v-btn>-->
+<!--                            <v-btn icon color="blue" @click="$router.push({ name: 'invoice',params:{id:item.id} })">-->
+<!--                                <v-icon small>mdi-download</v-icon>-->
+<!--                            </v-btn>-->
+<!--                            <v-btn icon color="yellow darken-4" @click="$router.push({ name: 'show-order',params:{id:item.id} })">-->
+<!--                                <v-icon small>mdi-eye</v-icon>-->
+<!--                            </v-btn>-->
+<!--                            <v-btn-->
+<!--                                color="red lighten-2"-->
+<!--                                dark-->
+<!--                                icon-->
+<!--                                @click="showDeleteDialog(item)"-->
+<!--                            >-->
+<!--                                <v-icon small>mdi-check-decagram</v-icon>-->
+<!--                            </v-btn>-->
                         </template>
                     </v-data-table>
                     <v-dialog v-model="dialog" width="400">
@@ -414,5 +474,42 @@ export default {
 <style scoped>
 .datatable-search{
     width: 0px !important;
+}
+.datatable-action-item .v-list-item__icon:first-child{
+    margin-right: 0px !important;
+}
+
+.v-list-item{
+    padding-right: 70px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    min-height: 0px !important;
+}
+.v-list-item__icon{
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+.v-list-item__content{
+    padding: 0px !important;
+}
+
+.edit-text{
+    color: #2196f3;
+}
+.delete-text{
+    color: #e57373;
+}
+.details-text{
+    color: #ff9800;
+}
+.chat-text{
+    color: #4caf50;
+}
+
+.invoice-text{
+    color: #2196f3;
+}
+.status-text{
+    color: #e57373;
 }
 </style>

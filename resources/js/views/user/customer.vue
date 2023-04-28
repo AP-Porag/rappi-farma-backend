@@ -131,13 +131,54 @@
                             </v-chip>
                         </template>
                         <template v-slot:item.action="{ item }">
-                            <v-btn icon color="orange" @click="$router.push({ name: 'customer-details',params:{id:item.id} })">
-                                <v-icon small>mdi-eye</v-icon>
-                            </v-btn>
 
-                            <v-btn icon color="green" @click="$router.push({ name: 'customer-chat',params:{id:item.id} })">
-                                <v-icon small>mdi-comment</v-icon>
-                            </v-btn>
+                            <v-menu transition="slide-x-transition">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn
+                                        v-bind="attrs"
+                                        v-on="on"
+                                        color="black"
+                                        dark
+                                        small
+                                    >
+                                        <v-icon>mdi-dots-vertical</v-icon>
+                                    </v-btn>
+                                </template>
+
+                                <v-list>
+                                    <v-list-item-group class="datatable-action-item">
+
+                                        <v-list-item @click="$router.push({ name: 'customer-details',params:{id:item.id} })">
+                                            <v-list-item-icon>
+                                                <v-icon color="orange" small>mdi-eye</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title class="details-text">Details</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+
+                                        <v-list-item @click="$router.push({ name: 'customer-chat',params:{id:item.id} })" class="datatable-dropdown-item">
+                                            <v-list-item-icon>
+                                                <v-icon color="green" small>mdi-comment</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title class="chat-text">Chat</v-list-item-title>
+                                            </v-list-item-content>
+                                        </v-list-item>
+
+                                    </v-list-item-group>
+                                </v-list>
+                            </v-menu>
+
+
+
+<!--                            <v-btn icon color="orange" @click="$router.push({ name: 'customer-details',params:{id:item.id} })">-->
+<!--                                <v-icon small>mdi-eye</v-icon>-->
+<!--                            </v-btn>-->
+
+<!--                            <v-btn icon color="green" @click="$router.push({ name: 'customer-chat',params:{id:item.id} })">-->
+<!--                                <v-icon small>mdi-comment</v-icon>-->
+<!--                            </v-btn>-->
                         </template>
                     </v-data-table>
 <!--                    <v-dialog v-model="dialog" width="400">-->
@@ -356,4 +397,34 @@ export default {
 .datatable-search{
     width: 0px !important;
 }
+.datatable-action-item .v-list-item__icon:first-child{
+    margin-right: 0px !important;
+}
+
+.v-list-item{
+    padding-right: 70px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    min-height: 0px !important;
+}
+.v-list-item__icon{
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+.v-list-item__content{
+    padding: 0px !important;
+}
+
+.edit-text{
+    color: #2196f3;
+}
+.delete-text{
+     color: #e57373;
+ }
+.details-text{
+     color: #ff9800;
+ }
+.chat-text{
+     color: #4caf50;
+ }
 </style>
